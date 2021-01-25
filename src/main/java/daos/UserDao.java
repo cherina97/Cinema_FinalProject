@@ -7,8 +7,8 @@ import java.sql.*;
 import java.util.Optional;
 
 public class UserDao implements CRUD<User>{
-    private static final String INSERT_USER = "INSERT INTO user (first_name, last_name, email, role, password) VALUES (?, ?, ?, ?, ?);";
-    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM user WHERE email = ?";
+    private static final String INSERT_USER = "INSERT INTO users (first_name, last_name, email, role, password) VALUES (?, ?, ?, ?, ?);";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     private Connection connection;
 
     public UserDao() {
@@ -42,12 +42,11 @@ public class UserDao implements CRUD<User>{
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
-                Optional.of(User.of(resultSet));
+                return Optional.of(User.of(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return Optional.empty();
-        //todo fix return
     }
 }

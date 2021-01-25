@@ -1,6 +1,8 @@
 package servlets;
 
+import entities.User;
 import org.apache.commons.lang3.ObjectUtils;
+import services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+    private final UserService userService = UserService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,8 +32,14 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
+        Optional<User> userByEmail = userService.getUserByEmail(email);
 
+        if(userByEmail.isPresent() && userByEmail.get().getPassword().equals(password)){
+            req.setAttribute("userEmail", email);
+            req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
+        }
 
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
 
     }
 }

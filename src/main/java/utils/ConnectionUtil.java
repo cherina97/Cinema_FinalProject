@@ -1,6 +1,7 @@
 package utils;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -12,6 +13,9 @@ public class ConnectionUtil {
 
     public static Connection getConnection() {
         try {
+            Driver driver = new com.mysql.cj.jdbc.Driver();
+            DriverManager.registerDriver(driver);
+
             return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             e.printStackTrace();
