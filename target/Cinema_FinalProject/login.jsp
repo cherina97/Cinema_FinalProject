@@ -8,17 +8,15 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"></jsp:include>
 
 <form action="login" method="post">
 
-    <label for="login">Login :</label> <input name="login" id="login">
+    <label for="email">Email :</label> <input name="email" id="email">
     <br>
     <label for="password">Password : </label> <input name="password" id="password">
     <br>
     <input type="submit" value="submit">
 </form>
 
-<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

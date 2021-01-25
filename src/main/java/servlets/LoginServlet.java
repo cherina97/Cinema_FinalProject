@@ -27,19 +27,22 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (ObjectUtils.anyNull(email, password)){
+        if (ObjectUtils.anyNull(email, password)) {
             req.getRequestDispatcher("login.jsp").forward(req, resp);
+//            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         Optional<User> userByEmail = userService.getUserByEmail(email);
 
-        if(userByEmail.isPresent() && userByEmail.get().getPassword().equals(password)){
+        if (userByEmail.isPresent() && userByEmail.get().getPassword().equals(password)) {
             req.setAttribute("userEmail", email);
             req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
+//            resp.setStatus(HttpServletResponse.SC_OK);
+            return;
         }
 
         req.getRequestDispatcher("login.jsp").forward(req, resp);
-
+//        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
 }

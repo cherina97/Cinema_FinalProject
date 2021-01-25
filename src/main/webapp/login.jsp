@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"></jsp:include>
 
 <form action="login" method="post">
 
@@ -19,6 +18,5 @@
     <input type="submit" value="submit">
 </form>
 
-<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

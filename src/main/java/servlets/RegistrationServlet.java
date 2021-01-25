@@ -18,6 +18,12 @@ public class RegistrationServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("register.jsp").forward(req, resp);
+    }
+
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String firstName = req.getParameter("firstName");
@@ -25,7 +31,7 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (ObjectUtils.allNotNull(firstName, lastName, email, password)){
+        if (ObjectUtils.allNotNull(firstName, lastName, email, password)) {
             userService.createUser(new User.Builder()
                     .withFirstName(firstName)
                     .withLastName(lastName)
@@ -35,10 +41,13 @@ public class RegistrationServlet extends HttpServlet {
                     .build());
             req.setAttribute("userEmail", email);
             req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
+//            resp.setStatus(HttpServletResponse.SC_CREATED);
+            return;
         }
 
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
-
+        req.getRequestDispatcher("register.jsp").forward(req, resp);
+//        resp.setContentType("text/plain");
+//        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
     }
 }
