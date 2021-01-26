@@ -27,12 +27,17 @@
         <ul class="nav">
             <li>
                 <a href="${pageContext.request.contextPath}/login">
-                    <i class="zmdi zmdi-view-dashboard"></i> Login
+                    <i class="zmdi zmdi-view-dashboard"></i> Log in
                 </a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/register">
                     <i class="zmdi zmdi-link"></i> Registration
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/logout" class="logout">
+                    <i class="zmdi zmdi-link"></i> Log out
                 </a>
             </li>
 
@@ -46,6 +51,8 @@
 
         </div>
 </div>
+
+<script src="js/navbar.js"></script>
 
 </body>
 </html>

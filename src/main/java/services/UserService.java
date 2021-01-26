@@ -27,4 +27,8 @@ public class UserService {
     public Optional<User> getUserByEmail(String email){
         return userDao.getByEmail(email);
     }
+
+    public Optional<User> getUserByEmailAndPassword(String email, String password) {
+        return userDao.getByEmail(email).filter(user -> user.getPassword().equals(password));
+    }
 }

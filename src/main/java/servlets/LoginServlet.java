@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -33,11 +34,15 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        Optional<User> userByEmail = userService.getUserByEmail(email);
+        Optional<User> userOptional = userService.getUserByEmailAndPassword(email, password);
 
-        if (userByEmail.isPresent() && userByEmail.get().getPassword().equals(password)) {
-            req.setAttribute("userEmail", email);
-            req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
+        if (userOptional.isPresent()) {
+            HttpSession session = req.getSession(true);
+            session.setAttribute("userEmail", userOptional.get().getEmail());
+
+//            req.setAttribute("userEmail", email);
+            resp.sendRedirect("cabinet.jsp");
+//            req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
 //            resp.setStatus(HttpServletResponse.SC_OK);
             return;
         }
