@@ -29,8 +29,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         if (ObjectUtils.anyNull(email, password)) {
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
-//            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
@@ -40,14 +39,10 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession(true);
             session.setAttribute("userEmail", userOptional.get().getEmail());
 
-//            req.setAttribute("userEmail", email);
-            resp.sendRedirect("cabinet.jsp");
-//            req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
-//            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setStatus(HttpServletResponse.SC_OK);
             return;
         }
 
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
-//        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
 }

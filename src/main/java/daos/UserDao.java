@@ -4,12 +4,14 @@ import entities.User;
 import utils.ConnectionUtil;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDao implements CRUD<User>{
-    private static final String INSERT_USER = "INSERT INTO users (first_name, last_name, email, role, password) VALUES (?, ?, ?, ?, ?);";
+    private final Connection connection;
+    private static final String INSERT_USER =
+            "INSERT INTO users (first_name, last_name, email, role, password) VALUES (?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
-    private Connection connection;
 
     public UserDao() {
         this.connection = ConnectionUtil.getConnection();
@@ -34,8 +36,12 @@ public class UserDao implements CRUD<User>{
         return user;
     }
 
-    public Optional<User> getByEmail(String email){
+    @Override
+    public List<User> readAll() {
+        return null;
+    }
 
+    public Optional<User> getByEmail(String email){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
             preparedStatement.setString(1, email);

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class UserService {
     private static UserService userService;
-    private UserDao userDao;
+    private final UserDao userDao;
 
     public UserService() {
         this.userDao = new UserDao();
@@ -20,15 +20,12 @@ public class UserService {
         return userService;
     }
 
-    public User createUser(User user) {
-        return userDao.create(user);
-    }
-
-    public Optional<User> getUserByEmail(String email){
-        return userDao.getByEmail(email);
+    public void createUser(User user) {
+        userDao.create(user);
     }
 
     public Optional<User> getUserByEmailAndPassword(String email, String password) {
-        return userDao.getByEmail(email).filter(user -> user.getPassword().equals(password));
+        return userDao.getByEmail(email)
+                .filter(user -> user.getPassword().equals(password));
     }
 }

@@ -22,7 +22,7 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <header>
-            <a href="#">Cinema</a>
+            <a href="${pageContext.request.contextPath}/">Cinema</a>
         </header>
         <ul class="nav">
             <li>
@@ -31,13 +31,23 @@
                 </a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/register">
-                    <i class="zmdi zmdi-link"></i> Registration
+                <a href="${pageContext.request.contextPath}/logout" class="logout">
+                    <i class="zmdi zmdi-link"></i> Log out
                 </a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/logout" class="logout">
-                    <i class="zmdi zmdi-link"></i> Log out
+                <a href="${pageContext.request.contextPath}/cabinet" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> Cabinet
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/createSession" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> Create session
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/allSession" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> All sessions
                 </a>
             </li>
 
@@ -53,6 +63,7 @@
 </div>
 
 <script src="js/navbar.js"></script>
+<script src="js/login.js"></script>
 
 </body>
 </html>

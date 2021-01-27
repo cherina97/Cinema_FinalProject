@@ -17,11 +17,6 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("register.jsp").forward(req, resp);
-    }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,14 +35,12 @@ public class RegistrationServlet extends HttpServlet {
                     .withPassword(password)
                     .build());
             req.setAttribute("userEmail", email);
-            req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
-//            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.setStatus(HttpServletResponse.SC_CREATED);
             return;
         }
 
-        req.getRequestDispatcher("register.jsp").forward(req, resp);
-//        resp.setContentType("text/plain");
-//        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        resp.setContentType("text/plain");
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
     }
 }
