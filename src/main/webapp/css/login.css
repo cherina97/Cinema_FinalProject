@@ -33,7 +33,7 @@
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #3a130c;
     width: 100%;
     border: 0;
     padding: 15px;
@@ -45,7 +45,7 @@
 }
 
 .form button:hover, .form button:active, .form button:focus {
-    background: #43A047;
+    background: #281111;
 }
 
 .form .message {
@@ -55,7 +55,7 @@
 }
 
 .form .message a {
-    color: #4CAF50;
+    color: #3a130c;
     text-decoration: none;
 }
 
@@ -106,12 +106,6 @@
 body {
     background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('img/empty-cinema.jpg');
     background-size: 100%;
-
-    /*background: #76b852; !* fallback for old browsers *!*/
-    /*background: -webkit-linear-gradient(right, #76b852, #8DC26F);*/
-    /*background: -moz-linear-gradient(right, #76b852, #8DC26F);*/
-    /*background: -o-linear-gradient(right, #76b852, #8DC26F);*/
-    /*background: linear-gradient(to left, #76b852, #8DC26F);*/
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

@@ -32,7 +32,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #37474F;
+    background: #232223;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -40,7 +40,7 @@ body {
 }
 
 #sidebar header {
-    background-color: #263238;
+    background-color: #141414;
     font-size: 20px;
     line-height: 52px;
     text-align: center;
@@ -62,7 +62,7 @@ body {
 
 #sidebar .nav a{
     background: none;
-    border-bottom: 1px solid #455A64;
+    border-bottom: 1px solid #010000;
     color: #CFD8DC;
     font-size: 14px;
     padding: 16px 24px;

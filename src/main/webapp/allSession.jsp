@@ -26,6 +26,7 @@
             <th>Start At</th>
             <th>Duration</th>
             <th>Tickets</th>
+            <th>Action</th>
         </tr>
         </thead>
 
@@ -37,6 +38,9 @@
             <td>${session.startAt} </td>
             <td>${session.duration} </td>
             <td>${session.tickets} </td>
+            <td><a href="${pageContext.request.contextPath}/tickets">
+                Tickets
+            </a></td>
             </tbody>
         </c:forEach>
     </table>
