@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Create session</title>
+    <title>All sessions</title>
 
     <link rel="stylesheet" href="css/allSessions.css">
 </head>
@@ -25,7 +25,6 @@
             <th>Description</th>
             <th>Start At</th>
             <th>Duration</th>
-            <th>Tickets</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -37,10 +36,11 @@
             <td>${session.description} </td>
             <td>${session.startAt} </td>
             <td>${session.duration} </td>
-            <td>${session.tickets} </td>
-            <td><a href="${pageContext.request.contextPath}/tickets">
-                Tickets
-            </a></td>
+            <td>
+                <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}">
+                    Tickets
+                </a>
+            </td>
             </tbody>
         </c:forEach>
     </table>

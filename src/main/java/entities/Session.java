@@ -11,7 +11,7 @@ public class Session {
     private String description;
     private Time startAt;
     private Time duration;
-    private int tickets;
+//    private int tickets;
 
     public static Session of(ResultSet resultSet) {
         try {
@@ -20,7 +20,7 @@ public class Session {
             String description = resultSet.getString("description");
             Time startAt = resultSet.getTime("start_at");
             Time duration = resultSet.getTime("duration");
-            int tickets = resultSet.getInt("tickets");
+//            int tickets = resultSet.getInt("tickets");
 
             return new Session.Builder()
                     .withId(id)
@@ -28,7 +28,7 @@ public class Session {
                     .withDescription(description)
                     .withTimeStartAt(startAt)
                     .withDuration(duration)
-                    .withTickets(tickets)
+//                    .withTickets(tickets)
                     .build();
 
         } catch (SQLException e) {
@@ -68,10 +68,10 @@ public class Session {
             return this;
         }
 
-        public Session.Builder withTickets(int tickets){
-            session.tickets = tickets;
-            return this;
-        }
+//        public Session.Builder withTickets(int tickets){
+//            session.tickets = tickets;
+//            return this;
+//        }
 
         public Session build(){
             return session;
@@ -118,11 +118,11 @@ public class Session {
         this.duration = duration;
     }
 
-    public int getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(int tickets) {
-        this.tickets = tickets;
-    }
+//    public int getTickets() {
+//        return tickets;
+//    }
+//
+//    public void setTickets(int tickets) {
+//        this.tickets = tickets;
+//    }
 }

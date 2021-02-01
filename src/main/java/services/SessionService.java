@@ -21,11 +21,15 @@ public class SessionService {
         return sessionService;
     }
 
-    public void createSession(Session session){
-        sessionDao.create(session);
+    public Session createSession(Session session){
+        return sessionDao.create(session);
     }
 
     public List<Session> readAllSessions(){
         return sessionDao.readAll();
+    }
+
+    public Session getSessionById(int sessionId){
+        return sessionDao.getSessionById(sessionId);
     }
 }

@@ -10,8 +10,9 @@ import java.util.List;
 public class SessionDao implements CRUD<Session> {
     private final Connection connection;
     private static final String INSERT_SESSION =
-            "INSERT INTO sessions (film_title, description, start_at, duration, tickets) VALUES (?, ?, ?, ?, ?)";
+            "INSERT INTO sessions (film_title, description, start_at, duration) VALUES (?, ?, ?, ?)";
     private static final String READ_ALL_SESSIONS = "SELECT * FROM sessions";
+    private static final String GET_BY_ID = "SELECT * FROM sessions WHERE id = ?";
 
     public SessionDao() {
         this.connection = ConnectionUtil.getConnection();
@@ -24,7 +25,6 @@ public class SessionDao implements CRUD<Session> {
             preparedStatement.setString(2, session.getDescription());
             preparedStatement.setTime(3, session.getStartAt());
             preparedStatement.setTime(4, session.getDuration());
-            preparedStatement.setInt(5, session.getTickets());
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -50,5 +50,19 @@ public class SessionDao implements CRUD<Session> {
             e.printStackTrace();
         }
         return sessionList;
+    }
+
+    public Session getSessionById(int sessionId){
+        Session session = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_ID)){
+            preparedStatement.setInt(1, sessionId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            session = Session.of(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return session;
     }
 }

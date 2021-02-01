@@ -24,6 +24,10 @@ public class UserService {
         userDao.create(user);
     }
 
+    public Optional<User> getByEmail(String email){
+        return userDao.getByEmail(email);
+    }
+
     public Optional<User> getUserByEmailAndPassword(String email, String password) {
         return userDao.getByEmail(email)
                 .filter(user -> user.getPassword().equals(password));

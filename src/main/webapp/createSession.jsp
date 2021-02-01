@@ -30,9 +30,9 @@
             <input name="duration" type="time" placeholder="Duration"/>
         </label>
 
-        <label>
-            <input name="tickets" type="text" placeholder="Count of tickets"/>
-        </label>
+<%--        <label>--%>
+<%--            <input name="tickets" type="text" placeholder="Count of tickets"/>--%>
+<%--        </label>--%>
 
         <button>Create session</button>
     </form>

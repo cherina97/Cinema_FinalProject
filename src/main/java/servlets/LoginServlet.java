@@ -39,6 +39,10 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession(true);
             session.setAttribute("userEmail", userOptional.get().getEmail());
 
+//            String userEmail = (String) req.getSession().getAttribute("userEmail");
+            Optional<User> userByEmail = userService.getByEmail(email);
+            req.getSession().setAttribute("user", userByEmail);
+
             resp.setStatus(HttpServletResponse.SC_OK);
             return;
         }

@@ -28,13 +28,13 @@
 
             <div id="info">
 
-                <h1>Daniela Waara</h1>
+                <h1> ${sessionScope.user.get().email} </h1>
 
                 <ul id="about">
-                    <li><i class="fa fa-briefcase" aria-hidden="true"></i>UI/UX Designer</li>
-                    <li><i class="fa fa-heart" aria-hidden="true"></i>Taken</li>
-                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>Sweden</li>
-                    <li><i class="fa fa-globe" aria-hidden="true"></i><a href="#">enwaara.se</a></li>
+                    <li><i class="fa fa-briefcase" aria-hidden="true"></i>${sessionScope.user.get().firstName}</li>
+                    <li><i class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.get().lastName}</li>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> Ukraine </li>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> ${sessionScope.user.get().role} </li>
                 </ul>
 
                 <ul id="social">

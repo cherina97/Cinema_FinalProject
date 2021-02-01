@@ -1,8 +1,10 @@
 package servlets;
 
 import entities.Session;
+import entities.Ticket;
 import org.apache.commons.lang3.ObjectUtils;
 import services.SessionService;
+import services.TicketService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import java.sql.Time;
 @WebServlet("/createSession")
 public class CreateSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();
+    private final TicketService ticketService = TicketService.getInstance();
 
 
     @Override
@@ -28,21 +31,32 @@ public class CreateSessionServlet extends HttpServlet {
         String description = req.getParameter("description");
         String startAt = req.getParameter("startAt");
         String duration = req.getParameter("duration");
-        String tickets = req.getParameter("tickets");
 
-        if (ObjectUtils.allNotNull(filmTitle, description, startAt, duration, tickets)) {
-            sessionService.createSession(
+        if (ObjectUtils.allNotNull(filmTitle, description, startAt, duration)) {
+            Session createdSession = sessionService.createSession(
                     new Session.Builder()
-                    .withFilmTitle(filmTitle)
-                    .withDescription(description)
-                    .withTimeStartAt(Time.valueOf(startAt + ":00"))
-                    .withDuration(Time.valueOf(duration + ":00"))
-                    .withTickets(Integer.parseInt(tickets))
-                    .build());
+                            .withFilmTitle(filmTitle)
+                            .withDescription(description)
+                            .withTimeStartAt(Time.valueOf(startAt + ":00"))
+                            .withDuration(Time.valueOf(duration + ":00"))
+                            .build());
+            createTicketsForSession(createdSession);
             resp.sendRedirect("/cinema/allSession");
             return;
         }
 
         req.getRequestDispatcher("createSession.jsp").forward(req, resp);
+    }
+
+    private void createTicketsForSession(Session createdSession) {
+        int sessionId = createdSession.getId();
+
+        for (int i = 1; i <= 5; i++) {
+            ticketService.createTicket(new Ticket.Builder()
+                    .withSeatNumber(i)
+                    .withSessionId(sessionId)
+                    .withPrice(50)
+                    .build());
+        }
     }
 }
