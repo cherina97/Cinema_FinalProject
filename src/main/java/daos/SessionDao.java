@@ -1,7 +1,7 @@
 package daos;
 
 import entities.Session;
-import utils.ConnectionUtil;
+import utils.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class SessionDao implements CRUD<Session> {
     private static final String GET_BY_ID = "SELECT * FROM sessions WHERE id = ?";
 
     public SessionDao() {
-        this.connection = ConnectionUtil.getConnection();
+        this.connection = ConnectionPool.getInstance().getConnection();
     }
 
     @Override

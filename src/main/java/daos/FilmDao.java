@@ -1,7 +1,7 @@
 package daos;
 
 import entities.Film;
-import utils.ConnectionUtil;
+import utils.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class FilmDao implements CRUD<Film> {
     private final Connection connection;
 
     public FilmDao() {
-        this.connection = ConnectionUtil.getConnection();
+        this.connection = ConnectionPool.getInstance().getConnection();
     }
 
     @Override

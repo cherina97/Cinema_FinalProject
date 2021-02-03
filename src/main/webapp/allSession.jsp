@@ -24,6 +24,7 @@
             <th>Film title</th>
             <th>Start At</th>
             <th>Week day</th>
+            <th>Tickets</th>
         </tr>
         </thead>
 
@@ -33,6 +34,11 @@
             <td>${session.film.filmTitle}</td>
             <td>${session.startAt} </td>
             <td>${session.weekDay} </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}">
+                    Tickets
+                </a>
+            </td>
             </tbody>
         </c:forEach>
     </table>

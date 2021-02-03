@@ -1,7 +1,7 @@
 package daos;
 
 import entities.User;
-import utils.ConnectionUtil;
+import utils.ConnectionPool;
 
 import java.sql.*;
 import java.util.List;
@@ -14,7 +14,7 @@ public class UserDao implements CRUD<User>{
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
 
     public UserDao() {
-        this.connection = ConnectionUtil.getConnection();
+        this.connection = ConnectionPool.getInstance().getConnection();
     }
 
     @Override

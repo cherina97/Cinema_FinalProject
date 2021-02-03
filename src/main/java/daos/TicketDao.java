@@ -1,7 +1,7 @@
 package daos;
 
 import entities.Ticket;
-import utils.ConnectionUtil;
+import utils.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class TicketDao implements CRUD<Ticket>{
     private final Connection connection;
 
     public TicketDao() {
-        this.connection = ConnectionUtil.getConnection();
+        this.connection = ConnectionPool.getInstance().getConnection();
     }
 
 

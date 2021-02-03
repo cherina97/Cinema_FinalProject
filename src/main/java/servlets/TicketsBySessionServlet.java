@@ -14,8 +14,8 @@ import java.util.List;
 
 @WebServlet("/allSession/tickets")
 public class TicketsBySessionServlet extends HttpServlet {
-    private SessionService sessionService = SessionService.getInstance();
-    private TicketService ticketService = TicketService.getInstance();
+    private final SessionService sessionService = SessionService.getInstance();
+    private final TicketService ticketService = TicketService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

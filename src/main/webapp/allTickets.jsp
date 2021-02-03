@@ -51,15 +51,12 @@
             </td>
 
             <td>
-                <c:choose>
-                    <c:when test="${sessionScope.user.get() ne null}">
-                        <a href="${pageContext.request.contextPath}/allSession/tickets/buy">
-                            Buy a ticket
-                        </a>
-                    </c:when>
-                </c:choose>
+                <c:if test="${sessionScope.user.get() ne null}">
+                    <a href="${pageContext.request.contextPath}/allSession/tickets/buy">
+                        Buy a ticket
+                    </a>
+                </c:if>
             </td>
-
             </tbody>
         </c:forEach>
     </table>
