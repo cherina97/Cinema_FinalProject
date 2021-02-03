@@ -1,7 +1,6 @@
 package servlets;
 
 import entities.User;
-import entities.UserRole;
 import org.apache.commons.lang3.ObjectUtils;
 import services.UserService;
 
@@ -31,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
                     .withFirstName(firstName)
                     .withLastName(lastName)
                     .withEmail(email)
-                    .withRole(UserRole.USER.name())
+                    .withRoleId(1)
                     .withPassword(password)
                     .build());
             req.setAttribute("userEmail", email);

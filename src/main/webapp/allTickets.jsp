@@ -27,6 +27,8 @@
             <th>Seat Number</th>
             <th>Price</th>
             <th>User id</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
         </thead>
 
@@ -37,11 +39,33 @@
             <td>${ticket.seatNumber} </td>
             <td>${ticket.price} </td>
             <td>${ticket.userId} </td>
+            <td>
+                <c:choose>
+                    <c:when test="${ticket.userId ne null}">
+                        Available to buy
+                    </c:when>
+                    <c:otherwise>
+                        Seat is taken
+                    </c:otherwise>
+                </c:choose>
+            </td>
+
+            <td>
+                <c:choose>
+                    <c:when test="${sessionScope.user.get() ne null}">
+                        <a href="${pageContext.request.contextPath}/allSession/tickets/buy">
+                            Buy a ticket
+                        </a>
+                    </c:when>
+                </c:choose>
+            </td>
+
             </tbody>
         </c:forEach>
     </table>
 
 </div>
 
+<script src="${pageContext.request.contextPath}/js/navbar.js"></script>
 </body>
 </html>

@@ -21,26 +21,18 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Film Title</th>
-            <th>Description</th>
+            <th>Film title</th>
             <th>Start At</th>
-            <th>Duration</th>
-            <th>Action</th>
+            <th>Week day</th>
         </tr>
         </thead>
 
         <c:forEach var="session" items="${requestScope.sessionList}">
             <tbody>
-            <td><c:out value="${session.id}"/></td>
-            <td>${session.filmTitle} </td>
-            <td>${session.description} </td>
+            <td>${session.id}</td>
+            <td>${session.film.filmTitle}</td>
             <td>${session.startAt} </td>
-            <td>${session.duration} </td>
-            <td>
-                <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}">
-                    Tickets
-                </a>
-            </td>
+            <td>${session.weekDay} </td>
             </tbody>
         </c:forEach>
     </table>

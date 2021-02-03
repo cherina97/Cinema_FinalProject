@@ -10,7 +10,7 @@ import java.util.Optional;
 public class UserDao implements CRUD<User>{
     private final Connection connection;
     private static final String INSERT_USER =
-            "INSERT INTO users (first_name, last_name, email, role, password) VALUES (?, ?, ?, ?, ?);";
+            "INSERT INTO users (first_name, last_name, email, password, role_id) VALUES (?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
 
     public UserDao() {
@@ -23,8 +23,8 @@ public class UserDao implements CRUD<User>{
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getRole());
-            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setInt(5, user.getRoleId());
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();

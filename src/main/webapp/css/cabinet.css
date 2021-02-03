@@ -1,12 +1,15 @@
+#content{
+    top: 40px;
+}
 #container {
-    width: 500px;
-    height: 670px;
+    width: 450px;
+    height: 620px;
     margin: 0 auto;
     box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     position: relative;
     overflow: hidden;
     background: -moz-linear-gradient(45deg, rgba(245, 246, 250, 1) 0%, rgba(255, 255, 255, 1) 100%);

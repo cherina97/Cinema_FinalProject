@@ -1,6 +1,9 @@
 package entities;
 
-public enum UserRole {
-    USER,
-    ADMIN
+public class UserRole {
+
+    private int id;
+    private int roleName;
+
+
 }

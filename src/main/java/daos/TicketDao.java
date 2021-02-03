@@ -26,7 +26,7 @@ public class TicketDao implements CRUD<Ticket>{
     public Ticket create(Ticket ticket) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TICKET, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setInt(1, ticket.getSeatNumber());
-            preparedStatement.setDouble(2, ticket.getPrice());
+            preparedStatement.setBigDecimal(2, ticket.getPrice());
             preparedStatement.setInt(3, ticket.getSessionId());
             preparedStatement.executeUpdate();
 

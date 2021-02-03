@@ -15,7 +15,7 @@ $("button.register")
             var email = $("form.register-form input.email").val();
             var password = $("form.register-form input.registerPass").val();
             if (firstName === '' || lastName === '' || email === '' || password === '') {
-                alert("Please fill all fields...!!!!!!");
+                alert("Please fill all fields!");
             }
             // else if ((password.length) < 4) {
             //     alert("Password should at least 4 character in length...!!!!!!");
@@ -63,7 +63,7 @@ $("button.login").click(function (event) {
         $.post("login", userLogin)
             .done(function (data, textStatus, xhr) {
                 if (xhr.status === 200) {
-                    window.location = window.origin + "/cinema/cabinet.jsp";
+                    window.location = window.origin + "/cinema/cabinet";
                 } else {
                     alert("error while authorizing the user");
                 }

@@ -15,38 +15,59 @@
 </head>
 
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
+
 
 <div id="viewport">
 
-    <div id="wrapper">
-        <div id="container">
+    <!-- Sidebar -->
+    <jsp:include page="navbar.jsp"></jsp:include>
 
-            <div id="back"></div>
+    <!-- Content -->
+    <div id="content">
 
-            <img src="css/img/22965342.jpg"/>
+        <div id="wrapper">
+            <div id="container">
 
-            <div id="info">
+                <div id="back"></div>
 
-                <h1> ${sessionScope.user.get().email} </h1>
+                <img src="css/img/22965342.jpg"/>
 
-                <ul id="about">
-                    <li><i class="fa fa-briefcase" aria-hidden="true"></i>${sessionScope.user.get().firstName}</li>
-                    <li><i class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.get().lastName}</li>
-                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> Ukraine </li>
-                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> ${sessionScope.user.get().role} </li>
-                </ul>
+                <div id="info">
 
-                <ul id="social">
-                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-codepen" aria-hidden="true"></i></a></li>
-                </ul>
+                    <h1> ${sessionScope.user.get().email} </h1>
+
+                    <ul id="about">
+                        <li><i class="fa fa-briefcase" aria-hidden="true"></i>${sessionScope.user.get().firstName}</li>
+                        <li><i class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.get().lastName}</li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i> Ukraine</li>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <c:choose>
+                                <c:when test="${sessionScope.user.get().roleId == 1}">
+                                    USER
+                                </c:when>
+                                <c:otherwise>
+                                    ADMIN
+                                </c:otherwise>
+                            </c:choose>
+
+                        </li>
+                    </ul>
+
+                    <ul id="social">
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-codepen" aria-hidden="true"></i></a></li>
+                    </ul>
+
+                </div>
 
             </div>
-
         </div>
+
+
     </div>
+
+
 
 
 </div>

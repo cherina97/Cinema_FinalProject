@@ -41,6 +41,16 @@
                 </a>
             </li>
             <li>
+                <a href="${pageContext.request.contextPath}/addFilm" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> Add film
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/allFilms" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> All films
+                </a>
+            </li>
+            <li>
                 <a href="${pageContext.request.contextPath}/createSession" class="cabinet">
                     <i class="zmdi zmdi-link"></i> Create session
                 </a>
@@ -55,11 +65,7 @@
         </ul>
     </div>
 
-        <!-- Content -->
-        <div id="content">
 
-
-        </div>
 </div>
 
 <script src="js/navbar.js"></script>

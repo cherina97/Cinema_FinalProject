@@ -1,79 +1,48 @@
 package entities;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
 
 public class Session {
 
     private int id;
-    private String filmTitle;
-    private String description;
+//        private int filmId;
+    private Film film;
     private Time startAt;
-    private Time duration;
-//    private int tickets;
+    private String weekDay;
 
-    public static Session of(ResultSet resultSet) {
-        try {
-            int id = resultSet.getInt("id");
-            String filmTitle = resultSet.getString("film_title");
-            String description = resultSet.getString("description");
-            Time startAt = resultSet.getTime("start_at");
-            Time duration = resultSet.getTime("duration");
-//            int tickets = resultSet.getInt("tickets");
-
-            return new Session.Builder()
-                    .withId(id)
-                    .withFilmTitle(filmTitle)
-                    .withDescription(description)
-                    .withTimeStartAt(startAt)
-                    .withDuration(duration)
-//                    .withTickets(tickets)
-                    .build();
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error");
-        }
-    }
-
-    public static class Builder{
+    public static class Builder {
         private Session session;
 
         public Builder() {
             session = new Session();
         }
 
-        public Session.Builder withId(int id){
+        public Session.Builder withId(int id) {
             session.id = id;
             return this;
         }
 
-        public Session.Builder withFilmTitle(String filmTitle){
-            session.filmTitle = filmTitle;
+        //        public Session.Builder withFilmId (int filmId){
+//            session.filmId = filmId;
+//            return this;
+//        }
+        public Session.Builder withFilm(Film film) {
+            session.film = film;
             return this;
         }
 
-        public Session.Builder withDescription(String description){
-            session.description = description;
-            return this;
-        }
 
-        public Session.Builder withTimeStartAt(Time startAt){
+        public Session.Builder withTimeStartAt(Time startAt) {
             session.startAt = startAt;
             return this;
         }
 
-        public Session.Builder withDuration(Time duration){
-            session.duration = duration;
+        public Session.Builder withWeekDay(String weekDay) {
+            session.weekDay = weekDay;
             return this;
         }
 
-//        public Session.Builder withTickets(int tickets){
-//            session.tickets = tickets;
-//            return this;
-//        }
-
-        public Session build(){
+        public Session build() {
             return session;
         }
     }
@@ -86,20 +55,21 @@ public class Session {
         this.id = id;
     }
 
-    public String getFilmTitle() {
-        return filmTitle;
+//    public int getFilmId() {
+//        return filmId;
+//    }
+//
+//    public void setFilmId(int filmId) {
+//        this.filmId = filmId;
+//    }
+
+
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilmTitle(String filmTitle) {
-        this.filmTitle = filmTitle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
     public Time getStartAt() {
@@ -110,19 +80,11 @@ public class Session {
         this.startAt = startAt;
     }
 
-    public Time getDuration() {
-        return duration;
+    public String getWeekDay() {
+        return weekDay;
     }
 
-    public void setDuration(Time duration) {
-        this.duration = duration;
+    public void setWeekDay(String weekDay) {
+        this.weekDay = weekDay;
     }
-
-//    public int getTickets() {
-//        return tickets;
-//    }
-//
-//    public void setTickets(int tickets) {
-//        this.tickets = tickets;
-//    }
 }

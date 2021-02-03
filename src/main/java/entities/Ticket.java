@@ -1,5 +1,6 @@
 package entities;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -7,15 +8,16 @@ public class Ticket {
 
     private int id;
     private int seatNumber;
-    private double price;
+    private BigDecimal price;
     private int userId;
     private int sessionId;
+    private boolean isAvailable;
 
     public static Ticket of(ResultSet resultSet) {
         try {
             int id = resultSet.getInt("id");
             int seatNumber = resultSet.getInt("seat_number");
-            double price = resultSet.getDouble("price");
+            BigDecimal price = resultSet.getBigDecimal("price");
             int userId = resultSet.getInt("user_id");
             int sessionId = resultSet.getInt("session_id");
 
@@ -48,7 +50,7 @@ public class Ticket {
             return this;
         }
 
-        public Ticket.Builder withPrice(double price){
+        public Ticket.Builder withPrice(BigDecimal price){
             ticket.price = price;
             return this;
         }
@@ -84,11 +86,11 @@ public class Ticket {
         this.seatNumber = seatNumber;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -108,5 +110,11 @@ public class Ticket {
         this.sessionId = sessionId;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
 
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
 }
