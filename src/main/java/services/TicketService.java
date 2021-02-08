@@ -2,6 +2,7 @@ package services;
 
 import daos.TicketDao;
 import entities.Ticket;
+import entities.User;
 
 import java.util.List;
 
@@ -32,7 +33,11 @@ public class TicketService {
         return ticketDao.readAllTicketsBySessionId(sessionId);
     }
 
-//    public void createTicketsForSession(int sessionId) {
-//        ticketDao.createTicketsForSession(sessionId);
-//    }
+    public List<Ticket> getTicketsBySeats(List<Integer> checked, int sessionId) {
+        return ticketDao.getTicketsBySeats(checked, sessionId);
+    }
+
+    public void setUserForTickets(List<Ticket> ticketsBySeats, User user) {
+        ticketDao.setUserForTickets(ticketsBySeats, user);
+    }
 }

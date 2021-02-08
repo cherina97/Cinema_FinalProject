@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
@@ -41,6 +41,12 @@
                 </c:forEach>
             </select>
         </label>
+
+<%--        <label>--%>
+<%--            <c:forEach items="${applicationScope.weekDays}" var="dayOfWeek">--%>
+<%--                <input type="checkbox" class="seats" value="${dayOfWeek.name()}" name="test">--%>
+<%--            </c:forEach>--%>
+<%--        </label>--%>
 
         <button>Create session</button>
     </form>

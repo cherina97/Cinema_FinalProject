@@ -11,7 +11,6 @@ public class Ticket {
     private BigDecimal price;
     private int userId;
     private int sessionId;
-    private boolean isAvailable;
 
     public static Ticket of(ResultSet resultSet) {
         try {
@@ -34,7 +33,7 @@ public class Ticket {
     }
 
     public static class Builder{
-        private Ticket ticket;
+        private final Ticket ticket;
 
         public Builder() {
             ticket = new Ticket();
@@ -110,11 +109,11 @@ public class Ticket {
         this.sessionId = sessionId;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", seatNumber=" + seatNumber +
+                '}';
     }
 }

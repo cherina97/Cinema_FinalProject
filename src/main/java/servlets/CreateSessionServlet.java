@@ -39,7 +39,6 @@ public class CreateSessionServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String filmId = req.getParameter("filmId");
         String startAt = req.getParameter("startAt");
         String weekDay = req.getParameter("weekDay");
@@ -62,7 +61,7 @@ public class CreateSessionServlet extends HttpServlet {
     private void createTicketsForSession(Session createdSession) {
         int sessionId = createdSession.getId();
 
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 24; i++) {
             ticketService.createTicket(new Ticket.Builder()
                     .withSeatNumber(i)
                     .withSessionId(sessionId)

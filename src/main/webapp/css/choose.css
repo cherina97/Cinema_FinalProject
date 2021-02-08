@@ -1,0 +1,164 @@
+body
+{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#Username
+{
+    border:none;
+    border-bottom:1px solid;
+}
+
+.screen
+{
+    width:100%;
+    height:20px;
+    background:#4388cc;
+    color:#fff;
+    line-height:20px;
+    font-size:15px;
+}
+
+.smallBox::before
+{
+    content:".";
+    width:15px;
+    height:15px;
+    float:left;
+    margin-right:10px;
+}
+.greenBox::before
+{
+    content:"";
+    background:Green;
+}
+.redBox::before
+{
+    content:"";
+    background:Red;
+}
+.emptyBox::before
+{
+    content:"";
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    background-color:#ccc;
+}
+
+.seats
+{
+    border:1px solid red;background:yellow;
+}
+
+
+
+.seatGap
+{
+    width:40px;
+}
+
+.seatVGap
+{
+    height:40px;
+}
+
+table
+{
+    text-align:center;
+}
+
+
+.Displaytable
+{
+    text-align:center;
+}
+.Displaytable td, .Displaytable th {
+    border: 1px solid;
+    text-align: left;
+}
+
+textarea
+{
+    border:none;
+    background:transparent;
+}
+
+
+
+input[type=checkbox] {
+    width:0px;
+    margin-right:18px;
+}
+
+input[type=checkbox]:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align:middle;
+    text-align: center;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+    background-color:#ccc;
+}
+
+input[type=checkbox]:checked:before {
+    background-color:Green;
+    font-size: 15px;
+}
+
+/* Main Container -  this controls the size of the circle */
+.circle_container
+{
+    width : 20px;
+    height : 20px;
+    margin-left : 45%;
+    padding : 0;
+    /* 	border : 1px solid red; */
+}
+
+/* Circle Main draws the actual circle */
+.circle_main
+{
+    width : 100%;
+    height : 100%;
+    border-radius : 50%;
+    border : 1px solid black;	/* can alter thickness and colour of circle on this line */
+    margin : 0;
+    padding : 0;
+}
+
+/* Circle Text Container - constrains text area to within the circle */
+.circle_text_container
+{
+    /* area constraints */
+    width : 70%;
+    height : 70%;
+    max-width : 70%;
+    max-height : 70%;
+    margin : 0;
+    padding : 0;
+
+    /* some position nudging to center the text area */
+    position : relative;
+    left : 15%;
+    top : 15%;
+
+    /* preserve 3d prevents blurring sometimes caused by the text centering in the next class */
+    transform-style : preserve-3d;
+
+    /* 	border : 1px solid green; */
+}
+
+/* Circle Text - the appearance of the text within the circle plus vertical centering */
+.circle_text
+{
+    /* change font/size/etc here */
+    font: 11px "Tahoma", Arial, Serif;
+    text-align : center;
+
+    /* vertical centering technique */
+    position : relative;
+    top : 50%;
+    transform : translateY(-50%);
+}
+
+

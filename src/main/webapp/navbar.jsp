@@ -60,6 +60,11 @@
                     <i class="zmdi zmdi-link"></i> All sessions
                 </a>
             </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/allSession/tickets/buy" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> Buy
+                </a>
+            </li>
 
 
         </ul>
