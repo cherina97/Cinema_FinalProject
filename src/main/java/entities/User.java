@@ -10,8 +10,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String role;
     private String password;
+    private int roleId;
 
     public User() {
     }
@@ -22,16 +22,16 @@ public class User {
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
             String email = resultSet.getString("email");
-            String role = resultSet.getString("role");
             String password = resultSet.getString("password");
+            int roleId = resultSet.getInt("role_id");
 
             return new User.Builder()
                     .withId(id)
                     .withFirstName(firstName)
                     .withLastName(lastName)
                     .withEmail(email)
-                    .withRole(role)
                     .withPassword(password)
+                    .withRoleId(roleId)
                     .build();
 
         } catch (SQLException e) {
@@ -66,8 +66,8 @@ public class User {
             return this;
         }
 
-        public Builder withRole(String role){
-            user.role = role;
+        public Builder withRoleId(int roleId){
+            user.roleId = roleId;
             return this;
         }
 
@@ -121,16 +121,12 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole(String role) {
-        if (role == null) {
-            this.role = UserRole.USER.name();
-        } else {
-            this.role = role;
-        }
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -138,15 +134,19 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName)
-                && Objects.equals(lastName, user.lastName)
-                && Objects.equals(email, user.email)
-                && Objects.equals(password, user.password)
-                && Objects.equals(role, user.role);
+        return id == user.id && roleId == user.roleId && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, role);
+        return Objects.hash(id, firstName, lastName, email, password, roleId);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

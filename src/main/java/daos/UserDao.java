@@ -1,18 +1,20 @@
 package daos;
 
 import entities.User;
-import utils.ConnectionUtil;
+import utils.ConnectionPool;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDao implements CRUD<User>{
-    private static final String INSERT_USER = "INSERT INTO user (first_name, last_name, email, role, password) VALUES (?, ?, ?, ?, ?);";
-    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM user WHERE email = ?";
-    private Connection connection;
+    private final Connection connection;
+    private static final String INSERT_USER =
+            "INSERT INTO users (first_name, last_name, email, password, role_id) VALUES (?, ?, ?, ?, ?);";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
 
     public UserDao() {
-        this.connection = ConnectionUtil.getConnection();
+        this.connection = ConnectionPool.getInstance().getConnection();
     }
 
     @Override
@@ -21,8 +23,8 @@ public class UserDao implements CRUD<User>{
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getRole());
-            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setInt(5, user.getRoleId());
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -34,20 +36,24 @@ public class UserDao implements CRUD<User>{
         return user;
     }
 
-    public Optional<User> getByEmail(String email){
+    //todo
+    @Override
+    public List<User> readAll() {
+        return null;
+    }
 
+    public Optional<User> getByEmail(String email){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
             preparedStatement.setString(1, email);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
-                Optional.of(User.of(resultSet));
+                return Optional.of(User.of(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return Optional.empty();
-        //todo fix return
     }
 }

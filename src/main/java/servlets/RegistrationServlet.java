@@ -1,7 +1,6 @@
 package servlets;
 
 import entities.User;
-import entities.UserRole;
 import org.apache.commons.lang3.ObjectUtils;
 import services.UserService;
 
@@ -17,6 +16,7 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -25,20 +25,21 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (ObjectUtils.allNotNull(firstName, lastName, email, password)){
+        if (ObjectUtils.allNotNull(firstName, lastName, email, password)) {
             userService.createUser(new User.Builder()
                     .withFirstName(firstName)
                     .withLastName(lastName)
                     .withEmail(email)
-                    .withRole(UserRole.USER.name())
+                    .withRoleId(1)
                     .withPassword(password)
                     .build());
             req.setAttribute("userEmail", email);
-            req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            return;
         }
 
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
-
+        resp.setContentType("text/plain");
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
     }
 }
