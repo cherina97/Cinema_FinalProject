@@ -19,10 +19,9 @@
 
     <!-- Sidebar -->
     <jsp:include page="navbar.jsp"></jsp:include>
+
     <!-- Content -->
     <div id="content">
-
-
         <div class="inputForm">
             <div style="text-align: center;">
                 Name *: <input type="text" id="Username" required>
@@ -117,7 +116,7 @@
 
 
                     </table>
-                    <button type="submit"> Buy</button>
+                    <button> Buy</button>
 
                 </form>
 

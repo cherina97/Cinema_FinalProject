@@ -4,10 +4,13 @@ import entities.User;
 import utils.ConnectionPool;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDao implements CRUD<User>{
+    private static final String READ_ALL_USERS = "SELECT * FROM users";
+    private static final String DELETE_BY_ID = "DELETE FROM users WHERE id = ?";
     private final Connection connection;
     private static final String INSERT_USER =
             "INSERT INTO users (first_name, last_name, email, password, role_id) VALUES (?, ?, ?, ?, ?);";
@@ -36,10 +39,36 @@ public class UserDao implements CRUD<User>{
         return user;
     }
 
-    //todo
+
     @Override
     public List<User> readAll() {
-        return null;
+        List<User> users = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL_USERS)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                users.add(User.of(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public void remove(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(User user) {
+
     }
 
     public Optional<User> getByEmail(String email){

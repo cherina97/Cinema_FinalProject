@@ -25,6 +25,8 @@
             <th>Start At</th>
             <th>Week day</th>
             <th>Tickets</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -39,6 +41,8 @@
                     Tickets
                 </a>
             </td>
+            <td> <a href="${pageContext.request.contextPath}/allSession/update?id=${session.id}">Update</a> </td>
+            <td> <a href="${pageContext.request.contextPath}/allSession/delete?id=${session.id}">Delete</a> </td>
             </tbody>
         </c:forEach>
     </table>

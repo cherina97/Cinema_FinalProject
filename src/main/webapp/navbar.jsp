@@ -61,13 +61,15 @@
                 </a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/allSession/tickets/buy" class="cabinet">
+                <a href="${pageContext.request.contextPath}/tickets" class="cabinet">
                     <i class="zmdi zmdi-link"></i> Buy
                 </a>
             </li>
-
-
         </ul>
+
+        <!-- Content -->
+        <div id="content">
+        </div>
     </div>
 
 

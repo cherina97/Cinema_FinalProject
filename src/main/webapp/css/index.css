@@ -56,7 +56,8 @@ body {
     color: #fff;
 }
 
-#sidebar .nav{
+#sidebar .nav li:hover{
+    background-color:#1a1a1a;
 
 }
 
@@ -70,9 +71,23 @@ body {
 
 #sidebar .nav a:hover{
     background: none;
-    color: #ECEFF1;
+    color: #b3a4a4;
 }
 
 #sidebar .nav a i{
     margin-right: 16px;
+}
+#content nav {
+    background-color:#232223;
+    border: black;
+    border-radius:0;
+    height: 52px;
+
+}
+#content li a{
+    color: #c5c5c5
+}
+
+#content li a:hover{
+    color: #ffffff
 }

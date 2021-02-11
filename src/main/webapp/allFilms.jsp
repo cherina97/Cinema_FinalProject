@@ -24,6 +24,8 @@
             <th>Film Title</th>
             <th>Description</th>
             <th>Duration</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -33,6 +35,8 @@
             <td>${film.filmTitle} </td>
             <td>${film.description} </td>
             <td>${film.duration} </td>
+            <td> <a href="${pageContext.request.contextPath}/allFilms/update?id=${film.id}">Update</a> </td>
+            <td> <a href="${pageContext.request.contextPath}/allFilms/delete?id=${film.id}">Delete</a> </td>
             </tbody>
         </c:forEach>
     </table>

@@ -3,6 +3,7 @@ package services;
 import daos.UserDao;
 import entities.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -31,5 +32,13 @@ public class UserService {
     public Optional<User> getUserByEmailAndPassword(String email, String password) {
         return userDao.getByEmail(email)
                 .filter(user -> user.getPassword().equals(password));
+    }
+
+    public List<User> readAllUsers(){
+        return  userDao.readAll();
+    }
+
+    public void removeUser(int id){
+        userDao.remove(id);
     }
 }

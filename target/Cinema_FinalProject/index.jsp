@@ -25,22 +25,35 @@
     <div id="content">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="${pageContext.request.contextPath}/cabinet.jsp"> Cabinet </a></li>
-                </ul>
+                <c:choose>
+                    <c:when test="${sessionScope.user ne null}">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="${pageContext.request.contextPath}/logout"> Logout </a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="${pageContext.request.contextPath}/cabinet.jsp"> Cabinet </a></li>
+                        </ul>
+                    </c:when>
+                    <c:otherwise>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="${pageContext.request.contextPath}/login"> Login </a></li>
+                        </ul>
+                    </c:otherwise>
+                </c:choose>
+
+
+
             </div>
         </nav>
 
         <div class="container-fluid">
-            <h1>Simple Sidebar</h1>
-            <p>
-                Make sure to keep all page content within the
-                <code>#content</code>.
-            </p>
+            <jsp:include page="carousel.html"></jsp:include>
         </div>
     </div>
 </div>
+
 <script src="js/navbar.js"></script>
+<script src="js/login.js"></script>
 
 </body>
 </html>

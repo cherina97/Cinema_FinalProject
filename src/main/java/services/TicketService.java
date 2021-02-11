@@ -40,4 +40,12 @@ public class TicketService {
     public void setUserForTickets(List<Ticket> ticketsBySeats, User user) {
         ticketDao.setUserForTickets(ticketsBySeats, user);
     }
+
+    public void removeTicket(int id){
+        ticketDao.remove(id);
+    }
+
+    public List<Ticket> getTicketsByUser(User user) {
+        return ticketDao.getTicketsByUser(user);
+    }
 }

@@ -42,12 +42,6 @@
             </select>
         </label>
 
-<%--        <label>--%>
-<%--            <c:forEach items="${applicationScope.weekDays}" var="dayOfWeek">--%>
-<%--                <input type="checkbox" class="seats" value="${dayOfWeek.name()}" name="test">--%>
-<%--            </c:forEach>--%>
-<%--        </label>--%>
-
         <button>Create session</button>
     </form>
 

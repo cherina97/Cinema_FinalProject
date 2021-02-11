@@ -9,6 +9,9 @@ import java.util.List;
 
 public class SessionDao implements CRUD<Session> {
 
+    private static final String DELETE_BY_ID = "DELETE FROM sessions WHERE id = ?";
+    private static final String UPDATE_SESSION =
+            "UPDATE sessions SET film_id = ?, start_at = ?, week_day = ? WHERE id = ?";
     private final Connection connection;
     private static final String INSERT_SESSION =
             "INSERT INTO sessions (film_id, start_at, week_day) VALUES (?, ?, ?)";
@@ -51,6 +54,32 @@ public class SessionDao implements CRUD<Session> {
             e.printStackTrace();
         }
         return sessionList;
+    }
+
+    @Override
+    public void remove(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(Session session) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SESSION);
+            preparedStatement.setInt(1, session.getFilm().getId());
+            preparedStatement.setTime(2, session.getStartAt());
+            preparedStatement.setString(3, session.getWeekDay());
+            preparedStatement.setInt(4, session.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Session of(ResultSet resultSet) {

@@ -32,4 +32,12 @@ public class SessionService {
     public Session getSessionById(int sessionId){
         return sessionDao.getSessionById(sessionId);
     }
+
+    public void removeSession(int id){
+        sessionDao.remove(id);
+    }
+
+    public void updateSession(Session session){
+        sessionDao.update(session);
+    }
 }

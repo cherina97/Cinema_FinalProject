@@ -32,4 +32,12 @@ public class FilmService {
     public Film getById(int filmId){
         return filmDao.getById(filmId);
     }
+
+    public void removeFilm(int id){
+        filmDao.remove(id);
+    }
+
+    public void updateFilm(Film film){
+        filmDao.update(film);
+    }
 }
