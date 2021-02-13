@@ -1,5 +1,6 @@
 package entities;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class Session {
@@ -7,7 +8,7 @@ public class Session {
     private int id;
     private Film film;
     private Time startAt;
-    private String weekDay;
+    private Date date;
 
     public static class Builder {
         private Session session;
@@ -21,10 +22,6 @@ public class Session {
             return this;
         }
 
-        //        public Session.Builder withFilmId (int filmId){
-//            session.filmId = filmId;
-//            return this;
-//        }
         public Session.Builder withFilm(Film film) {
             session.film = film;
             return this;
@@ -36,10 +33,11 @@ public class Session {
             return this;
         }
 
-        public Session.Builder withWeekDay(String weekDay) {
-            session.weekDay = weekDay;
+        public Session.Builder withDate(Date date){
+            session.date = date;
             return this;
         }
+
 
         public Session build() {
             return session;
@@ -53,15 +51,6 @@ public class Session {
     public void setId(int id) {
         this.id = id;
     }
-
-//    public int getFilmId() {
-//        return filmId;
-//    }
-//
-//    public void setFilmId(int filmId) {
-//        this.filmId = filmId;
-//    }
-
 
     public Film getFilm() {
         return film;
@@ -79,11 +68,11 @@ public class Session {
         this.startAt = startAt;
     }
 
-    public String getWeekDay() {
-        return weekDay;
+    public Date getDate() {
+        return date;
     }
 
-    public void setWeekDay(String weekDay) {
-        this.weekDay = weekDay;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

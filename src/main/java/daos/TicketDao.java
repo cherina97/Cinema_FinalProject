@@ -125,8 +125,6 @@ public class TicketDao implements CRUD<Ticket>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public List<Ticket> getTicketsByUser(User user) {

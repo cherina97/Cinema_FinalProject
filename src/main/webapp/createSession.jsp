@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<jsp:useBean id="allFilms" scope="request" type="java.util.List"/>
+<%--<jsp:useBean id="allFilms" scope="request" type="java.util.List"/>--%>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
         <label>
             <select name="filmId">
                 <option value="" disabled selected hidden> Select film for session</option>
-                <c:forEach var="film" items="${allFilms}">
+                <c:forEach var="film" items="${requestScope.allFilms}">
                     <option value="${film.id}">${film.filmTitle}</option>
                 </c:forEach>
             </select>
@@ -35,11 +35,7 @@
         </label>
 
         <label>
-            <select name="weekDay">
-                <c:forEach items="${applicationScope.weekDays}" var="dayOfWeek">
-                    <option value="${dayOfWeek.name()}">${dayOfWeek.name()}</option>
-                </c:forEach>
-            </select>
+            <input name="date" type="date">
         </label>
 
         <button>Create session</button>

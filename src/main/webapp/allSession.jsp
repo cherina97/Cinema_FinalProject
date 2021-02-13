@@ -35,7 +35,7 @@
             <td>${session.id}</td>
             <td>${session.film.filmTitle}</td>
             <td>${session.startAt} </td>
-            <td>${session.weekDay} </td>
+            <td>${session.date} </td>
             <td>
                 <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}">
                     Tickets

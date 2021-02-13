@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -39,14 +40,14 @@ public class UpdateSessionServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String filmId = req.getParameter("filmId");
         LocalTime startAt = LocalTime.parse(req.getParameter("startAt"));
-        String weekDay = req.getParameter("weekDay");
+        String date = req.getParameter("date");
 
         sessionService.updateSession(
                 new Session.Builder()
                         .withId(id)
                         .withFilm(filmService.getById(Integer.parseInt(filmId)))
                         .withTimeStartAt(Time.valueOf(startAt))
-                        .withWeekDay(weekDay)
+                        .withDate(Date.valueOf(date))
                         .build());
 
         resp.sendRedirect("/cinema/allSession");

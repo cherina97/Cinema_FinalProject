@@ -7,7 +7,6 @@ import services.FilmService;
 import services.SessionService;
 import services.TicketService;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Time;
 
 @WebServlet("/createSession")
@@ -22,12 +22,6 @@ public class CreateSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();
     private final TicketService ticketService = TicketService.getInstance();
     private final FilmService filmService = FilmService.getInstance();
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-//        getServletContext().setAttribute("weekDays", WeekDay.values());
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,14 +33,14 @@ public class CreateSessionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String filmId = req.getParameter("filmId");
         String startAt = req.getParameter("startAt");
-        String weekDay = req.getParameter("weekDay");
+        String date = req.getParameter("date");
 
-        if (ObjectUtils.allNotNull(filmId, startAt, weekDay)) {
+        if (ObjectUtils.allNotNull(filmId, startAt, date)) {
             Session createdSession = sessionService.createSession(
                     new Session.Builder()
                             .withFilm(filmService.getById(Integer.parseInt(filmId)))
                             .withTimeStartAt(Time.valueOf(startAt + ":00"))
-                            .withWeekDay(weekDay)
+                            .withDate(Date.valueOf(date))
                             .build());
             createTicketsForSession(createdSession);
             resp.sendRedirect("/cinema/allSession");
