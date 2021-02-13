@@ -46,8 +46,8 @@
 
                 </div>
             </td>
-            <td>${film.filmTitle} </td>
-            <td>${film.description} </td>
+            <td>${film.filmTitle} ${film.filmTitleUK}</td>
+            <td>${film.description} ${film.descriptionUK}</td>
             <td>${film.duration} </td>
             <td><a href="${pageContext.request.contextPath}/allFilms/update?id=${film.id}">Update</a>
                 <a href="${pageContext.request.contextPath}/allFilms/updatePoster?id=${film.id}">Update poster</a>

@@ -65,6 +65,16 @@
                     <i class="zmdi zmdi-link"></i> Buy
                 </a>
             </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/addGenre" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> Add genre
+                </a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/allGenres" class="cabinet">
+                    <i class="zmdi zmdi-link"></i> All genres
+                </a>
+            </li>
         </ul>
 
         <!-- Content -->

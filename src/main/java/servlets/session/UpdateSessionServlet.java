@@ -1,6 +1,5 @@
 package servlets.session;
 
-import daos.WeekDay;
 import entities.Session;
 import services.FilmService;
 import services.SessionService;
@@ -23,7 +22,7 @@ public class UpdateSessionServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        getServletContext().setAttribute("weekDays", WeekDay.values());
+//        getServletContext().setAttribute("weekDays", WeekDay.values());
     }
 
     @Override

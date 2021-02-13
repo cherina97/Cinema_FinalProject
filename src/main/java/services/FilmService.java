@@ -2,6 +2,7 @@ package services;
 
 import daos.FilmDao;
 import entities.Film;
+import entities.Genre;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -54,5 +55,9 @@ public class FilmService {
 
     public SerialBlob getBlobFromPart(Part filePart) {
         return filmDao.getBlobFromPart(filePart);
+    }
+
+    public void setGenresForFilm(Film film, List<Genre> genres){
+        filmDao.setGenresForFilm(film, genres);
     }
 }

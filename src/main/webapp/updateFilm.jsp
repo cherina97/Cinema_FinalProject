@@ -24,7 +24,15 @@
         </label>
 
         <label>
+            <input name="filmTitleUK" type="text" placeholder="Film title" value="${requestScope.filmById.filmTitleUK}"/>
+        </label>
+
+        <label>
             <input name="description" type="text" placeholder="Description" value="${requestScope.filmById.description}"/>
+        </label>
+
+        <label>
+            <input name="descriptionUK" type="text" placeholder="Description" value="${requestScope.filmById.descriptionUK}"/>
         </label>
 
         <label>
