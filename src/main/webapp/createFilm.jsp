@@ -12,7 +12,7 @@
 
 <div id="viewport">
 
-    <form class="register-form" action="addFilm" method="post">
+    <form class="register-form" action="addFilm" method="post" enctype="multipart/form-data">
 
         <label>
             <input name="filmTitle" type="text" placeholder="Film title"/>
@@ -26,7 +26,11 @@
             <input name="duration" type="time" placeholder="Duration"/>
         </label>
 
-        <button>Add film</button>
+        <label>
+            <input name="poster" type="file"/>
+        </label>
+
+        <button type="submit">Add film</button>
     </form>
 
 </div>

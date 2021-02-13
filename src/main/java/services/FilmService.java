@@ -3,6 +3,9 @@ package services;
 import daos.FilmDao;
 import entities.Film;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
 import java.util.List;
 
 public class FilmService {
@@ -39,5 +42,17 @@ public class FilmService {
 
     public void updateFilm(Film film){
         filmDao.update(film);
+    }
+
+    public void updatePoster(Film film){
+        filmDao.updatePoster(film);
+    }
+
+    public void uploadPoster(int id, HttpServletResponse response){
+        filmDao.uploadPoster(id, response);
+    }
+
+    public SerialBlob getBlobFromPart(Part filePart) {
+        return filmDao.getBlobFromPart(filePart);
     }
 }

@@ -13,6 +13,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 
 @WebServlet("/allFilms/update")
+//@MultipartConfig(maxFileSize = 16177215)
 public class UpdateFilmServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();
 
@@ -31,6 +32,9 @@ public class UpdateFilmServlet extends HttpServlet {
         String filmTitle = req.getParameter("filmTitle");
         String description = req.getParameter("description");
         LocalTime localTime = LocalTime.parse(req.getParameter("duration"));
+//        Part filePart = req.getPart("poster");
+
+//        SerialBlob serialBlob = filmService.getBlobFromPart(filePart);
 
         filmService.updateFilm(
                 new Film.Builder()
@@ -38,6 +42,7 @@ public class UpdateFilmServlet extends HttpServlet {
                         .withFilmTitle(filmTitle)
                         .withDescription(description)
                         .withDuration(Time.valueOf(localTime))
+//                        .withPoster(serialBlob)
                         .build());
 
         resp.sendRedirect("/cinema/allFilms");

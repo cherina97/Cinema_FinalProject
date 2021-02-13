@@ -1,5 +1,6 @@
 package entities;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -10,6 +11,7 @@ public class Film {
     private  String filmTitle;
     private String description;
     private Time duration;
+    private Blob poster;
 
     public static Film of(ResultSet resultSet) {
         try {
@@ -57,6 +59,11 @@ public class Film {
             return this;
         }
 
+        public Film.Builder withPoster(Blob poster){
+            film.poster = poster;
+            return this;
+        }
+
         public Film build(){
             return film;
         }
@@ -92,5 +99,13 @@ public class Film {
 
     public void setDuration(Time duration) {
         this.duration = duration;
+    }
+
+    public Blob getPoster() {
+        return poster;
+    }
+
+    public void setPoster(Blob poster) {
+        this.poster = poster;
     }
 }
