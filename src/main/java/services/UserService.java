@@ -2,6 +2,7 @@ package services;
 
 import daos.UserDao;
 import entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class UserService {
 
     public Optional<User> getUserByEmailAndPassword(String email, String password) {
         return userDao.getByEmail(email)
-                .filter(user -> user.getPassword().equals(password));
+                .filter(user -> BCrypt.checkpw(password, user.getPassword()));
     }
 
     public List<User> readAllUsers(){

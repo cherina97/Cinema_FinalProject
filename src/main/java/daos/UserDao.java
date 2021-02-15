@@ -1,6 +1,7 @@
 package daos;
 
 import entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 import utils.ConnectionPool;
 
 import java.sql.*;
@@ -26,7 +27,10 @@ public class UserDao implements CRUD<User>{
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPassword());
+
+            String hashPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            preparedStatement.setString(4, hashPassword);
+
             preparedStatement.setInt(5, user.getRoleId());
             preparedStatement.executeUpdate();
 

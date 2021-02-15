@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+nav{
+    height: 60px;
+}
+
+.carousel{
+    margin-top: 60px;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(-45deg, #dc3545, #af9bb2, #117a8b, #819ab0);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.carousel-caption{
+    background-color:#00000099;
+}
+.h3{
+    color:white;
+    margin-top: 20px;
+    margin-bottom: -70px;
+}
+
+.carousel-item{
+    width: 100%;
+    height: 500px;
+}
+.carousel img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*.navbar{*/
+/*    background-color: #212529*/
+/*}*/
+.cont{
+    background-color:#0000006b;
+}
