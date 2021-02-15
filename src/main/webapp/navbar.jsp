@@ -7,86 +7,72 @@
     <meta charset="ISO-8859-1">
     <title>Welcome</title>
 
-    <link rel="stylesheet" href="css/index.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 <body>
 
-<div id="viewport">
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <header>
-            <a href="${pageContext.request.contextPath}/">Cinema</a>
-        </header>
-        <ul class="nav">
-            <li>
-                <a href="${pageContext.request.contextPath}/login">
-                    <i class="zmdi zmdi-view-dashboard"></i> Log in
-                </a>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #212529">
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Cinema</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/logout" class="logout">
-                    <i class="zmdi zmdi-link"></i> Log out
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" id="logout" href="${pageContext.request.contextPath}/logout">Logout</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/cabinet" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> Cabinet
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/addFilm" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> Add film
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/addFilm">Add film</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/allFilms" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> All films
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/allFilms">All films</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/createSession" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> Create session
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/createSession">Create session</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/allSession" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> All sessions
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/allSession">All session</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/tickets" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> Buy
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/tickets">Buy</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/addGenre" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> Add genre
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/addGenre">Add genre</a>
             </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/allGenres" class="cabinet">
-                    <i class="zmdi zmdi-link"></i> All genres
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/allGenres">All genres</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
             </li>
         </ul>
 
-        <!-- Content -->
-        <div id="content">
-        </div>
+        <%--        <form class="form-inline mt-2 mt-md-0">--%>
+        <%--            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">--%>
+        <%--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+        <%--        </form>--%>
     </div>
+</nav>
 
-
-</div>
 
 <script src="js/navbar.js"></script>
-<script src="js/login.js"></script>
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </body>
 </html>

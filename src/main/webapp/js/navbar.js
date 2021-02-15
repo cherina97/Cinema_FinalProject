@@ -1,4 +1,4 @@
-$("a.logout").click(function () {
+$("a#logout").click(function () {
 
     $.get("logout")
         .done(function (data, textStatus, xhr) {

@@ -49,21 +49,6 @@ public class GenreDao implements CRUD<Genre>{
         return genres;
     }
 
-//    public Genre getByName(String genre){
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement("select * from genres where genre_name = ?");
-//            preparedStatement.setString(1, genre);
-//
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            if (resultSet.next()){
-//                return Genre.of(resultSet);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return  null;
-//    }
-
     public List<Genre> getGenresByIds(List<Integer> genresIds){
         List <Genre> genres = new ArrayList<>();
         try {
