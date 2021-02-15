@@ -26,6 +26,7 @@ public class FilmDao implements CRUD<Film> {
     private static final String UPDATE_POSTER = "UPDATE films SET poster = ? WHERE id = ?";
     private static final String INSERT_INTO_GENRE_FILM = "INSERT INTO genre_film (film_id, genre_id) VALUES (?, ?)";
     private final Connection connection;
+    private int noOfRecords;
 
     public FilmDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
@@ -40,9 +41,7 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.setString(4, film.getDescriptionUK());
             preparedStatement.setTime(5, film.getDuration());
             preparedStatement.setBlob(6, film.getPoster());
-
             preparedStatement.executeUpdate();
-//            setGenresForFilm(film, genre);
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             generatedKeys.next();
@@ -53,11 +52,9 @@ public class FilmDao implements CRUD<Film> {
         return film;
     }
 
-    public void setGenresForFilm(Film film, List <Genre> genres){
+    public void setGenresForFilm(Film film, List<Genre> genres) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_GENRE_FILM)) {
             preparedStatement.setInt(1, film.getId());
-//            preparedStatement.setInt(2, genre.getId());
-//            preparedStatement.execute();
             connection.setAutoCommit(false);
 
             for (Genre genre : genres) {
@@ -91,6 +88,31 @@ public class FilmDao implements CRUD<Film> {
             e.printStackTrace();
         }
         return filmList;
+    }
+
+    public List<Film> readAll(int offset, int noOfRecords) {
+        String query = "select SQL_CALC_FOUND_ROWS * from films limit "
+                + offset + ", " + noOfRecords;
+
+        List<Film> filmList = new ArrayList<>();
+        try (Statement stmt = connection.createStatement()){
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                filmList.add(Film.of(rs));
+            }
+            rs.close();
+
+            rs = stmt.executeQuery("SELECT FOUND_ROWS()");
+            if (rs.next())
+                this.noOfRecords = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return filmList;
+    }
+
+    public int getNoOfRecords() {
+        return noOfRecords;
     }
 
     @Override
@@ -134,11 +156,11 @@ public class FilmDao implements CRUD<Film> {
     }
 
     public Film getById(int filmId) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_ID)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_ID)) {
             preparedStatement.setInt(1, filmId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 return Film.of(resultSet);
             }
         } catch (SQLException e) {
@@ -147,7 +169,7 @@ public class FilmDao implements CRUD<Film> {
         return null;
     }
 
-    public void uploadPoster(int id, HttpServletResponse response){
+    public void uploadPoster(int id, HttpServletResponse response) {
         try {
             PreparedStatement stmt = connection.prepareStatement(SELECT_POSTER);
             stmt.setInt(1, id);
@@ -161,7 +183,7 @@ public class FilmDao implements CRUD<Film> {
 
     }
 
-    public SerialBlob getBlobFromPart(Part filePart){
+    public SerialBlob getBlobFromPart(Part filePart) {
         SerialBlob serialBlob = null;
         try {
             InputStream inputStream = filePart.getInputStream();

@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}" scope="session" />
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}"
+       scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="prop"/>
 
@@ -22,8 +23,8 @@
 <jsp:include page="navbar.jsp"></jsp:include>
 
 <div id="viewport">
+    <caption>All films</caption>
     <table>
-        <caption>All films</caption>
 
         <thead>
         <tr>
@@ -37,12 +38,12 @@
         </tr>
         </thead>
 
-        <c:forEach var="film" items="${requestScope.filmList}">
+        <c:forEach var="film" items="${requestScope.filmListPagination}">
             <tbody>
             <td>${film.id}</td>
             <td>
                 <div class="image">
-                    <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${film.id}" />
+                    <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${film.id}"/>
 
                 </div>
             </td>
@@ -57,16 +58,36 @@
         </c:forEach>
     </table>
 
-    <h3><fmt:message key="label.welcome"/></h3>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <c:if test="${requestScope.currentPage != 1}">
+                <li class="page-item">
+                    <a class="page-link" href="allFilms?page=${requestScope.currentPage - 1}"> &laquo; </a>
+                </li>
+            </c:if>
 
-    <span class="lang">
-        <form>
-            <select name="language" onchange="submit()">
-                <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
-                <option value="uk_UA" ${language == 'uk_UA' ? 'selected' : ''}>UK</option>
-            </select>
-        </form>
-    </span>
+            <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${requestScope.currentPage eq i}">
+                        <li class="page-item active">
+                            <a class="page-link"> ${i} <span class="sr-only">(current)</span></a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link" href="allFilms?page=${i}">${i}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${requestScope.currentPage lt requestScope.noOfPages}">
+                <li class="page-item">
+                    <a class="page-link" href="allFilms?page=${requestScope.currentPage + 1}"> &raquo; </a>
+                </li>
+            </c:if>
+        </ul>
+    </nav>
 
 </div>
 

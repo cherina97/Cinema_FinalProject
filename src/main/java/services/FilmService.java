@@ -33,6 +33,14 @@ public class FilmService {
         return filmDao.readAll();
     }
 
+    public List<Film> readAll(int offset, int noOfRecords){
+        return filmDao.readAll(offset, noOfRecords);
+    }
+
+    public int getNoOfRecords() {
+        return filmDao.getNoOfRecords();
+    }
+
     public Film getById(int filmId){
         return filmDao.getById(filmId);
     }
