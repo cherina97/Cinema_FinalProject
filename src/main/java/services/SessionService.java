@@ -29,6 +29,18 @@ public class SessionService {
         return sessionDao.readAll();
     }
 
+    public List<Session> readAllFromNow(){
+        return sessionDao.readAllFromNow();
+    }
+
+    public List<Session> readAllOrderByFilm(){
+        return sessionDao.readAllOrderByFilm();
+    }
+
+    public List<Session> readAllOrderByFreeSeats(){
+        return sessionDao.readAllOrderByFreeSeats();
+    }
+
     public Session getSessionById(int sessionId){
         return sessionDao.getSessionById(sessionId);
     }

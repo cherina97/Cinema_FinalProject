@@ -8,3 +8,6 @@ body{
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }
+table caption{
+    caption-side: top;
+}

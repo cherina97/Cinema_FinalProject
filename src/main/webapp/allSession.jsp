@@ -26,9 +26,19 @@
     </div>
 
     <div class="mainBlock">
-
         <main role="main" class="container">
-            <table>
+            <div class="sortingButtons">
+                <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=filmTitle"
+                   role="button">By film title</a>
+                <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=freePlace"
+                   role="button">By free place</a>
+                <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=date" role="button">By
+                    date</a>
+                <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=allSession" role="button">All session</a>
+            </div>
+
+            <table class="table">
+                <caption>All sessions</caption>
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -40,8 +50,7 @@
                     <th>Delete</th>
                 </tr>
                 </thead>
-
-                <c:forEach var="session" items="${requestScope.sessionList}">
+                <c:forEach var="session" items="${requestScope.allSession}">
                     <tbody>
                     <td>${session.id}</td>
                     <td>${session.film.filmTitle}</td>
@@ -52,8 +61,10 @@
                             Tickets
                         </a>
                     </td>
-                    <td><a href="${pageContext.request.contextPath}/allSession/update?id=${session.id}">Update</a></td>
-                    <td><a href="${pageContext.request.contextPath}/allSession/delete?id=${session.id}">Delete</a></td>
+                    <td><a href="${pageContext.request.contextPath}/allSession/update?id=${session.id}">Update</a>
+                    </td>
+                    <td><a href="${pageContext.request.contextPath}/allSession/delete?id=${session.id}">Delete</a>
+                    </td>
                     </tbody>
                 </c:forEach>
             </table>

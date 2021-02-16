@@ -12,10 +12,20 @@ public class SessionDao implements CRUD<Session> {
     private static final String DELETE_BY_ID = "DELETE FROM sessions WHERE id = ?";
     private static final String UPDATE_SESSION =
             "UPDATE sessions SET film_id = ?, start_at = ?, date = ? WHERE id = ?";
+
     private final Connection connection;
     private static final String INSERT_SESSION =
             "INSERT INTO sessions (film_id, start_at, date) VALUES (?, ?, ?)";
-    private static final String READ_ALL_SESSIONS = "SELECT * FROM sessions";
+    private static final String READ_ALL_SESSIONS = "SELECT * FROM sessions order by date, start_at";
+    private static final String READ_ALL_ORDER_BY_DATE =
+            "select * from sessions where date >= CURDATE() order by start_at, date";
+    private static final String READ_ALL_ORDER_BY_FILM =
+            "select * from sessions inner join films on sessions.film_id = films.id where date >= CURDATE() order by film_title";
+    private static final String READ_ALL_ORDER_BY_FREE_SEATS =
+            "select sessions.id, sessions.film_id, sessions.start_at, sessions.date, count(*) as user_id from tickets \n" +
+                    "inner join sessions \n" +
+                    "on tickets.session_id = sessions.id \n" +
+                    "where user_id is null and date >= CURDATE() group by session_id order by user_id desc";
     private static final String GET_BY_ID = "SELECT * FROM sessions WHERE id = ?";
 
     public SessionDao() {
@@ -43,8 +53,25 @@ public class SessionDao implements CRUD<Session> {
 
     @Override
     public List<Session> readAll() {
+        return getSessionList(READ_ALL_SESSIONS);
+    }
+
+    public List<Session> readAllFromNow() {
+        return getSessionList(READ_ALL_ORDER_BY_DATE);
+    }
+
+    public List<Session> readAllOrderByFilm() {
+        return getSessionList(READ_ALL_ORDER_BY_FILM);
+    }
+
+    public List<Session> readAllOrderByFreeSeats() {
+        return getSessionList(READ_ALL_ORDER_BY_FREE_SEATS);
+    }
+    
+
+    private List<Session> getSessionList(String readAllSessionsFromNowOrderBy) {
         List<Session> sessionList = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL_SESSIONS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(readAllSessionsFromNowOrderBy)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -97,13 +124,14 @@ public class SessionDao implements CRUD<Session> {
                     .build();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error");
+            e.printStackTrace();
         }
+        return null;
     }
 
-    public Session getSessionById(int sessionId){
+    public Session getSessionById(int sessionId) {
         Session session = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_ID)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_ID)) {
             preparedStatement.setInt(1, sessionId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
