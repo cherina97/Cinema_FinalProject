@@ -17,6 +17,8 @@ public class TicketDao implements CRUD<Ticket>{
     private static final String GET_TICKETS_BY_SEATS =
             "SELECT * FROM tickets WHERE seat_number IN (?) AND session_id = ?";
     private static final String SET_TICKETS_FOR_USER = "UPDATE tickets SET user_id = ? WHERE id IN (?)";
+    private static final String DELETE_BY_ID = "DELETE FROM tickets WHERE id = ?";
+    private static final String GET_TICKETS_BY_USER = "SELECT * FROM tickets WHERE user_id = ?";
     private final Connection connection;
 
     public TicketDao() {
@@ -54,6 +56,22 @@ public class TicketDao implements CRUD<Ticket>{
             e.printStackTrace();
         }
         return ticketList;
+    }
+
+    @Override
+    public void remove(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(Ticket ticket) {
+
     }
 
     public List<Ticket> readAllTicketsBySessionId(int sessionId) {
@@ -107,7 +125,21 @@ public class TicketDao implements CRUD<Ticket>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public List<Ticket> getTicketsByUser(User user) {
+        List <Ticket> ticketList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_TICKETS_BY_USER);
+            preparedStatement.setInt(1, user.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()) {
+                ticketList.add(Ticket.of(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ticketList;
     }
 }

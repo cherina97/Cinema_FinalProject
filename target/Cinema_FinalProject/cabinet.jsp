@@ -34,15 +34,15 @@
 
                 <div id="info">
 
-                    <h1> ${sessionScope.user.get().email} </h1>
+                    <h1> ${sessionScope.user.email} </h1>
 
                     <ul id="about">
-                        <li><i class="fa fa-briefcase" aria-hidden="true"></i>${sessionScope.user.get().firstName}</li>
-                        <li><i class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.get().lastName}</li>
+                        <li><i class="fa fa-briefcase" aria-hidden="true"></i>${sessionScope.user.firstName}</li>
+                        <li><i class="fa fa-heart" aria-hidden="true"></i>${sessionScope.user.lastName}</li>
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i> Ukraine</li>
                         <li><i class="fa fa-map-marker" aria-hidden="true"></i>
                             <c:choose>
-                                <c:when test="${sessionScope.user.get().roleId == 1}">
+                                <c:when test="${sessionScope.user.roleId == 1}">
                                     USER
                                 </c:when>
                                 <c:otherwise>
@@ -68,8 +68,14 @@
     </div>
 
 
-
-
 </div>
+
+<script src="js/navbar.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </body>
 </html>

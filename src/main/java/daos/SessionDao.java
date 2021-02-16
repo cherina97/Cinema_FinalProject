@@ -9,9 +9,12 @@ import java.util.List;
 
 public class SessionDao implements CRUD<Session> {
 
+    private static final String DELETE_BY_ID = "DELETE FROM sessions WHERE id = ?";
+    private static final String UPDATE_SESSION =
+            "UPDATE sessions SET film_id = ?, start_at = ?, date = ? WHERE id = ?";
     private final Connection connection;
     private static final String INSERT_SESSION =
-            "INSERT INTO sessions (film_id, start_at, week_day) VALUES (?, ?, ?)";
+            "INSERT INTO sessions (film_id, start_at, date) VALUES (?, ?, ?)";
     private static final String READ_ALL_SESSIONS = "SELECT * FROM sessions";
     private static final String GET_BY_ID = "SELECT * FROM sessions WHERE id = ?";
 
@@ -24,7 +27,7 @@ public class SessionDao implements CRUD<Session> {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SESSION, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, session.getFilm().getId());
             preparedStatement.setTime(2, session.getStartAt());
-            preparedStatement.setObject(3, session.getWeekDay());
+            preparedStatement.setObject(3, session.getDate());
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -53,18 +56,44 @@ public class SessionDao implements CRUD<Session> {
         return sessionList;
     }
 
+    @Override
+    public void remove(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(Session session) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SESSION);
+            preparedStatement.setInt(1, session.getFilm().getId());
+            preparedStatement.setTime(2, session.getStartAt());
+            preparedStatement.setDate(3, session.getDate());
+            preparedStatement.setInt(4, session.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Session of(ResultSet resultSet) {
         try {
             int id = resultSet.getInt("id");
             int filmId = resultSet.getInt("film_id");
             Time startAt = resultSet.getTime("start_at");
-            String weekDay = resultSet.getString("week_day");
+            Date date = Date.valueOf(resultSet.getString("date"));
 
             return new Session.Builder()
                     .withId(id)
                     .withFilm(new FilmDao().getById(filmId))
                     .withTimeStartAt(startAt)
-                    .withWeekDay(weekDay)
+                    .withDate(date)
                     .build();
 
         } catch (SQLException e) {
