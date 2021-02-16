@@ -1,6 +1,14 @@
 body
 {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('img/empty-cinema.jpg');
+    background-size: 100%;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.container{
+    margin-top: 8%;
 }
 
 #Username
@@ -13,7 +21,7 @@ body
 {
     width:100%;
     height:20px;
-    background:#4388cc;
+    background:#36120e;
     color:#fff;
     line-height:20px;
     font-size:15px;
@@ -46,10 +54,9 @@ body
 
 .seats
 {
-    border:1px solid red;background:yellow;
+    border:1px solid red;
+    background:yellow;
 }
-
-
 
 .seatGap
 {
@@ -110,7 +117,8 @@ input[type=checkbox]:checked:before {
 {
     width : 20px;
     height : 20px;
-    margin-left : 45%;
+    margin-left : 30%;
+    margin-top: 25%;
     padding : 0;
     /* 	border : 1px solid red; */
 }

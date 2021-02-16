@@ -1,18 +1,18 @@
-function onLoaderFunc() {
-    $(".seatStructure *").prop("disabled", true);
-    $(".displayerBoxes *").prop("disabled", true);
-}
+// function onLoaderFunc() {
+//     $(".seatStructure *").prop("disabled", true);
+//     $(".displayerBoxes *").prop("disabled", true);
+// }
 
-function takeData() {
-    if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-        alert("Please Enter your Name and Number of Seats");
-    } else {
-        $(".inputForm *").prop("disabled", true);
-        $(".seatStructure *").prop("disabled", false);
-        document.getElementById("notification")
-            .innerHTML = "<b style='margin-bottom:0px;background:yellow;'>Please Select your Seats!</b>";
-    }
-}
+// function takeData() {
+//     if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
+//         alert("Please Enter your Name and Number of Seats");
+//     } else {
+//         $(".inputForm *").prop("disabled", true);
+//         $(".seatStructure *").prop("disabled", false);
+//         document.getElementById("notification")
+//             .innerHTML = "<b style='margin-bottom:0px;background:yellow;'>Please Select your Seats!</b>";
+//     }
+// }
 
 
 function updateTextArea() {

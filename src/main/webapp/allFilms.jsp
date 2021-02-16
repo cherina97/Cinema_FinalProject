@@ -17,77 +17,92 @@
 
     <link rel="stylesheet" href="css/allSessions.css">
     <link rel="stylesheet" href="css/allFilms.css">
+    <link rel="stylesheet" href="css/createFilm.css">
+
 </head>
 <body>
 
-<jsp:include page="navbar.jsp"></jsp:include>
+<div class="cont">
 
-<div id="viewport">
-    <caption>All films</caption>
-    <table>
+    <div class="header">
+        <jsp:include page="navbar.jsp"></jsp:include>
+    </div>
 
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Poster</th>
-            <th>Film Title</th>
-            <th>Description</th>
-            <th>Duration</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
+    <div class="mainBlock">
 
-        <c:forEach var="film" items="${requestScope.filmListPagination}">
-            <tbody>
-            <td>${film.id}</td>
-            <td>
-                <div class="image">
-                    <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${film.id}"/>
+        <main role="main" class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Poster</th>
+                    <th>Film Title</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                    <th>Genre</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
 
-                </div>
-            </td>
-            <td>${film.filmTitle} ${film.filmTitleUK}</td>
-            <td>${film.description} ${film.descriptionUK}</td>
-            <td>${film.duration} </td>
-            <td><a href="${pageContext.request.contextPath}/allFilms/update?id=${film.id}">Update</a>
-                <a href="${pageContext.request.contextPath}/allFilms/updatePoster?id=${film.id}">Update poster</a>
-            </td>
-            <td><a href="${pageContext.request.contextPath}/allFilms/delete?id=${film.id}">Delete</a></td>
-            </tbody>
-        </c:forEach>
-    </table>
+                <c:forEach var="film" items="${requestScope.filmListPagination}">
+                    <tbody>
+                    <td>${film.id}</td>
+                    <td>
+                        <div class="image">
+                            <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${film.id}"/>
+                        </div>
+                    </td>
+                    <td>${film.filmTitle} ${film.filmTitleUK}</td>
+                    <td>${film.description} ${film.descriptionUK}</td>
+                    <td>${film.duration} </td>
+                    <td>
+                        <img src="${pageContext.servletContext.contextPath}/allFilms?id=${film.id}" style="display: none"/>
+                        ${film.genre}
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <c:if test="${requestScope.currentPage != 1}">
-                <li class="page-item">
-                    <a class="page-link" href="allFilms?page=${requestScope.currentPage - 1}"> &laquo; </a>
-                </li>
-            </c:if>
 
-            <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${requestScope.currentPage eq i}">
-                        <li class="page-item active">
-                            <a class="page-link"> ${i} <span class="sr-only">(current)</span></a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
+                    </td>
+                    <td><a href="${pageContext.request.contextPath}/allFilms/update?id=${film.id}">Update</a>
+                        <a href="${pageContext.request.contextPath}/allFilms/updatePoster?id=${film.id}">Update
+                            poster</a>
+                    </td>
+                    <td><a href="${pageContext.request.contextPath}/allFilms/delete?id=${film.id}">Delete</a></td>
+                    </tbody>
+                </c:forEach>
+            </table>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <c:if test="${requestScope.currentPage != 1}">
                         <li class="page-item">
-                            <a class="page-link" href="allFilms?page=${i}">${i}</a>
+                            <a class="page-link" href="allFilms?page=${requestScope.currentPage - 1}"> &laquo; </a>
                         </li>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
+                    </c:if>
 
-            <c:if test="${requestScope.currentPage lt requestScope.noOfPages}">
-                <li class="page-item">
-                    <a class="page-link" href="allFilms?page=${requestScope.currentPage + 1}"> &raquo; </a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
+                    <c:forEach begin="1" end="${requestScope.noOfPages}" var="i">
+                        <c:choose>
+                            <c:when test="${requestScope.currentPage eq i}">
+                                <li class="page-item active">
+                                    <a class="page-link"> ${i} <span class="sr-only">(current)</span></a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a class="page-link" href="allFilms?page=${i}">${i}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${requestScope.currentPage lt requestScope.noOfPages}">
+                        <li class="page-item">
+                            <a class="page-link" href="allFilms?page=${requestScope.currentPage + 1}"> &raquo; </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
+        </main>
+    </div>
 
 </div>
 

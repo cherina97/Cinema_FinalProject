@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
 
 public class Film {
 
@@ -14,7 +15,9 @@ public class Film {
     private String descriptionUK;
     private Time duration;
     private Blob poster;
-    private Genre genre;
+    private List<Genre> genres;
+
+
 
     public static Film of(ResultSet resultSet) {
         try {

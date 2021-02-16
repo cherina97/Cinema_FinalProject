@@ -51,9 +51,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/allGenres">All genres</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
         </ul>
 
         <%--        <form class="form-inline mt-2 mt-md-0">--%>

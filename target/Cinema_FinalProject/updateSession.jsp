@@ -16,47 +16,55 @@
 </head>
 <body>
 
-<jsp:include page="navbar.jsp"></jsp:include>
+<div class="cont">
 
-<div id="viewport">
+    <div class="header">
+        <jsp:include page="navbar.jsp"></jsp:include>
+    </div>
 
-    <form class="register-form" action="${pageContext.request.contextPath}/allSession/update" method="post">
+    <div class="mainBlock">
 
-        <input name="id" type="hidden" value="${requestScope.sessionById.id}"/>
+        <main role="main" class="container">
 
-        <label>
-            <select name="filmId">
-<%--                <option value="${requestScope.sessionById.film.filmTitle}"> </option>--%>
-                <c:forEach var="film" items="${allFilms}">
-<%--                    <option value="${film.id}">${film.filmTitle}</option>--%>
-                    <option value="${film.id}"
-                        ${requestScope.sessionById.film.filmTitle == film.filmTitle ? 'selected="selected"' : ''}>
-                            ${film.filmTitle}
-                    </option>
-                </c:forEach>
-            </select>
-        </label>
+            <form class="register-form" action="${pageContext.request.contextPath}/allSession/update" method="post">
+
+                <input name="id" type="hidden" value="${requestScope.sessionById.id}"/>
+
+                <label>
+                    <select name="filmId">
+                        <%--                <option value="${requestScope.sessionById.film.filmTitle}"> </option>--%>
+                        <c:forEach var="film" items="${allFilms}">
+                            <%--                    <option value="${film.id}">${film.filmTitle}</option>--%>
+                            <option value="${film.id}"
+                                ${requestScope.sessionById.film.filmTitle == film.filmTitle ? 'selected="selected"' : ''}>
+                                    ${film.filmTitle}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </label>
 
 
-        <label>
-            <input name="startAt" type="time" value="${requestScope.sessionById.startAt}"/>
-        </label>
+                <label>
+                    <input name="startAt" type="time" value="${requestScope.sessionById.startAt}"/>
+                </label>
 
-        <label>
-            <select name="weekDay">
-<%--                <option value="${requestScope.sessionById.weekDay}"></option>--%>
-                <c:forEach items="${applicationScope.weekDays}" var="dayOfWeek">
-<%--                    <option value="${dayOfWeek.name()}">${dayOfWeek.name()}</option>--%>
-                    <option value="${dayOfWeek.name()}"
-                        ${requestScope.sessionById.weekDay == dayOfWeek.name() ? 'selected="selected"' : ''}>
-                            ${dayOfWeek.name()}
-                    </option>
-                </c:forEach>
-            </select>
-        </label>
+                <label>
+                    <select name="weekDay">
+                        <%--                <option value="${requestScope.sessionById.weekDay}"></option>--%>
+                        <c:forEach items="${applicationScope.weekDays}" var="dayOfWeek">
+                            <%--                    <option value="${dayOfWeek.name()}">${dayOfWeek.name()}</option>--%>
+                            <option value="${dayOfWeek.name()}"
+                                ${requestScope.sessionById.weekDay == dayOfWeek.name() ? 'selected="selected"' : ''}>
+                                    ${dayOfWeek.name()}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </label>
 
-        <button>Edit session</button>
-    </form>
+                <button>Edit session</button>
+            </form>
+        </main>
+    </div>
 
 </div>
 

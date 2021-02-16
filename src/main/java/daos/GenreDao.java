@@ -12,6 +12,8 @@ public class GenreDao implements CRUD<Genre>{
     private static final String INSERT_GENRE = "INSERT INTO genres (genre_name, genre_name_uk) VALUES (?, ?);";
     private static final String READ_ALL_GENRES = "SELECT * FROM genres";
     private static final String GET_BY_IDS = "SELECT * FROM genres WHERE id IN (?)";
+    private static final String GET_GENRES_BY_FILM_ID =
+            "select * from genres join genre_film on genre_film.genre_id=genres.id where genre_film.film_id = ?";
     private final Connection connection;
 
     public GenreDao() {
@@ -76,5 +78,21 @@ public class GenreDao implements CRUD<Genre>{
     @Override
     public void update(Genre genre) {
 
+    }
+
+    public List<Genre> getGenresByFilmId(int filmId) {
+        List<Genre> genres = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_GENRES_BY_FILM_ID);
+            preparedStatement.setInt(1, filmId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                genres.add(Genre.of(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return genres;
     }
 }

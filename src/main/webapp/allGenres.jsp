@@ -11,33 +11,46 @@
     <title>All genres</title>
 
     <link rel="stylesheet" href="css/allSessions.css">
-    <link rel="stylesheet" href="css/allFilms.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
-<jsp:include page="navbar.jsp"></jsp:include>
+<div class="cont">
 
-<div id="viewport">
-    <table>
-        <caption>All genres</caption>
+    <div class="header">
+        <jsp:include page="navbar.jsp"></jsp:include>
+    </div>
 
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Genre name</th>
-            <th>Genre name uk</th>
-        </tr>
-        </thead>
+    <div class="mainBlock">
 
-        <c:forEach var="genre" items="${requestScope.genres}">
-            <tbody>
-            <td>${genre.id}</td>
-            <td>${genre.genreName}</td>
-            <td>${genre.genreNameUK}</td>
-            </tbody>
-        </c:forEach>
-    </table>
+        <main role="main" class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Genre name</th>
+                    <th>Genre name uk</th>
+                </tr>
+                </thead>
+
+                <c:forEach var="genre" items="${requestScope.genres}">
+                    <tbody>
+                    <td>${genre.id}</td>
+                    <td>${genre.genreName}</td>
+                    <td>${genre.genreNameUK}</td>
+                    </tbody>
+                </c:forEach>
+            </table>
+        </main>
+    </div>
 </div>
+
+<script src="js/navbar.js"></script>
+
 
 </body>
 </html>

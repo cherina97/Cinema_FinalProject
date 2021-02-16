@@ -36,4 +36,8 @@ public class GenreService {
     public List<Genre> getGenresByIds(List<Integer> genresIds){
         return genreDao.getGenresByIds(genresIds);
     }
+
+    public List<Genre> getGenresByFilmId(int filmId) {
+        return genreDao.getGenresByFilmId(filmId);
+    }
 }

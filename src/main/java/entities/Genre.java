@@ -54,4 +54,9 @@ public class Genre {
     public void setGenreNameUK(String genreNameUK) {
         this.genreNameUK = genreNameUK;
     }
+
+    @Override
+    public String toString() {
+        return genreName;
+    }
 }

@@ -63,39 +63,13 @@
                 </a>
             </div>
 
-            <%--    <!-- Content -->--%>
-            <%--    <div id="content">--%>
-            <%--        <nav class="navbar navbar-default">--%>
-            <%--            <div class="container-fluid">--%>
-            <%--                <c:choose>--%>
-            <%--                    <c:when test="${sessionScope.user ne null}">--%>
-            <%--                        <ul class="nav navbar-nav navbar-right">--%>
-            <%--                            <li><a href="${pageContext.request.contextPath}/logout"> Logout </a></li>--%>
-            <%--                        </ul>--%>
-            <%--                        <ul class="nav navbar-nav navbar-right">--%>
-            <%--                            <li><a href="${pageContext.request.contextPath}/cabinet.jsp"> Cabinet </a></li>--%>
-            <%--                        </ul>--%>
-            <%--                    </c:when>--%>
-            <%--                    <c:otherwise>--%>
-            <%--                        <ul class="nav navbar-nav navbar-right">--%>
-            <%--                            <li><a href="${pageContext.request.contextPath}/login"> Login </a></li>--%>
-            <%--                        </ul>--%>
-            <%--                    </c:otherwise>--%>
-            <%--                </c:choose>--%>
 
-
-            <%--            </div>--%>
-            <%--        </nav>--%>
-
-            <%--        <div class="container-fluid">--%>
-            <%--            <jsp:include page="carousel.html"></jsp:include>--%>
-            <%--        </div>--%>
-            <%--    </div>--%>
 
 
         </main>
 
     </div>
+
 
 
 </div>

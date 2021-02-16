@@ -194,4 +194,25 @@ public class FilmDao implements CRUD<Film> {
         }
         return serialBlob;
     }
+
+    public List<Film> readAllFilmsWhereGenreIdPresent(int genreId) {
+        List<Film> films = null;
+        ResultSet rs = null;
+        try (PreparedStatement ps = connection.prepareStatement(
+                "select id, film_title, film_title_uk, description, description_uk, duration, poster " +
+                        "from films inner join genre_film " +
+                        "on films.id = genre_film.film_id where genre_film.genre_id = ?"
+
+        )) {
+            ps.setInt(1, genreId);
+            rs = ps.executeQuery();
+            films = new ArrayList<>();
+            while (rs.next()) {
+                films.add(Film.of(rs));
+            }
+        } catch (SQLException e) {
+            //error
+        }
+        return films;
+    }
 }
