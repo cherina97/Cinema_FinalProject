@@ -110,7 +110,10 @@
 
 
                         </table>
-                        <button class="btn btn-primary"> Buy</button>
+
+                        <c:if test="${sessionScope.user ne null}">
+                            <button class="btn btn-dark"> Buy</button>
+                        </c:if>
                     </form>
                 </div>
             </div>
@@ -120,6 +123,7 @@
 
 
 </div>
+<script src="js/navbar.js"></script>
 
 
 <script src="${pageContext.request.contextPath}/js/choose.js"></script>

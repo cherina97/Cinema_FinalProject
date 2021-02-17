@@ -54,8 +54,8 @@ public class FilmService {
         filmDao.remove(id);
     }
 
-    public void updateFilm(Film film){
-        filmDao.update(film);
+    public Film updateFilm(Film film){
+        return filmDao.update(film);
     }
 
     public void updatePoster(Film film){
@@ -72,6 +72,10 @@ public class FilmService {
 
     public void setGenresForFilm(Film film, List<Genre> genres){
         filmDao.setGenresForFilm(film, genres);
+    }
+
+    public void updateGenresForFilm(Film film, List<Genre> genres){
+        filmDao.updateGenresForFilm(film, genres);
     }
 
     public FilmDto getFilmWithGenres(int filmId) {

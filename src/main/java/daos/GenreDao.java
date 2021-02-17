@@ -76,7 +76,8 @@ public class GenreDao implements CRUD<Genre>{
     }
 
     @Override
-    public void update(Genre genre) {
+    public Genre update(Genre genre) {
+        return null;
 
     }
 

@@ -9,6 +9,7 @@ public class Session {
     private Film film;
     private Time startAt;
     private Date date;
+    private int freePlaces;
 
     public static class Builder {
         private Session session;
@@ -35,6 +36,11 @@ public class Session {
 
         public Session.Builder withDate(Date date){
             session.date = date;
+            return this;
+        }
+
+        public Session.Builder withFreeSeats(int freeSeats){
+            session.freePlaces = freeSeats;
             return this;
         }
 
@@ -74,5 +80,13 @@ public class Session {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getFreePlaces() {
+        return freePlaces;
+    }
+
+    public void setFreePlaces(int freePlaces) {
+        this.freePlaces = freePlaces;
     }
 }

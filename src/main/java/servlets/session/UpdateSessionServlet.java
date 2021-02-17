@@ -15,7 +15,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 
-@WebServlet("/allSession/update")
+@WebServlet("/allSession/admin/update")
 public class UpdateSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();
     private final FilmService filmService = FilmService.getInstance();
@@ -23,7 +23,6 @@ public class UpdateSessionServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-//        getServletContext().setAttribute("weekDays", WeekDay.values());
     }
 
     @Override
@@ -41,6 +40,7 @@ public class UpdateSessionServlet extends HttpServlet {
         String filmId = req.getParameter("filmId");
         LocalTime startAt = LocalTime.parse(req.getParameter("startAt"));
         String date = req.getParameter("date");
+
 
         sessionService.updateSession(
                 new Session.Builder()

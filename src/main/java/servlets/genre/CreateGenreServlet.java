@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/addGenre")
+@WebServlet("/allGenres/admin/addGenre")
 public class CreateGenreServlet extends HttpServlet {
     private final GenreService genreService = GenreService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("createGenre.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createGenre.jsp").forward(req, resp);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CreateGenreServlet extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher("createGenre.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createGenre.jsp").forward(req, resp);
     }
 
 }

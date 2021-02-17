@@ -25,6 +25,7 @@ public class FilmDao implements CRUD<Film> {
     private static final String SELECT_POSTER = "SELECT poster FROM films WHERE id = ?";
     private static final String UPDATE_POSTER = "UPDATE films SET poster = ? WHERE id = ?";
     private static final String INSERT_INTO_GENRE_FILM = "INSERT INTO genre_film (film_id, genre_id) VALUES (?, ?)";
+    private static final String UPDATE_GENRES_FILM = "UPDATE genre_films SET genre_id = ? WHERE film_id = ?";
     private final Connection connection;
     private int noOfRecords;
 
@@ -70,6 +71,31 @@ public class FilmDao implements CRUD<Film> {
             //commit
             connection.commit();
             connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //todo
+    public void updateGenresForFilm(Film film, List<Genre> genres) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GENRES_FILM)) {
+
+            connection.setAutoCommit(false);
+            for (Genre genre : genres) {
+                preparedStatement.setInt(1, genre.getId());
+                preparedStatement.setInt(2, film.getId());
+                try {
+                    preparedStatement.execute();
+                } catch (SQLException e) {
+                    //rollback if exception
+                    connection.rollback();
+                    System.err.print("SQLException");
+                }
+            }
+            //commit
+            connection.commit();
+            connection.setAutoCommit(true);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,7 +153,7 @@ public class FilmDao implements CRUD<Film> {
     }
 
     @Override
-    public void update(Film film) {
+    public Film update(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_FILM);
             preparedStatement.setString(1, film.getFilmTitle());
@@ -141,6 +167,7 @@ public class FilmDao implements CRUD<Film> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return film;
     }
 
     public void updatePoster(Film film) {

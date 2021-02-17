@@ -13,7 +13,7 @@ import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 
-@WebServlet("/allFilms/updatePoster")
+@WebServlet("/allFilms/admin/updatePoster")
 @MultipartConfig(maxFileSize = 16177215)
 public class UpdateFilmPoster extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();

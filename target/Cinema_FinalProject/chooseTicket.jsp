@@ -110,7 +110,10 @@
 
 
                         </table>
-                        <button class="btn btn-primary"> Buy</button>
+
+                        <c:if test="${sessionScope.user ne null}">
+                            <button class="btn btn-dark"> Buy</button>
+                        </c:if>
                     </form>
                 </div>
             </div>

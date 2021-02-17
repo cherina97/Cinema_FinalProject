@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -36,13 +35,7 @@ public class LoginServlet extends HttpServlet {
         Optional<User> userOptional = userService.getUserByEmailAndPassword(email, password);
 
         if (userOptional.isPresent()) {
-            HttpSession session = req.getSession(true);
-            session.setAttribute("userEmail", userOptional.get().getEmail());
-
-//            String userEmail = (String) req.getSession().getAttribute("userEmail");
-            Optional<User> userByEmail = userService.getByEmail(email);
-            req.getSession().setAttribute("user", userByEmail.get());
-
+            req.getSession().setAttribute("user", userOptional.get());
             resp.setStatus(HttpServletResponse.SC_OK);
             return;
         }

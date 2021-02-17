@@ -57,16 +57,16 @@
                     <td>${film.description} ${film.descriptionUK}</td>
                     <td>${film.duration} </td>
                     <td>
-                        <img src="${pageContext.servletContext.contextPath}/allFilms?id=${film.id}" style="display: none"/>
+<%--                        <img src="${pageContext.servletContext.contextPath}/allFilms?id=${film.id}" style="display: none"/>--%>
                         ${film.genre}
 
 
                     </td>
-                    <td><a href="${pageContext.request.contextPath}/allFilms/update?id=${film.id}">Update</a>
-                        <a href="${pageContext.request.contextPath}/allFilms/updatePoster?id=${film.id}">Update
+                    <td><a href="${pageContext.request.contextPath}/allFilms/admin/update?id=${film.id}">Update</a>
+                        <a href="${pageContext.request.contextPath}/allFilms/admin/updatePoster?id=${film.id}">Update
                             poster</a>
                     </td>
-                    <td><a href="${pageContext.request.contextPath}/allFilms/delete?id=${film.id}">Delete</a></td>
+                    <td><a href="${pageContext.request.contextPath}/allFilms/admin/delete?id=${film.id}">Delete</a></td>
                     </tbody>
                 </c:forEach>
             </table>

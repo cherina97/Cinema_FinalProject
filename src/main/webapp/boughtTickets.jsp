@@ -8,8 +8,9 @@
     <meta charset="ISO-8859-1">
     <title>Your tickets</title>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/allSessions.css"/>
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css"/>--%>
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/allSessions.css"/>--%>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>
 
 </head>
 <body>
@@ -46,6 +47,9 @@
         </table>
     </div>
 </div>
+
+<script src="js/navbar.js"></script>
+
 
 </body>
 </html>

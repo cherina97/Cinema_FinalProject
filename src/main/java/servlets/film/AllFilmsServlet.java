@@ -3,7 +3,6 @@ package servlets.film;
 import dto.FilmDto;
 import entities.Film;
 import services.FilmService;
-import services.GenreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,6 @@ import java.util.List;
 @WebServlet("/allFilms")
 public class AllFilmsServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();
-    private final GenreService genreService = GenreService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

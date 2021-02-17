@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet("/addFilm")
+@WebServlet("/allFilms/admin/addFilm")
 @MultipartConfig(maxFileSize = 16177215)
 public class CreateFilmServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();
@@ -30,7 +30,7 @@ public class CreateFilmServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Genre> genres = genreService.readAllGenres();
         req.setAttribute("genres", genres);
-        req.getRequestDispatcher("createFilm.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createFilm.jsp").forward(req, resp);
     }
 
     @Override
@@ -43,7 +43,6 @@ public class CreateFilmServlet extends HttpServlet {
         Part filePart = req.getPart("poster");
 
         String[] genres = req.getParameterValues("genres");
-
         List<Integer> genresIds = Arrays.stream(genres)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
@@ -70,6 +69,6 @@ public class CreateFilmServlet extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher("createFilm.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createFilm.jsp").forward(req, resp);
     }
 }

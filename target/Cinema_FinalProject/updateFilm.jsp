@@ -25,7 +25,7 @@
 
         <main role="main" class="container">
 
-            <form class="register-form" action="${pageContext.request.contextPath}/allFilms/update" method="post">
+            <form class="register-form" action="${pageContext.request.contextPath}/allFilms/admin/update" method="post">
 
                 <input name="id" type="hidden" value="${requestScope.filmById.id}"/>
 

@@ -21,5 +21,8 @@
     <br>
     <input type="submit" value="submit">
 </form>
+
+<script src="js/navbar.js"></script>
+
 </body>
 </html>

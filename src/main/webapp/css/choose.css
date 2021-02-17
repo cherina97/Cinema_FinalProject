@@ -169,4 +169,8 @@ input[type=checkbox]:checked:before {
     transform : translateY(-50%);
 }
 
+.btn{
+    margin-top:2%;
+}
+
 

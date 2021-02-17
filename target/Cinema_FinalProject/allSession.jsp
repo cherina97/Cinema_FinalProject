@@ -46,6 +46,7 @@
                     <th>Start At</th>
                     <th>Week day</th>
                     <th>Tickets</th>
+                    <th>Free seats</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -61,9 +62,10 @@
                             Tickets
                         </a>
                     </td>
-                    <td><a href="${pageContext.request.contextPath}/allSession/update?id=${session.id}">Update</a>
+                    <td>${session.freePlaces}</td>
+                    <td><a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
                     </td>
-                    <td><a href="${pageContext.request.contextPath}/allSession/delete?id=${session.id}">Delete</a>
+                    <td><a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
                     </td>
                     </tbody>
                 </c:forEach>

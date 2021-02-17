@@ -10,5 +10,5 @@ public interface CRUD<T> {
 
     void remove(int id);
 
-    void update(T t);
+    T update(T t);
 }

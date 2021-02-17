@@ -70,8 +70,8 @@ public class TicketDao implements CRUD<Ticket>{
     }
 
     @Override
-    public void update(Ticket ticket) {
-
+    public Ticket update(Ticket ticket) {
+        return null;
     }
 
     public List<Ticket> readAllTicketsBySessionId(int sessionId) {

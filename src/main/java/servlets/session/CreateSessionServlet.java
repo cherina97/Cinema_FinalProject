@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 
-@WebServlet("/createSession")
+@WebServlet("/allSession/admin/createSession")
 public class CreateSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();
     private final TicketService ticketService = TicketService.getInstance();
@@ -26,7 +26,7 @@ public class CreateSessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("allFilms", filmService.readAllFilms());
-        req.getRequestDispatcher("createSession.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createSession.jsp").forward(req, resp);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class CreateSessionServlet extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher("createSession.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createSession.jsp").forward(req, resp);
     }
 
     private void createTicketsForSession(Session createdSession) {

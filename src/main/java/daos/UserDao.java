@@ -71,8 +71,8 @@ public class UserDao implements CRUD<User>{
     }
 
     @Override
-    public void update(User user) {
-
+    public User update(User user) {
+        return null;
     }
 
     public Optional<User> getByEmail(String email){
