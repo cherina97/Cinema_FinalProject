@@ -123,6 +123,7 @@
 
 
 </div>
+<script src="js/navbar.js"></script>
 
 
 <script src="${pageContext.request.contextPath}/js/choose.js"></script>
