@@ -8,7 +8,7 @@
     <meta charset="ISO-8859-1">
     <title>Create film</title>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/accessDenied.css"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -33,8 +33,11 @@
     <div class="mainBlock">
 
         <main role="main" class="container">
-            <h1>Oops! You enter a wrong param. Try again :)</h1>
-            <a href="${pageContext.request.contextPath}/">back to home page</a>
+
+            <div class="container">
+                <h2 style="color: #cccccc"> Oops! You enter a wrong param. Try again :)</h2>
+                <p><a href="${pageContext.request.contextPath}/"  style="color: darkgrey">back to home page</a></p>
+            </div>
         </main>
     </div>
 
@@ -44,6 +47,7 @@
 </div>
 
 <script src="js/navbar.js"></script>
+<script src="js/accessDenied.js"></script>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

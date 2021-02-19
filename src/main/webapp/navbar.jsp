@@ -47,9 +47,6 @@
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
                     </li>
                     <li class="nav-item">
@@ -66,9 +63,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/allSession">All session</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets">Buy</a>
-                    </li>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets">Buy</a>--%>
+<%--                    </li>--%>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/allGenres/admin/addGenre">Add
                             genre</a>

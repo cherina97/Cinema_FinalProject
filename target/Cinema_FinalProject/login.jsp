@@ -29,7 +29,6 @@
                         <input class="lastName" type="text" placeholder="Last name"/>
                         <input class="email" type="email" placeholder="Email"/>
                         <input class="registerPass" type="password" placeholder="Password"/>
-
                         <button class="register">Create</button>
                         <p class="message">Already registered? <a href="#">Sign In</a></p>
                     </form>

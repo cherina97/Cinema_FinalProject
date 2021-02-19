@@ -16,7 +16,6 @@ import java.io.IOException;
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -24,6 +23,8 @@ public class RegistrationServlet extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+
+
 
         if (ObjectUtils.allNotNull(firstName, lastName, email, password)) {
             userService.createUser(new User.Builder()
@@ -34,6 +35,7 @@ public class RegistrationServlet extends HttpServlet {
                     .withPassword(password)
                     .build());
             req.setAttribute("userEmail", email);
+
             resp.setStatus(HttpServletResponse.SC_CREATED);
             return;
         }

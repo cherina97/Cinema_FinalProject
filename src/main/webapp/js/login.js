@@ -17,8 +17,8 @@ $("button.register")
             if (firstName === '' || lastName === '' || email === '' || password === '') {
                 alert("Please fill all fields!");
             }
-            // else if ((password.length) < 4) {
-            //     alert("Password should at least 4 character in length...!!!!!!");
+                // else if ((password.length) < 4) {
+                //     alert("Password should at least 4 character in length...!!!!!!");
             // }
             else {
                 var userRegistration = {
@@ -28,20 +28,19 @@ $("button.register")
                     password
                 };
 
-                $.post("register", userRegistration,)
+                $.post("register", userRegistration)
                     .done(function (data, textStatus, xhr) {
                         if (xhr.status === 201) {
                             $("form")[0].reset();
                             $("form")[1].reset();
                             loginRegisterSwitch();
                         } else {
-                            alert("error while creating a user");
+                            alert("Such email is already exists. Try another one");
                         }
                     })
                     .fail(function () {
                         alert("error while creating a user");
                     });
-                ;
             }
         });
 

@@ -9,12 +9,12 @@
     <title>Tickets</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/allSessions.css"/>
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css"/>--%>
+    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css"/>--%>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/choose.css"/>
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>--%>
+    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>--%>
 
 </head>
-<body >
+<body>
 
 <div class="cont">
 
@@ -81,6 +81,114 @@
                             <tr>
                                 <th>Row 2</th>
                                 <c:forEach var="ticket" items="${requestScope.range2}">
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${ticket.userId != 0}">
+                                                xxx
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" class="seats" value="${ticket.seatNumber}"
+                                                       name="checkedSeats">
+                                                <div class="circle_container">
+                                                    <div class="circle_main">
+                                                        <div class="circle_text_container">
+                                                            <div class="circle_text">
+                                                                    ${ticket.seatNumber}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </c:forEach>
+                                <th></th>
+                            </tr>
+
+                            <tr>
+                                <th>Row 3</th>
+                                <c:forEach var="ticket" items="${requestScope.range3}">
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${ticket.userId != 0}">
+                                                xxx
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" class="seats" value="${ticket.seatNumber}"
+                                                       name="checkedSeats">
+                                                <div class="circle_container">
+                                                    <div class="circle_main">
+                                                        <div class="circle_text_container">
+                                                            <div class="circle_text">
+                                                                    ${ticket.seatNumber}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </c:forEach>
+                                <th></th>
+                            </tr>
+
+                            <tr>
+                                <th>Row 4</th>
+                                <c:forEach var="ticket" items="${requestScope.range4}">
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${ticket.userId != 0}">
+                                                xxx
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" class="seats" value="${ticket.seatNumber}"
+                                                       name="checkedSeats">
+                                                <div class="circle_container">
+                                                    <div class="circle_main">
+                                                        <div class="circle_text_container">
+                                                            <div class="circle_text">
+                                                                    ${ticket.seatNumber}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </c:forEach>
+                                <th></th>
+                            </tr>
+
+                            <tr>
+                                <th>Row 5</th>
+                                <c:forEach var="ticket" items="${requestScope.range5}">
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${ticket.userId != 0}">
+                                                xxx
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" class="seats" value="${ticket.seatNumber}"
+                                                       name="checkedSeats">
+                                                <div class="circle_container">
+                                                    <div class="circle_main">
+                                                        <div class="circle_text_container">
+                                                            <div class="circle_text">
+                                                                    ${ticket.seatNumber}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </c:forEach>
+                                <th></th>
+                            </tr>
+
+                            <tr>
+                                <th>Row 6</th>
+                                <c:forEach var="ticket" items="${requestScope.range6}">
                                     <td>
                                         <c:choose>
                                             <c:when test="${ticket.userId != 0}">

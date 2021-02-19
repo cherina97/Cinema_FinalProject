@@ -15,6 +15,12 @@ public class AdminFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+//        boolean isStaticResource = request.getRequestURI().startsWith("/webapp/");
+//
+//        if (isStaticResource) {
+//            chain.doFilter(request, response);
+//        }
+
         User user = (User) request.getSession().getAttribute("user");
         if(user == null || user.getRoleId() == 1){
             request.getRequestDispatcher("/accessDenied.jsp").forward(request, response);

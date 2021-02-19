@@ -49,8 +49,12 @@
                                     ADMIN
                                 </c:otherwise>
                             </c:choose>
-
                         </li>
+
+                        <c:if test="${sessionScope.user.roleId == 1}">
+                            <a class="tickets" href="${pageContext.request.contextPath}/tickets">Your tickets</a>
+                        </c:if>
+
                     </ul>
 
                     <ul id="social">

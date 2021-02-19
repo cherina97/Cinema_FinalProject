@@ -20,8 +20,12 @@ public class NotAuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String uri = request.getServletPath();
-        User user = (User) request.getSession().getAttribute("user");
+        if (uri.matches(".*(css|jpg|png|gif|js)")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
+        User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             if (!START_PAGES.contains(uri)) {
                 request.getRequestDispatcher("/accessDenied.jsp").forward(request, response);

@@ -38,13 +38,12 @@
                 <div class="form-group">
                     <label>Enter a film title: </label>
                     <input id="title" name="filmTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Film title"
-                           required minlength="5" maxlength="10" pattern="[a-zA-Z0-9]+"
-                           oninvalid="this.setCustomValidity('${sessionScope.user.email}')">
+                           required oninvalid="this.setCustomValidity('${sessionScope.user.email}')">
                 </div>
                 <div class="form-group">
                     <label>Enter a film title in Ukrainian: </label>
                     <input name="filmTitleUK" type="text" class="form-control" placeholder="Film title uk"
-                           required minlength="5" maxlength="10" pattern="[a-zA-Z0-9]+">
+                           required>
                 </div>
                 <div class="form-group">
                     <label>Enter a description: </label>

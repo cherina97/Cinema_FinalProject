@@ -32,6 +32,18 @@ public class TicketsBySessionServlet extends HttpServlet {
         List<Ticket> range2 = ticketList.stream().skip(12).limit(12).collect(Collectors.toList());
         req.setAttribute("range2", range2);
 
+        List<Ticket> range3 = ticketList.stream().skip(24).limit(12).collect(Collectors.toList());
+        req.setAttribute("range3", range3);
+
+        List<Ticket> range4 = ticketList.stream().skip(36).limit(12).collect(Collectors.toList());
+        req.setAttribute("range4", range4);
+
+        List<Ticket> range5 = ticketList.stream().skip(48).limit(12).collect(Collectors.toList());
+        req.setAttribute("range5", range5);
+
+        List<Ticket> range6 = ticketList.stream().skip(60).limit(12).collect(Collectors.toList());
+        req.setAttribute("range6", range6);
+
         String path = "/chooseTicket.jsp?id=" + sessionId;
         getServletContext().getRequestDispatcher(path).include(req, resp);
     }

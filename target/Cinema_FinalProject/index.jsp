@@ -34,22 +34,22 @@
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="https://i.ytimg.com/vi/kFw_2KKkmok/maxresdefault.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Title</h5>
-                            <p>Description</p>
+                            <h5>Minions</h5>
+                            <p>Minions Stuart, Kevin, and Bob are recruited by Scarlet Overkill, a supervillain who, alongside her inventor husband Herb, hatches a plot to take over the world.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="https://zlatopil.com/wp-content/uploads/2019/07/poster_5d11afff4dd09.jpg" alt="Second slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Title</h5>
-                            <p>Description</p>
+                            <h5>Spider-Man</h5>
+                            <p>Following the events of Avengers: Endgame (2019), Spider-Man must step up to take on new threats in a world that has changed forever.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="https://i.ytimg.com/vi/9iVm5By-zIA/maxresdefault.jpg" alt="Third slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Title</h5>
-                            <p>Description</p>
+                            <h5>Jungle Cruise</h5>
+                            <p>Based on Disneyland's theme park ride where a small riverboat takes a group of travelers through a jungle filled with dangerous animals and reptiles but with a supernatural element.</p>
                         </div>
                     </div>
                 </div>

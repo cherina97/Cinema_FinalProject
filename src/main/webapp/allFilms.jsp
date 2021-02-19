@@ -34,20 +34,24 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Id</th>
+<%--                    <th>Id</th>--%>
                     <th>Poster</th>
                     <th>Film Title</th>
                     <th>Description</th>
                     <th>Duration</th>
                     <th>Genre</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+
+                    <c:if test="${sessionScope.user.roleId == 2}">
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </c:if>
+
                 </tr>
                 </thead>
 
                 <c:forEach var="film" items="${requestScope.filmListPagination}">
                     <tbody>
-                    <td>${film.id}</td>
+<%--                    <td>${film.id}</td>--%>
                     <td>
                         <div class="image">
                             <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${film.id}"/>
@@ -56,17 +60,14 @@
                     <td>${film.filmTitle} ${film.filmTitleUK}</td>
                     <td>${film.description} ${film.descriptionUK}</td>
                     <td>${film.duration} </td>
-                    <td>
-<%--                        <img src="${pageContext.servletContext.contextPath}/allFilms?id=${film.id}" style="display: none"/>--%>
-                        ${film.genre}
-
-
-                    </td>
-                    <td><a href="${pageContext.request.contextPath}/allFilms/admin/update?id=${film.id}">Update</a>
-                        <a href="${pageContext.request.contextPath}/allFilms/admin/updatePoster?id=${film.id}">Update
-                            poster</a>
-                    </td>
-                    <td><a href="${pageContext.request.contextPath}/allFilms/admin/delete?id=${film.id}">Delete</a></td>
+                    <td>${film.genre} </td>
+                    <c:if test="${sessionScope.user.roleId == 2}">
+                        <td><a href="${pageContext.request.contextPath}/allFilms/admin/update?id=${film.id}">Update</a>
+                            <a href="${pageContext.request.contextPath}/allFilms/admin/updatePoster?id=${film.id}">Update
+                                poster</a></td>
+                        <td><a href="${pageContext.request.contextPath}/allFilms/admin/delete?id=${film.id}">Delete</a>
+                        </td>
+                    </c:if>
                     </tbody>
                 </c:forEach>
             </table>
