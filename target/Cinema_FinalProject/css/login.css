@@ -59,9 +59,9 @@
     text-decoration: none;
 }
 
-.form .register-form {
-    display: none;
-}
+/*.form .register-form {*/
+/*    display: none;*/
+/*}*/
 
 .container {
     position: relative;
@@ -110,3 +110,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.error{
+    color:#792c2c;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: -25px;
+}
+

@@ -1,7 +1,6 @@
 package servlets.user;
 
 import entities.User;
-import org.apache.commons.lang3.ObjectUtils;
 import services.UserService;
 
 import javax.servlet.ServletException;
@@ -23,23 +22,31 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (ObjectUtils.anyNull(email, password)) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+        Optional<User> userOptional = userService.getUserByEmailAndPassword(email, password);
+
+        Optional<User> optionalUser = userService.getByEmail(email);
+        String errorUser = "User with such email doesn't exist";
+        String errorPassword = "Wrong password. Try again";
+
+        if(!optionalUser.isPresent()){
+            req.setAttribute("userError", errorUser);
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
 
-        Optional<User> userOptional = userService.getUserByEmailAndPassword(email, password);
+        if(!optionalUser.get().getPassword().equals(password)){
+            req.setAttribute("userError", errorPassword);
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
 
         if (userOptional.isPresent()) {
             req.getSession().setAttribute("user", userOptional.get());
-            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.sendRedirect("/cinema/cabinet");
             return;
         }
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
 
-        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }
 }
