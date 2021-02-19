@@ -1,10 +1,14 @@
 package entities;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
 public class User {
+    private static final Logger LOG = LoggerFactory.getLogger(User.class);
 
     private int id;
     private String firstName;
@@ -35,8 +39,10 @@ public class User {
                     .build();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error");
+            LOG.error("SQLException in of method of User class", e);
         }
+        //todo
+        return null;
     }
 
     public static class Builder{

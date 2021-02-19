@@ -1,5 +1,7 @@
 package daos;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import entities.Session;
 import utils.ConnectionPool;
 
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SessionDao implements CRUD<Session> {
+    private static final Logger LOG = LoggerFactory.getLogger(SessionDao.class);
 
     private static final String DELETE_BY_ID = "DELETE FROM sessions WHERE id = ?";
     private static final String UPDATE_SESSION =
@@ -55,7 +58,7 @@ public class SessionDao implements CRUD<Session> {
             session.setId(generatedKeys.getInt(1));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in create method of SessionDao class", e);
         }
         return session;
     }
@@ -88,7 +91,7 @@ public class SessionDao implements CRUD<Session> {
                 sessionList.add(ofWithUserId(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getSessionList method of SessionDao class", e);
         }
         return sessionList;
     }
@@ -100,7 +103,7 @@ public class SessionDao implements CRUD<Session> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in remove method of SessionDao class", e);
         }
     }
 
@@ -115,8 +118,9 @@ public class SessionDao implements CRUD<Session> {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in update method of SessionDao class", e);
         }
+        //todo
         return null;
     }
 
@@ -137,8 +141,9 @@ public class SessionDao implements CRUD<Session> {
                     .build();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in ofWithUserId method of SessionDao class", e);
         }
+        //todo
         return null;
     }
 
@@ -157,8 +162,9 @@ public class SessionDao implements CRUD<Session> {
                     .build();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in of method of SessionDao class", e);
         }
+        /// TODO: 19.02.2021
         return null;
     }
 
@@ -171,7 +177,7 @@ public class SessionDao implements CRUD<Session> {
             resultSet.next();
             session = of(resultSet);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getSessionById method of SessionDao class", e);
         }
         return session;
     }

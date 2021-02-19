@@ -1,5 +1,7 @@
 package daos;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import entities.User;
 import org.mindrot.jbcrypt.BCrypt;
 import utils.ConnectionPool;
@@ -9,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDao implements CRUD<User>{
+public class UserDao implements CRUD<User> {
+    private static final Logger LOG = LoggerFactory.getLogger(UserDao.class);
+
     private static final String READ_ALL_USERS = "SELECT * FROM users";
     private static final String DELETE_BY_ID = "DELETE FROM users WHERE id = ?";
     private final Connection connection;
@@ -23,7 +27,7 @@ public class UserDao implements CRUD<User>{
 
     @Override
     public User create(User user) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getEmail());
@@ -38,7 +42,7 @@ public class UserDao implements CRUD<User>{
             generatedKeys.next();
             user.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in create method of UserDao class", e);
         }
         return user;
     }
@@ -54,7 +58,7 @@ public class UserDao implements CRUD<User>{
                 users.add(User.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in readAll method of UserDao class", e);
         }
         return users;
     }
@@ -66,7 +70,7 @@ public class UserDao implements CRUD<User>{
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in remove method of UserDao class", e);
         }
     }
 
@@ -75,17 +79,17 @@ public class UserDao implements CRUD<User>{
         return null;
     }
 
-    public Optional<User> getByEmail(String email){
+    public Optional<User> getByEmail(String email) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
             preparedStatement.setString(1, email);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 return Optional.of(User.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in update method of UserDao class", e);
         }
         return Optional.empty();
     }

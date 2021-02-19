@@ -1,9 +1,13 @@
 package entities;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Genre {
+    private static final Logger LOG = LoggerFactory.getLogger(Genre.class);
 
     private int id;
     private String genreName;
@@ -27,8 +31,10 @@ public class Genre {
             String genreNameUK = resultSet.getString("genre_name_uk");
             return new Genre(id, genreName, genreNameUK);
         } catch (SQLException e) {
-            throw new RuntimeException("Error");
+            LOG.error("SQLException in of method of Genre class", e);
         }
+        //todo
+        return null;
     }
 
     public int getId() {

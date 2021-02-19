@@ -1,10 +1,14 @@
 package entities;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Ticket {
+    private static final Logger LOG = LoggerFactory.getLogger(Ticket.class);
 
     private int id;
     private int seatNumber;
@@ -28,8 +32,10 @@ public class Ticket {
                     .withSessionId(sessionId)
                     .build();
         } catch (SQLException e) {
-            throw new RuntimeException("Error");
+            LOG.error("SQLException in of method of Ticket class", e);
         }
+        //todo
+        return null;
     }
 
     public static class Builder{

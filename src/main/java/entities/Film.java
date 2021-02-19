@@ -1,5 +1,8 @@
 package entities;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
+
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +10,7 @@ import java.sql.Time;
 import java.util.List;
 
 public class Film {
+    private static final Logger LOG = LoggerFactory.getLogger(Film.class);
 
     private int id;
     private String filmTitle;
@@ -38,8 +42,10 @@ public class Film {
                     .build();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error");
+            LOG.error("SQLException in of method of UserDao Film", e);
         }
+        //todo
+        return null;
     }
 
     public static class Builder {

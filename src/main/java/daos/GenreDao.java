@@ -1,5 +1,7 @@
 package daos;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import entities.Genre;
 import utils.ConnectionPool;
 
@@ -8,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GenreDao implements CRUD<Genre>{
+public class GenreDao implements CRUD<Genre> {
+    private static final Logger LOG = LoggerFactory.getLogger(GenreDao.class);
+
     private static final String INSERT_GENRE = "INSERT INTO genres (genre_name, genre_name_uk) VALUES (?, ?);";
     private static final String READ_ALL_GENRES = "SELECT * FROM genres";
     private static final String GET_BY_IDS = "SELECT * FROM genres WHERE id IN (?)";
@@ -22,7 +26,7 @@ public class GenreDao implements CRUD<Genre>{
 
     @Override
     public Genre create(Genre genre) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GENRE, Statement.RETURN_GENERATED_KEYS)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GENRE, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, genre.getGenreName());
             preparedStatement.setString(2, genre.getGenreNameUK());
             preparedStatement.executeUpdate();
@@ -31,7 +35,7 @@ public class GenreDao implements CRUD<Genre>{
             generatedKeys.next();
             genre.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in create method of GenreDao class", e);
         }
         return genre;
     }
@@ -46,13 +50,13 @@ public class GenreDao implements CRUD<Genre>{
                 genres.add(Genre.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in readAll method of GenreDao class", e);
         }
         return genres;
     }
 
-    public List<Genre> getGenresByIds(List<Integer> genresIds){
-        List <Genre> genres = new ArrayList<>();
+    public List<Genre> getGenresByIds(List<Integer> genresIds) {
+        List<Genre> genres = new ArrayList<>();
         try {
             String sqlIN = genresIds.stream()
                     .map(String::valueOf)
@@ -65,7 +69,7 @@ public class GenreDao implements CRUD<Genre>{
                 genres.add(Genre.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getGenresByIds method of GenreDao class", e);
         }
         return genres;
     }
@@ -73,12 +77,13 @@ public class GenreDao implements CRUD<Genre>{
     @Override
     public void remove(int id) {
 
+        //todo
     }
 
     @Override
     public Genre update(Genre genre) {
         return null;
-
+        //todo
     }
 
     public List<Genre> getGenresByFilmId(int filmId) {
@@ -92,7 +97,7 @@ public class GenreDao implements CRUD<Genre>{
                 genres.add(Genre.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getGenresByFilmId method of GenreDao class", e);
         }
         return genres;
     }

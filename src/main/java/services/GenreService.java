@@ -29,10 +29,6 @@ public class GenreService {
         return genreDao.readAll();
     }
 
-//    public Genre getByName(String name){
-//        return genreDao.getByName(name);
-//    }
-
     public List<Genre> getGenresByIds(List<Integer> genresIds){
         return genreDao.getGenresByIds(genresIds);
     }

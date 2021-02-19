@@ -1,5 +1,7 @@
 package daos;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import entities.Film;
 import entities.Genre;
 import org.apache.commons.io.IOUtils;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilmDao implements CRUD<Film> {
+    private static final Logger LOG = LoggerFactory.getLogger(FilmDao.class);
+
     private static final String CREATE_FILM =
             "INSERT INTO films (film_title, film_title_uk, description, description_uk, duration, poster) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String READ_ALL_FILMS = "SELECT * FROM films";
@@ -48,7 +52,7 @@ public class FilmDao implements CRUD<Film> {
             generatedKeys.next();
             film.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in create method of FilmDao class", e);
         }
         return film;
     }
@@ -72,7 +76,7 @@ public class FilmDao implements CRUD<Film> {
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in setGenresForFilm method of FilmDao class", e);
         }
     }
 
@@ -95,9 +99,8 @@ public class FilmDao implements CRUD<Film> {
             //commit
             connection.commit();
             connection.setAutoCommit(true);
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in updateGenresForFilm method of FilmDao class", e);
         }
     }
 
@@ -111,7 +114,7 @@ public class FilmDao implements CRUD<Film> {
                 filmList.add(Film.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in readAll method of FilmDao class", e);
         }
         return filmList;
     }
@@ -132,7 +135,7 @@ public class FilmDao implements CRUD<Film> {
             if (rs.next())
                 this.noOfRecords = rs.getInt(1);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in readAll method of FilmDao class", e);
         }
         return filmList;
     }
@@ -148,7 +151,7 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in remove method of FilmDao class", e);
         }
     }
 
@@ -165,7 +168,7 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in update method of FilmDao class", e);
         }
         return film;
     }
@@ -178,7 +181,7 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in updatePoster method of FilmDao class", e);
         }
     }
 
@@ -191,7 +194,7 @@ public class FilmDao implements CRUD<Film> {
                 return Film.of(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getById method of FilmDao class", e);
         }
         return null;
     }
@@ -205,7 +208,7 @@ public class FilmDao implements CRUD<Film> {
                 response.getOutputStream().write(rs.getBytes("poster"));
             }
         } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in uploadPoster method of FilmDao class", e);
         }
 
     }
@@ -217,7 +220,7 @@ public class FilmDao implements CRUD<Film> {
             byte[] bytes = IOUtils.toByteArray(inputStream);
             serialBlob = new SerialBlob(bytes);
         } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getBlobFromPart method of FilmDao class", e);
         }
         return serialBlob;
     }
@@ -238,7 +241,7 @@ public class FilmDao implements CRUD<Film> {
                 films.add(Film.of(rs));
             }
         } catch (SQLException e) {
-            //error
+            LOG.error("SQLException in readAllFilmsWhereGenreIdPresent method of FilmDao class", e);
         }
         return films;
     }

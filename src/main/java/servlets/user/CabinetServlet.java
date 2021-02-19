@@ -15,13 +15,7 @@ public class CabinetServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String userEmail = (String) req.getSession().getAttribute("userEmail");
-//        Optional<User> userByEmail = userService.getByEmail(userEmail);
-//        req.getSession().setAttribute("user", userByEmail);
-
-        req.getSession().getAttribute("user");
-
-
+       req.getSession().getAttribute("user");
         req.getRequestDispatcher("cabinet.jsp").forward(req, resp);
     }
 }

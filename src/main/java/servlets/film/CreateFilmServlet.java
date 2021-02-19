@@ -48,9 +48,6 @@ public class CreateFilmServlet extends HttpServlet {
                 .collect(Collectors.toList());
         List<Genre> genresByIds = genreService.getGenresByIds(genresIds);
 
-//        String genres = req.getParameter("genres");
-//        Genre byName = genreService.getByName(genres);
-
         SerialBlob serialBlob = filmService.getBlobFromPart(filePart);
 
         if (ObjectUtils.allNotNull(filmTitle, description, duration)) {
