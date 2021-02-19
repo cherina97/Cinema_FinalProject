@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
+    <meta>
     <title>Create film</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>
@@ -83,14 +83,6 @@
 </div>
 
 </div>
-
-<%--<script>--%>
-<%--    var input = document.getElementById('title');--%>
-<%--    input.oninvalid = function(event) {--%>
-<%--        event.target.setCustomValidity('Username should only contain lowercase letters. e.g. john');--%>
-<%--    }--%>
-
-<%--</script>--%>
 
 <script src="js/navbar.js"></script>
 

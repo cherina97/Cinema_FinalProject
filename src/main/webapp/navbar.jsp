@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
     <title>Welcome</title>
@@ -25,53 +31,47 @@
             <c:choose>
                 <c:when test="${sessionScope.user == null}">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/login"><fmt:message key="navbar.login"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession">All session</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message key="navbar.allSession"/></a>
                     </li>
                 </c:when>
                 <c:when test="${sessionScope.user.roleId == 1}">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet"><fmt:message key="navbar.cabinet"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms">All films</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms"><fmt:message key="navbar.allFilms"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession">All session</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message key="navbar.allSession"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets">Your tickets</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets"><fmt:message key="navbar.yourTickets"/></a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet"><fmt:message key="navbar.cabinet"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms/admin/addFilm">Add
-                            film</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms/admin/addFilm"><fmt:message key="navbar.addFilm"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms">All films</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms"><fmt:message key="navbar.allFilms"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession/admin/createSession">Create
-                            session</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession/admin/createSession"><fmt:message key="navbar.createSession"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession">All session</a>
-                    </li>
-<%--                    <li class="nav-item">--%>
-<%--                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets">Buy</a>--%>
-<%--                    </li>--%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres/admin/addGenre">Add
-                            genre</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message key="navbar.allSession"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres">All genres</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres/admin/addGenre"><fmt:message key="navbar.addGenre"/></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres"><fmt:message key="navbar.allGenres"/></a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -81,9 +81,20 @@
         <c:if test="${sessionScope.user ne null}">
             <div class="logout">
                 <a class="nav-link" id="logout" href="${pageContext.request.contextPath}/logout"
-                style="color: #9c9ca0">Logout</a>
+                style="color: #9c9ca0"><fmt:message key="navbar.logout"/></a>
             </div>
         </c:if>
+
+
+
+        <span class="lang">
+        <form>
+            <select name="language" onchange="submit()">
+                <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
+                <option value="uk_UA" ${language == 'uk_UA' ? 'selected' : ''}>UK</option>
+            </select>
+        </form>
+    </span>
 
 
     </div>

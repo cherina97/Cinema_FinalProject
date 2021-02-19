@@ -36,16 +36,15 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
 
-        if(!optionalUser.get().getPassword().equals(password)){
-            req.setAttribute("userError", errorPassword);
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
-        }
-
         if (userOptional.isPresent()) {
             req.getSession().setAttribute("user", userOptional.get());
             resp.sendRedirect("/cinema/cabinet");
             return;
+        } else {
+            req.setAttribute("userError", errorPassword);
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
+
         req.getRequestDispatcher("/login.jsp").forward(req, resp);
 
     }

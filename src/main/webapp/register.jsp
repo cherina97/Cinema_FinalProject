@@ -1,10 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Login</title>
+    <title><fmt:message key="register.main"/></title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css"/>
     <!-- Bootstrap CSS -->
@@ -26,35 +34,34 @@
             <div class="login-page">
                 <div class="form">
                     <form class="register-form" action="register" method="post">
-                        <input name="firstName" type="text" placeholder="First name"
+                        <input name="firstName" type="text" placeholder="<fmt:message key="register.firstName"/>"
                                required
                                maxlength="10"
-                               oninvalid="this.setCustomValidity('Cannot be empty')"
+                               oninvalid="this.setCustomValidity('<fmt:message key="register.empty"/>')"
                                oninput="setCustomValidity('')"
                         />
-                        <input name="lastName" type="text" placeholder="Last name"
+                        <input name="lastName" type="text" placeholder="<fmt:message key="register.lastName"/>"
                                required
                                maxlength="25"
-                               oninvalid="this.setCustomValidity('Cannot be empty')"
+                               oninvalid="this.setCustomValidity('<fmt:message key="register.empty"/>')"
                                oninput="setCustomValidity('')"
                         />
-                        <input name="email" type="email" placeholder="Email"
+                        <input name="email" type="email" placeholder="<fmt:message key="register.email"/>"
                                required
                                pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-                               oninvalid="this.setCustomValidity('Email shod be like this: example@mail.com')"
+                               oninvalid="this.setCustomValidity('<fmt:message key="register.email.valid"/>')"
                                oninput="setCustomValidity('')"
                         />
-                        <input name="password" type="password" placeholder="Password"
+                        <input name="password" type="password" placeholder="<fmt:message key="register.password"/>"
                                required
                                minlength="4"
-                               oninvalid="this.setCustomValidity('Password cannot be less than 4 symbols')"
+                               oninvalid="this.setCustomValidity('<fmt:message key="register.email.password"/>')"
                                oninput="setCustomValidity('')"
                         />
-                        <button class="register" type="submit">Create</button>
-                        <p class="message">Already registered? <a href="${pageContext.request.contextPath}/login">Sign
-                            In</a></p>
+                        <button class="register" type="submit"><fmt:message key="register.create"/></button>
+                        <p class="message"><fmt:message key="register.alreadyRegistered"/> <a href="${pageContext.request.contextPath}/login"><fmt:message key="register.signIn"/></a></p>
                         <div class="error">
-                            <p> ${requestScope.userPresent} </p>
+                            <p> ${requestScope.userError} </p>
                         </div>
                     </form>
                 </div>

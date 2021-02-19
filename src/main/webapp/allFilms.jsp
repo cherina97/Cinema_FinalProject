@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="ISO-8859-1" %>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -13,7 +13,7 @@
 <html lang="${language}">
 <head>
     <meta>
-    <title>All sessions</title>
+    <title><fmt:message key="allFilms.all"/></title>
 
     <link rel="stylesheet" href="css/allSessions.css">
     <link rel="stylesheet" href="css/allFilms.css">
@@ -35,11 +35,11 @@
                 <thead>
                 <tr>
 <%--                    <th>Id</th>--%>
-                    <th>Poster</th>
-                    <th>Film Title</th>
-                    <th>Description</th>
-                    <th>Duration</th>
-                    <th>Genre</th>
+                    <th><fmt:message key="allFilms.poster"/></th>
+                    <th><fmt:message key="allFilms.title"/></th>
+                    <th><fmt:message key="allFilms.desc"/></th>
+                    <th><fmt:message key="allFilms.duration"/></th>
+                    <th><fmt:message key="allFilms.genre"/></th>
 
                     <c:if test="${sessionScope.user.roleId == 2}">
                         <th>Update</th>

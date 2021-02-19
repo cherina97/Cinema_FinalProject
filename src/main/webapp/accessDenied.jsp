@@ -1,12 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Create film</title>
+    <title>Access denied</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/accessDenied.css"/>
 
@@ -41,7 +47,7 @@
                     </div>
                     3
                 </h1>
-                <p>Access denied</p>
+                <p><fmt:message key="access"/></p>
             </div>
         </main>
     </div>

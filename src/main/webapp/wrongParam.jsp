@@ -1,12 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Create film</title>
+    <title>Error</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/accessDenied.css"/>
 
@@ -35,8 +41,8 @@
         <main role="main" class="container">
 
             <div class="container">
-                <h2 style="color: #cccccc"> Oops! You enter a wrong param. Try again :)</h2>
-                <p><a href="${pageContext.request.contextPath}/"  style="color: darkgrey">back to home page</a></p>
+                <h2 style="color: #cccccc"> <fmt:message key="wrongParam"/></h2>
+                <p><a href="${pageContext.request.contextPath}/"  style="color: darkgrey"><fmt:message key="wrongParam.back"/></a></p>
             </div>
         </main>
     </div>

@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}" scope="session" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
     <title>Welcome</title>
@@ -34,7 +40,7 @@
                     <div class="carousel-item active">
                         <img class="d-block w-100" src="https://i.ytimg.com/vi/kFw_2KKkmok/maxresdefault.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Minions</h5>
+                            <h5><fmt:message key="index.film1"/></h5>
                             <p>Minions Stuart, Kevin, and Bob are recruited by Scarlet Overkill, a supervillain who, alongside her inventor husband Herb, hatches a plot to take over the world.</p>
                         </div>
                     </div>
@@ -67,6 +73,8 @@
 
 
         </main>
+
+<%--        <h3><fmt:message key="label.welcome"/></h3>--%>
 
     </div>
 
