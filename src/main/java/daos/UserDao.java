@@ -86,11 +86,23 @@ public class UserDao implements CRUD<User> {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.of(User.of(resultSet));
+                return Optional.ofNullable(User.of(resultSet));
             }
         } catch (SQLException e) {
             LOG.error("SQLException in update method of UserDao class", e);
         }
         return Optional.empty();
     }
+
+    public boolean checkEmailAvailability(String email) {
+        LOG.trace("Checking availability of email");
+
+        if(email == null) {
+            return false;
+        }
+
+        Optional<User> user = getByEmail(email);
+        return user.get() == null;
+    }
+
 }

@@ -12,7 +12,8 @@ import java.util.List;
 
 @WebFilter(urlPatterns = {"/*"})
 public class NotAuthFilter implements Filter {
-    private final List<String> START_PAGES = Arrays.asList("/index.jsp", "/login", "/register", "/allSession", "/allSession/tickets");
+    private final List<String> START_PAGES =
+            Arrays.asList("/index.jsp", "/login", "/register", "/allSession", "/posterServlet", "/allSession/tickets");
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

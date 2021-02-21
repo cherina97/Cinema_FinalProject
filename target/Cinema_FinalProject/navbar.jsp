@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}" scope="session" />
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
+       scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="prop"/>
 
@@ -31,47 +32,63 @@
             <c:choose>
                 <c:when test="${sessionScope.user == null}">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/login"><fmt:message key="navbar.login"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/login"><fmt:message
+                                key="navbar.login"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message key="navbar.allSession"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message
+                                key="navbar.allSession"/></a>
                     </li>
                 </c:when>
                 <c:when test="${sessionScope.user.roleId == 1}">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet"><fmt:message key="navbar.cabinet"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet"><fmt:message
+                                key="navbar.cabinet"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms"><fmt:message key="navbar.allFilms"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms"><fmt:message
+                                key="navbar.allFilms"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message key="navbar.allSession"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message
+                                key="navbar.allSession"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets"><fmt:message key="navbar.yourTickets"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/tickets"><fmt:message
+                                key="navbar.yourTickets"/></a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet"><fmt:message key="navbar.cabinet"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/cabinet"><fmt:message
+                                key="navbar.cabinet"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms/admin/addFilm"><fmt:message key="navbar.addFilm"/></a>
+                        <a class="nav-link"
+                           href="${pageContext.request.contextPath}/allFilms/admin/addFilm"><fmt:message
+                                key="navbar.addFilm"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms"><fmt:message key="navbar.allFilms"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allFilms"><fmt:message
+                                key="navbar.allFilms"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession/admin/createSession"><fmt:message key="navbar.createSession"/></a>
+                        <a class="nav-link"
+                           href="${pageContext.request.contextPath}/allSession/admin/createSession"><fmt:message
+                                key="navbar.createSession"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message key="navbar.allSession"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allSession"><fmt:message
+                                key="navbar.allSession"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres/admin/addGenre"><fmt:message key="navbar.addGenre"/></a>
+                        <a class="nav-link"
+                           href="${pageContext.request.contextPath}/allGenres/admin/addGenre"><fmt:message
+                                key="navbar.addGenre"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres"><fmt:message key="navbar.allGenres"/></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/allGenres"><fmt:message
+                                key="navbar.allGenres"/></a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -81,15 +98,14 @@
         <c:if test="${sessionScope.user ne null}">
             <div class="logout">
                 <a class="nav-link" id="logout" href="${pageContext.request.contextPath}/logout"
-                style="color: #9c9ca0"><fmt:message key="navbar.logout"/></a>
+                   style="color: #9c9ca0"><fmt:message key="navbar.logout"/></a>
             </div>
         </c:if>
 
 
-
         <span class="lang">
         <form>
-            <select name="language" onchange="submit()">
+            <select name="language" class="form-control" id="exampleFormControlSelect1" onchange="submit()">
                 <option value="en" ${language == 'en' ? 'selected' : ''}>EN</option>
                 <option value="uk_UA" ${language == 'uk_UA' ? 'selected' : ''}>UK</option>
             </select>

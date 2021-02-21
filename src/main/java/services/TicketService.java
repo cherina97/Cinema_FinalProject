@@ -1,6 +1,8 @@
 package services;
 
+import daos.SessionDao;
 import daos.TicketDao;
+import dto.TicketDto;
 import entities.Ticket;
 import entities.User;
 
@@ -9,9 +11,11 @@ import java.util.List;
 public class TicketService {
     private static TicketService ticketService;
     private final TicketDao ticketDao;
+    private final SessionDao sessionDao;
 
     public TicketService() {
         this.ticketDao = new TicketDao();
+        this.sessionDao = new SessionDao();
     }
 
     public static TicketService getInstance() {
@@ -48,4 +52,14 @@ public class TicketService {
     public List<Ticket> getTicketsByUser(User user) {
         return ticketDao.getTicketsByUser(user);
     }
+
+    public TicketDto getTicketWithSession(int ticketId) {
+        Ticket ticket = ticketDao.getById(ticketId);
+        return new TicketDto(ticket.getId(),
+                ticket.getSeatNumber(),
+                ticket.getPrice(),
+                ticket.getUserId(),
+                sessionDao.getSessionById(ticket.getSessionId()));
+    }
+
 }

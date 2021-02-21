@@ -23,7 +23,10 @@ public class SessionFilter implements Filter {
         int sessionId = Integer.parseInt(request.getParameter("id"));
 
         List<Session> sessionList = sessionService.readAllSessions();
-        List<Integer> presentIds = sessionList.stream().map(Session::getId).collect(Collectors.toList());
+        List<Integer> presentIds = sessionList
+                .stream()
+                .map(Session::getId)
+                .collect(Collectors.toList());
 
         if (presentIds.contains(sessionId)) {
             filterChain.doFilter(servletRequest, servletResponse);

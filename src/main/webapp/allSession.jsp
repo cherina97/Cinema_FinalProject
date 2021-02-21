@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}"
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="prop"/>
@@ -46,57 +46,68 @@
                    role="button"><fmt:message key="allSession.all"/></a>
             </div>
 
-            <table class="table">
-                <caption><fmt:message key="allSession.all"/></caption>
-                <thead>
-                <tr>
-                    <%--                    <th>Id</th>--%>
-                    <th><fmt:message key="allFilms.poster"/></th>
-                    <th><fmt:message key="allFilms.title"/></th>
-                    <th><fmt:message key="allFilms.desc"/></th>
-                    <th><fmt:message key="allSession.date"/></th>
-                    <th><fmt:message key="allSession.start"/></th>
-                    <th><fmt:message key="allFilms.duration"/></th>
-                    <th><fmt:message key="allSession.seats"/></th>
-                    <th><fmt:message key="allFilms.all"/></th>
-                    <c:if test="${sessionScope.user.roleId == 2}">
-                        <th>Update</th>
-                        <th>Delete</th>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="All" role="tabpanel"
+                     aria-labelledby="home-tab">
+                    <c:if test="${requestScope.allSession.size() == 0}" var="event" scope="session">
+                    <h4 class="text-center py-3 empty-events">
+                        <i class="far fa-folder-open"></i> No event
+                    </h4>
                     </c:if>
-
-                </tr>
-                </thead>
+                    <div class="row">
                 <c:forEach var="session" items="${requestScope.allSession}">
-                    <tbody>
-                        <%--                    <td>${session.id}</td>--%>
-                    <td>
-                        <div class="image">
-                            <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${session.film.id}"/>
-                        </div>
-                    </td>
-                    <td>${session.film.filmTitle}</td>
-                    <td>${session.film.description}</td>
-                    <td>${session.date} </td>
-                    <td>${session.startAt} </td>
-                    <td>${session.film.duration} </td>
-                    <td>${session.freePlaces}</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}">
-                            <fmt:message key="allSession.tickets"/>
-                        </a>
-                    </td>
+                    <div class="col-md-4">
+                        <br>
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="${pageContext.servletContext.contextPath}/posterServlet?id=${session.film.id}"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <c:choose>
+                                        <c:when test="${language == 'en'}">
+                                            ${session.film.filmTitle}
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${session.film.filmTitleUK}
+                                        </c:otherwise>
+                                    </c:choose>
 
-                    <c:if test="${sessionScope.user.roleId == 2}">
-                        <td>
-                            <a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
-                        </td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
-                        </td>
-                    </c:if>
-                    </tbody>
-                </c:forEach>
-            </table>
+                                </h5>
+                                <p class="card-text">
+                                    <c:choose>
+                                        <c:when test="${language == 'en'}">
+                                            ${session.film.description}
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${session.film.descriptionUK}
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><fmt:message key="allSession.date"/>: ${session.date}</li>
+                                <li class="list-group-item"><fmt:message key="allSession.start"/>: ${session.startAt};
+                                    <fmt:message key="allFilms.duration"/>: ${session.film.duration} </li>
+                                <li class="list-group-item"><fmt:message
+                                        key="allSession.seats"/>: ${session.freePlaces}</li>
+                                <c:if test="${sessionScope.user.roleId == 2}">
+                                    <li class="list-group-item">
+                                        <a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
+                                        <a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                            <div class="card-body">
+                                <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}"
+                                   class="card-link"><fmt:message key="allSession.tickets"/></a>
+                            </div>
+                        </div>
+                    </div>
+                        </c:forEach>
+
+            </div>
+
         </main>
     </div>
 </div>

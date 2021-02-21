@@ -23,6 +23,7 @@ public class TicketDao implements CRUD<Ticket> {
     private static final String SET_TICKETS_FOR_USER = "UPDATE tickets SET user_id = ? WHERE id IN (?)";
     private static final String DELETE_BY_ID = "DELETE FROM tickets WHERE id = ?";
     private static final String GET_TICKETS_BY_USER = "SELECT * FROM tickets WHERE user_id = ?";
+    private static final String GET_TICKET_BY_ID = "SELECT * FROM tickets WHERE id = ?";
     private final Connection connection;
 
     public TicketDao() {
@@ -146,5 +147,20 @@ public class TicketDao implements CRUD<Ticket> {
             LOG.error("SQLException in getTicketsByUser method of TicketDao class", e);
         }
         return ticketList;
+    }
+
+    public Ticket getById(int ticketId) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_TICKET_BY_ID)) {
+            preparedStatement.setInt(1, ticketId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return Ticket.of(resultSet);
+            }
+        } catch (SQLException e) {
+            LOG.error("SQLException in getById method of TicketDao class", e);
+        }
+        //todo
+        return null;
     }
 }

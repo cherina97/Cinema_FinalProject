@@ -21,7 +21,7 @@ public class AllFilmsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //pagination
         int page = 1;
-        int recordsPerPage = 3;
+        int recordsPerPage = 2;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
 
@@ -38,7 +38,6 @@ public class AllFilmsServlet extends HttpServlet {
         }
 
         req.setAttribute("filmListPagination", filmDtos);
-//        req.setAttribute("filmListPagination", filmList);
         req.setAttribute("noOfPages", noOfPages);
         req.setAttribute("currentPage", page);
 

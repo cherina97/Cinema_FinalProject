@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'uk_UA'}"
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="prop"/>
@@ -13,7 +13,7 @@
 <html lang="${language}">
 <head>
     <meta>
-    <title>All sessions</title>
+    <title><fmt:message key="allFilms.all"/></title>
 
     <link rel="stylesheet" href="css/allSessions.css">
     <link rel="stylesheet" href="css/allFilms.css">
@@ -34,12 +34,12 @@
             <table>
                 <thead>
                 <tr>
-<%--                    <th>Id</th>--%>
-                    <th>Poster</th>
-                    <th>Film Title</th>
-                    <th>Description</th>
-                    <th>Duration</th>
-                    <th>Genre</th>
+                    <%--                    <th>Id</th>--%>
+                    <th><fmt:message key="allFilms.poster"/></th>
+                    <th><fmt:message key="allFilms.title"/></th>
+                    <th><fmt:message key="allFilms.desc"/></th>
+                    <th><fmt:message key="allFilms.duration"/></th>
+                    <th><fmt:message key="allFilms.genre"/></th>
 
                     <c:if test="${sessionScope.user.roleId == 2}">
                         <th>Update</th>
@@ -51,14 +51,32 @@
 
                 <c:forEach var="film" items="${requestScope.filmListPagination}">
                     <tbody>
-<%--                    <td>${film.id}</td>--%>
+                        <%--                    <td>${film.id}</td>--%>
                     <td>
                         <div class="image">
                             <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${film.id}"/>
                         </div>
                     </td>
-                    <td>${film.filmTitle} ${film.filmTitleUK}</td>
-                    <td>${film.description} ${film.descriptionUK}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${language == 'en'}">
+                                ${film.filmTitle}
+                            </c:when>
+                            <c:otherwise>
+                                ${film.filmTitleUK}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${language == 'en'}">
+                                ${film.description}
+                            </c:when>
+                            <c:otherwise>
+                                ${film.descriptionUK}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>${film.duration} </td>
                     <td>${film.genre} </td>
                     <c:if test="${sessionScope.user.roleId == 2}">

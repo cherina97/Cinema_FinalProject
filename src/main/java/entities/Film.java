@@ -7,7 +7,6 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.util.List;
 
 public class Film {
     private static final Logger LOG = LoggerFactory.getLogger(Film.class);
@@ -19,9 +18,6 @@ public class Film {
     private String descriptionUK;
     private Time duration;
     private Blob poster;
-    private List<Genre> genres;
-
-
 
     public static Film of(ResultSet resultSet) {
         try {

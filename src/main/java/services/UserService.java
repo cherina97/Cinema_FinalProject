@@ -42,4 +42,8 @@ public class UserService {
     public void removeUser(int id){
         userDao.remove(id);
     }
+
+    public boolean checkEmailAvailability(String email){
+        return userDao.checkEmailAvailability(email);
+    }
 }

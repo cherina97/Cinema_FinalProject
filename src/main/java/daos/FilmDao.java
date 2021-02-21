@@ -119,6 +119,7 @@ public class FilmDao implements CRUD<Film> {
         return filmList;
     }
 
+    //pagination
     public List<Film> readAll(int offset, int noOfRecords) {
         String query = "select SQL_CALC_FOUND_ROWS * from films limit "
                 + offset + ", " + noOfRecords;

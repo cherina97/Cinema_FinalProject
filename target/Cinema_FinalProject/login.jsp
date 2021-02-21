@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Login</title>
+    <title><fmt:message key="login.main"/></title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css"/>
     <!-- Bootstrap CSS -->
@@ -26,12 +34,14 @@
             <div class="login-page">
                 <div class="form">
                     <form class="login-form" action="login" method="post">
-                        <input name="email" type="text" placeholder="Email"
+                        <input name="email" type="text" placeholder="<fmt:message key="register.email"/>"
                                required/>
-                        <input name="password" type="password" placeholder="Password"
+                        <input name="password" type="password" placeholder="<fmt:message key="register.password"/>"
                                required/>
-                        <button class="login">Login</button>
-                        <p class="message">Not registered? <a href="${pageContext.request.contextPath}/register">Create an account</a></p>
+                        <button class="login"><fmt:message key="login.main"/></button>
+                        <p class="message"><fmt:message key="login.notRegistered"/> <a
+                                href="${pageContext.request.contextPath}/register">
+                            <fmt:message key="login.createAcc"/></a></p>
                         <div class="error">
                             <p> ${requestScope.userError} </p>
                         </div>

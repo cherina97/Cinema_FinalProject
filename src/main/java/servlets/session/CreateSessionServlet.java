@@ -53,7 +53,7 @@ public class CreateSessionServlet extends HttpServlet {
     private void createTicketsForSession(Session createdSession) {
         int sessionId = createdSession.getId();
 
-        for (int i = 1; i <= 24; i++) {
+        for (int i = 1; i <= 72; i++) {
             ticketService.createTicket(new Ticket.Builder()
                     .withSeatNumber(i)
                     .withSessionId(sessionId)

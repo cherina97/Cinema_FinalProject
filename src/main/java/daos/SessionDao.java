@@ -40,6 +40,7 @@ public class SessionDao implements CRUD<Session> {
                     "on tickets.session_id = sessions.id \n" +
                     "where user_id is null and date >= CURDATE() group by session_id order by user_id desc";
     private static final String GET_BY_ID = "SELECT * FROM sessions WHERE id = ?";
+    private int noOfRecords;
 
     public SessionDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
@@ -81,6 +82,31 @@ public class SessionDao implements CRUD<Session> {
         return getSessionList(READ_ALL_ORDER_BY_FREE_SEATS);
     }
 
+    //pagination
+    public List<Session> readAll(int offset, int noOfRecords) {
+        String query = "select SQL_CALC_FOUND_ROWS * from sessions limit "
+                + offset + ", " + noOfRecords;
+
+        List<Session> sessionList = new ArrayList<>();
+        try (Statement stmt = connection.createStatement()){
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                sessionList.add(of(rs));
+            }
+            rs.close();
+
+            rs = stmt.executeQuery("SELECT FOUND_ROWS()");
+            if (rs.next())
+                this.noOfRecords = rs.getInt(1);
+        } catch (SQLException e) {
+            LOG.error("SQLException in readAll method of SessionDao class", e);
+        }
+        return sessionList;
+    }
+
+    public int getNoOfRecords() {
+        return noOfRecords;
+    }
 
     private List<Session> getSessionList(String readAllSessionsFromNowOrderBy) {
         List<Session> sessionList = new ArrayList<>();
@@ -169,16 +195,17 @@ public class SessionDao implements CRUD<Session> {
     }
 
     public Session getSessionById(int sessionId) {
-        Session session = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_ID)) {
             preparedStatement.setInt(1, sessionId);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            resultSet.next();
-            session = of(resultSet);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                return of(resultSet);
+            }
+//            resultSet.next();
         } catch (SQLException e) {
             LOG.error("SQLException in getSessionById method of SessionDao class", e);
         }
-        return session;
+        return null;
     }
 }

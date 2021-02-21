@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="prop"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>All sessions</title>
+    <title><fmt:message key="allSession.all"/></title>
 
     <link rel="stylesheet" href="css/allSessions.css">
     <link rel="stylesheet" href="css/allFilms.css">
@@ -30,66 +37,77 @@
         <main role="main" class="container">
             <div class="sortingButtons">
                 <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=filmTitle"
-                   role="button">By film title</a>
+                   role="button"><fmt:message key="allSession.sort.title"/></a>
                 <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=freePlace"
-                   role="button">By free place</a>
-                <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=date" role="button">By
-                    date</a>
+                   role="button"><fmt:message key="allSession.sort.seats"/></a>
+                <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=date" role="button">
+                    <fmt:message key="allSession.sort.date"/></a>
                 <a class="btn btn-dark" href="${pageContext.request.contextPath}/allSession?sortBy=allSession"
-                   role="button">All session</a>
+                   role="button"><fmt:message key="allSession.all"/></a>
             </div>
 
-            <table class="table">
-                <caption>All sessions</caption>
-                <thead>
-                <tr>
-                    <%--                    <th>Id</th>--%>
-                    <th>Poster</th>
-                    <th>Film title</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Start At</th>
-                    <th>Duration</th>
-                    <th>Free seats</th>
-                    <th>Tickets</th>
-                    <c:if test="${sessionScope.user.roleId == 2}">
-                        <th>Update</th>
-                        <th>Delete</th>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="All" role="tabpanel"
+                     aria-labelledby="home-tab">
+                    <c:if test="${requestScope.allSession.size() == 0}" var="event" scope="session">
+                    <h4 class="text-center py-3 empty-events">
+                        <i class="far fa-folder-open"></i> No event
+                    </h4>
                     </c:if>
-
-                </tr>
-                </thead>
+                    <div class="row">
                 <c:forEach var="session" items="${requestScope.allSession}">
-                    <tbody>
-                        <%--                    <td>${session.id}</td>--%>
-                    <td>
-                        <div class="image">
-                            <img src="${pageContext.servletContext.contextPath}/posterServlet?id=${session.film.id}"/>
-                        </div>
-                    </td>
-                    <td>${session.film.filmTitle}</td>
-                    <td>${session.film.description}</td>
-                    <td>${session.date} </td>
-                    <td>${session.startAt} </td>
-                    <td>${session.film.duration} </td>
-                    <td>${session.freePlaces}</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}">
-                            Tickets
-                        </a>
-                    </td>
+                    <div class="col-md-4">
+                        <br>
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="${pageContext.servletContext.contextPath}/posterServlet?id=${session.film.id}"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <c:choose>
+                                        <c:when test="${language == 'en'}">
+                                            ${session.film.filmTitle}
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${session.film.filmTitleUK}
+                                        </c:otherwise>
+                                    </c:choose>
 
-                    <c:if test="${sessionScope.user.roleId == 2}">
-                        <td>
-                            <a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
-                        </td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
-                        </td>
-                    </c:if>
-                    </tbody>
-                </c:forEach>
-            </table>
+                                </h5>
+                                <p class="card-text">
+                                    <c:choose>
+                                        <c:when test="${language == 'en'}">
+                                            ${session.film.description}
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${session.film.descriptionUK}
+                                        </c:otherwise>
+                                    </c:choose>
+                                </p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><fmt:message key="allSession.date"/>: ${session.date}</li>
+                                <li class="list-group-item"><fmt:message key="allSession.start"/>: ${session.startAt};
+                                    <fmt:message key="allFilms.duration"/>: ${session.film.duration} </li>
+                                <li class="list-group-item"><fmt:message
+                                        key="allSession.seats"/>: ${session.freePlaces}</li>
+                                <c:if test="${sessionScope.user.roleId == 2}">
+                                    <li class="list-group-item">
+                                        <a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
+                                        <a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                            <div class="card-body">
+                                <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}"
+                                   class="card-link"><fmt:message key="allSession.tickets"/></a>
+                            </div>
+                        </div>
+                    </div>
+                        </c:forEach>
+
+            </div>
+
         </main>
     </div>
 </div>

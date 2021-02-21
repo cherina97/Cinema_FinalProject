@@ -28,10 +28,10 @@
             <div class="seatStructure">
                 <div style="text-align: center;">
 
-
-                    <%-- table--%>
                     <form action="${pageContext.request.contextPath}/allSession/tickets" method="post">
                         <table id="seatsBlock">
+
+                            <input name="id" type="hidden" value="${sessionScope.sessionId}"/>
 
                             <p id="notification"></p>
 
