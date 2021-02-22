@@ -55,58 +55,60 @@
                     </h4>
                     </c:if>
                     <div class="row">
-                <c:forEach var="session" items="${requestScope.allSession}">
-                    <div class="col-md-4">
-                        <br>
-                        <div class="card">
-                            <img class="card-img-top"
-                                 src="${pageContext.servletContext.contextPath}/posterServlet?id=${session.film.id}"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <c:choose>
-                                        <c:when test="${language == 'en'}">
-                                            ${session.film.filmTitle}
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${session.film.filmTitleUK}
-                                        </c:otherwise>
-                                    </c:choose>
+                        <c:forEach var="session" items="${requestScope.allSession}">
+                            <div class="col-md-4">
+                                <br>
+                                <div class="card">
+                                    <img class="card-img-top"
+                                         src="${pageContext.servletContext.contextPath}/posterServlet?id=${session.film.id}"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <c:choose>
+                                                <c:when test="${language == 'en'}">
+                                                    ${session.film.filmTitle}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${session.film.filmTitleUK}
+                                                </c:otherwise>
+                                            </c:choose>
 
-                                </h5>
-                                <p class="card-text">
-                                    <c:choose>
-                                        <c:when test="${language == 'en'}">
-                                            ${session.film.description}
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${session.film.descriptionUK}
-                                        </c:otherwise>
-                                    </c:choose>
-                                </p>
+                                        </h5>
+                                        <p class="card-text">
+                                            <c:choose>
+                                                <c:when test="${language == 'en'}">
+                                                    ${session.film.description}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${session.film.descriptionUK}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><fmt:message
+                                                key="allSession.date"/>: ${session.date}</li>
+                                        <li class="list-group-item"><fmt:message
+                                                key="allSession.start"/>: ${session.startAt};
+                                            <fmt:message key="allFilms.duration"/>: ${session.film.duration} </li>
+                                        <li class="list-group-item"><fmt:message
+                                                key="allSession.seats"/>: ${session.freePlaces}</li>
+                                        <c:if test="${sessionScope.user.roleId == 2}">
+                                            <li class="list-group-item">
+                                                <a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
+                                                <a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                    <div class="card-body">
+                                        <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}"
+                                           class="card-link"><fmt:message key="allSession.tickets"/></a>
+                                    </div>
+                                </div>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><fmt:message key="allSession.date"/>: ${session.date}</li>
-                                <li class="list-group-item"><fmt:message key="allSession.start"/>: ${session.startAt};
-                                    <fmt:message key="allFilms.duration"/>: ${session.film.duration} </li>
-                                <li class="list-group-item"><fmt:message
-                                        key="allSession.seats"/>: ${session.freePlaces}</li>
-                                <c:if test="${sessionScope.user.roleId == 2}">
-                                    <li class="list-group-item">
-                                        <a href="${pageContext.request.contextPath}/allSession/admin/update?id=${session.id}">Update</a>
-                                        <a href="${pageContext.request.contextPath}/allSession/admin/delete?id=${session.id}">Delete</a>
-                                    </li>
-                                </c:if>
-                            </ul>
-                            <div class="card-body">
-                                <a href="${pageContext.request.contextPath}/allSession/tickets?id=${session.id}"
-                                   class="card-link"><fmt:message key="allSession.tickets"/></a>
-                            </div>
-                        </div>
-                    </div>
                         </c:forEach>
 
-            </div>
+                    </div>
 
         </main>
     </div>

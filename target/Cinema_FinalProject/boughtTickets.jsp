@@ -37,9 +37,9 @@
                             <div class="title">
                                 <h2>
                                     <c:choose>
-                                        <c:if test="${language == 'en'}">
+                                        <c:when test="${language == 'en'}">
                                             ${ticket.session.film.filmTitle}
-                                        </c:if>
+                                        </c:when>
                                         <c:otherwise>
                                             ${ticket.session.film.filmTitleUK}
                                         </c:otherwise>

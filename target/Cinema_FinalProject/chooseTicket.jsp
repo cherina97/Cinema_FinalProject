@@ -31,7 +31,7 @@
                     <form action="${pageContext.request.contextPath}/allSession/tickets" method="post">
                         <table id="seatsBlock">
 
-                            <input name="id" type="hidden" value="${requestScope.sessionId}"/>
+                            <input name="id" type="hidden" value="${sessionScope.sessionId}"/>
 
                             <p id="notification"></p>
 

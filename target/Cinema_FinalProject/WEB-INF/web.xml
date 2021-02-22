@@ -5,11 +5,6 @@
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
 
-<!--  <error-page>-->
-<!--    <error-code>401</error-code>-->
-<!--    <location>/accessDenied.jsp</location>-->
-<!--  </error-page>-->
-
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>filters.EncodingFilter</filter-class>
