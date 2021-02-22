@@ -11,3 +11,9 @@ body{
 table caption{
     caption-side: top;
 }
+
+.error{
+    color:#f23a3a;
+    font-size: 15px;
+    margin-top: 15px;
+}

@@ -6,6 +6,7 @@ import entities.Ticket;
 import entities.User;
 import utils.ConnectionPool;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -162,5 +163,23 @@ public class TicketDao implements CRUD<Ticket> {
         }
         //todo
         return null;
+    }
+
+    public void createTicketsForSession(int sessionId) {
+        try {
+            connection.setAutoCommit(false);
+            for (int i = 1; i <= 72; i++) {
+                create(new Ticket.Builder()
+                        .withSeatNumber(i)
+                        .withSessionId(sessionId)
+                        .withPrice(BigDecimal.valueOf(50))
+                        .build());
+            }
+            connection.commit();
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            LOG.error("SQLException in createTicketsForSession method of TicketDao class", e);
+        }
+
     }
 }

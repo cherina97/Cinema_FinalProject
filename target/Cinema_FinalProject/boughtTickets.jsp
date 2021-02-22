@@ -33,24 +33,31 @@
                 <c:forEach var="ticket" items="${requestScope.ticketsByUser}">
                     <div class="cardWrap">
                         <div class="card cardLeft">
-                            <h1><span>Ticket</span></h1>
+                            <h1><span><fmt:message key="tickets.ticket"/> </span></h1>
                             <div class="title">
                                 <h2>
-                                        ${ticket.session.film.filmTitle}
+                                    <c:choose>
+                                        <c:if test="${language == 'en'}">
+                                            ${ticket.session.film.filmTitle}
+                                        </c:if>
+                                        <c:otherwise>
+                                            ${ticket.session.film.filmTitleUK}
+                                        </c:otherwise>
+                                    </c:choose>
                                 </h2>
-                                <span>movie</span>
+                                <span><fmt:message key="tickets.film"/> </span>
                             </div>
                             <div class="name">
                                 <h2>${sessionScope.user.firstName} ${sessionScope.user.lastName}</h2>
-                                <span>name</span>
+                                <span><fmt:message key="tickets.name"/> </span>
                             </div>
                             <div class="seat">
                                 <h2>${ticket.seatNumber}</h2>
-                                <span>seat</span>
+                                <span><fmt:message key="tickets.seat"/> </span>
                             </div>
                             <div class="time">
                                 <h2>${ticket.session.startAt}</h2>
-                                <span>time</span>
+                                <span><fmt:message key="tickets.time"/> </span>
                             </div>
 
                         </div>
@@ -58,7 +65,7 @@
                             <div class="eye"></div>
                             <div class="number">
                                 <h3>${ticket.seatNumber}</h3>
-                                <span>seat</span>
+                                <span><fmt:message key="tickets.seat"/> </span>
                             </div>
                             <div class="barcode"></div>
                         </div>
@@ -66,31 +73,6 @@
                     </div>
                 </c:forEach>
             </div>
-
-            <%--        <table>--%>
-            <%--            <caption>Your tickets</caption>--%>
-
-            <%--            <thead>--%>
-            <%--            <tr>--%>
-            <%--                <th>Id</th>--%>
-            <%--                <th>Seat number</th>--%>
-            <%--                <th>Price</th>--%>
-            <%--                <th>User id</th>--%>
-            <%--                <th>Session id</th>--%>
-            <%--            </tr>--%>
-            <%--            </thead>--%>
-
-            <%--            <c:forEach var="ticket" items="${requestScope.ticketsByUser}">--%>
-            <%--                <tbody>--%>
-            <%--                <td>${ticket.id}</td>--%>
-            <%--                <td>${ticket.seatNumber} </td>--%>
-            <%--                <td>${ticket.price} </td>--%>
-            <%--                <td>${ticket.userId} </td>--%>
-            <%--                <td>${ticket.sessionId} </td>--%>
-            <%--                </tbody>--%>
-            <%--            </c:forEach>--%>
-            <%--        </table>--%>
-
         </main>
     </div>
 </div>

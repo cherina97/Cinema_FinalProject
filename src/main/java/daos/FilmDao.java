@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FilmDao implements CRUD<Film> {
     private static final Logger LOG = LoggerFactory.getLogger(FilmDao.class);
@@ -29,7 +30,9 @@ public class FilmDao implements CRUD<Film> {
     private static final String SELECT_POSTER = "SELECT poster FROM films WHERE id = ?";
     private static final String UPDATE_POSTER = "UPDATE films SET poster = ? WHERE id = ?";
     private static final String INSERT_INTO_GENRE_FILM = "INSERT INTO genre_film (film_id, genre_id) VALUES (?, ?)";
-    private static final String UPDATE_GENRES_FILM = "UPDATE genre_films SET genre_id = ? WHERE film_id = ?";
+    private static final String UPDATE_GENRES_FILM = "UPDATE genre_film SET genre_id = ? WHERE film_id = ?";
+    private static final String GET_FILM_BY_TITLE = "SELECT * FROM films WHERE film_title = ?";
+    private static final String DELETE_GENRE_FILM = "delete from genre_film where film_id = ?";
     private final Connection connection;
     private int noOfRecords;
 
@@ -82,23 +85,12 @@ public class FilmDao implements CRUD<Film> {
 
     //todo
     public void updateGenresForFilm(Film film, List<Genre> genres) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GENRES_FILM)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_GENRE_FILM)) {
+            preparedStatement.setInt(1, film.getId());
+            preparedStatement.executeUpdate();
 
-            connection.setAutoCommit(false);
-            for (Genre genre : genres) {
-                preparedStatement.setInt(1, genre.getId());
-                preparedStatement.setInt(2, film.getId());
-                try {
-                    preparedStatement.execute();
-                } catch (SQLException e) {
-                    //rollback if exception
-                    connection.rollback();
-                    System.err.print("SQLException");
-                }
-            }
-            //commit
-            connection.commit();
-            connection.setAutoCommit(true);
+            setGenresForFilm(film, genres);
+
         } catch (SQLException e) {
             LOG.error("SQLException in updateGenresForFilm method of FilmDao class", e);
         }
@@ -197,6 +189,7 @@ public class FilmDao implements CRUD<Film> {
         } catch (SQLException e) {
             LOG.error("SQLException in getById method of FilmDao class", e);
         }
+        //todo
         return null;
     }
 
@@ -245,5 +238,20 @@ public class FilmDao implements CRUD<Film> {
             LOG.error("SQLException in readAllFilmsWhereGenreIdPresent method of FilmDao class", e);
         }
         return films;
+    }
+
+    public Optional<Film> getFilmByTitle(String filmTitle) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_TITLE)) {
+            preparedStatement.setString(1, filmTitle);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.ofNullable(Film.of(resultSet));
+            }
+        } catch (SQLException e) {
+            LOG.error("SQLException in getFilmByTitle method of FilmDao class", e);
+        }
+        //todo
+        return Optional.empty();
     }
 }

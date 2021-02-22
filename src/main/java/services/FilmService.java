@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
 import java.util.List;
+import java.util.Optional;
 
 public class FilmService {
 
@@ -87,5 +88,9 @@ public class FilmService {
                 film.getDuration(),
                 film.getPoster(),
                 genreDao.getGenresByFilmId(film.getId()));
+    }
+
+    public Optional<Film> getFilmByTitle(String filmTitle) {
+        return filmDao.getFilmByTitle(filmTitle);
     }
 }

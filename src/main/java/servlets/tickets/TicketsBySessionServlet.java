@@ -23,7 +23,7 @@ public class TicketsBySessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int sessionId = Integer.parseInt(req.getParameter("id"));
-        req.getSession().setAttribute("sessionId", sessionId);
+        req.setAttribute("sessionId", sessionId);
 
         List<Ticket> ticketList = ticketService.readAllTicketsBySessionId(sessionId);
         List<Ticket> range1 = ticketList.stream().limit(12).collect(Collectors.toList());
@@ -55,7 +55,7 @@ public class TicketsBySessionServlet extends HttpServlet {
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
 
-        int sessionId = (int) req.getSession().getAttribute("sessionId");
+        int sessionId = (int) req.getAttribute("sessionId");
 
         List<Ticket> ticketsBySeats = ticketService.getTicketsBySeats(checkedList, sessionId);
         User user = (User) req.getSession().getAttribute("user");

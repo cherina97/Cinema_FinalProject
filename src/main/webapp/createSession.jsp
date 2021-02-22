@@ -53,8 +53,10 @@
                 <div class="form-group">
                     <label>Enter a start time: </label>
                     <input name="startAt" type="time" class="form-control" placeholder="Start at"
-                           required
-                           pattern="([0]?9|[1]?[0-9]|[2]?[0-2]):[0-9][0-9]">
+                           required>
+                    <div class="error">
+                        <p> ${requestScope.error} </p>
+                    </div>
                 </div>
 
                 <div class="form-group">

@@ -40,6 +40,9 @@
                     <input id="title" name="filmTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Film title"
                            required oninvalid="this.setCustomValidity('${sessionScope.user.email}')">
                 </div>
+                <div class="error">
+                    <p> ${requestScope.error} </p>
+                </div>
                 <div class="form-group">
                     <label>Enter a film title in Ukrainian: </label>
                     <input name="filmTitleUK" type="text" class="form-control" placeholder="Film title uk"
@@ -75,6 +78,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add film</button>
+
+
             </form>
         </main>
     </div>
