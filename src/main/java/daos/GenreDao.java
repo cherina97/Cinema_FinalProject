@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Genre dao.
+ */
 public class GenreDao implements CRUD<Genre> {
     private static final Logger LOG = LoggerFactory.getLogger(GenreDao.class);
 
@@ -20,6 +23,9 @@ public class GenreDao implements CRUD<Genre> {
             "select * from genres join genre_film on genre_film.genre_id=genres.id where genre_film.film_id = ?";
     private final Connection connection;
 
+    /**
+     * Instantiates a new Genre dao.
+     */
     public GenreDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
     }
@@ -55,6 +61,12 @@ public class GenreDao implements CRUD<Genre> {
         return genres;
     }
 
+    /**
+     * Gets genres by ids.
+     *
+     * @param genresIds the genres ids
+     * @return the genres by ids
+     */
     public List<Genre> getGenresByIds(List<Integer> genresIds) {
         List<Genre> genres = new ArrayList<>();
         try {
@@ -86,6 +98,12 @@ public class GenreDao implements CRUD<Genre> {
         //todo
     }
 
+    /**
+     * Gets genres by film id.
+     *
+     * @param filmId the film id
+     * @return the genres by film id
+     */
     public List<Genre> getGenresByFilmId(int filmId) {
         List<Genre> genres = new ArrayList<>();
         try {

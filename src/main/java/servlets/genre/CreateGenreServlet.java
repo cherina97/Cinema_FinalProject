@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Create genre servlet.
+ */
 @WebServlet("/allGenres/admin/addGenre")
 public class CreateGenreServlet extends HttpServlet {
     private final GenreService genreService = GenreService.getInstance();

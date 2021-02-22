@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User dao.
+ */
 public class UserDao implements CRUD<User> {
     private static final Logger LOG = LoggerFactory.getLogger(UserDao.class);
 
@@ -21,6 +24,9 @@ public class UserDao implements CRUD<User> {
             "INSERT INTO users (first_name, last_name, email, password, role_id) VALUES (?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
 
+    /**
+     * Instantiates a new User dao.
+     */
     public UserDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
     }
@@ -79,6 +85,12 @@ public class UserDao implements CRUD<User> {
         return null;
     }
 
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     */
     public Optional<User> getByEmail(String email) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
@@ -94,6 +106,12 @@ public class UserDao implements CRUD<User> {
         return Optional.empty();
     }
 
+    /**
+     * Check email availability boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean checkEmailAvailability(String email) {
         LOG.trace("Checking availability of email");
 

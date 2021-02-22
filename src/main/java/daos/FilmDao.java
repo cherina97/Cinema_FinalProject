@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Film dao.
+ */
 public class FilmDao implements CRUD<Film> {
     private static final Logger LOG = LoggerFactory.getLogger(FilmDao.class);
 
@@ -36,9 +39,13 @@ public class FilmDao implements CRUD<Film> {
     private final Connection connection;
     private int noOfRecords;
 
+    /**
+     * Instantiates a new Film dao.
+     */
     public FilmDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
     }
+
 
 
     public Film create(Film film) {
@@ -60,6 +67,12 @@ public class FilmDao implements CRUD<Film> {
         return film;
     }
 
+    /**
+     * Sets genres for film.
+     *
+     * @param film   the film
+     * @param genres the genres
+     */
     public void setGenresForFilm(Film film, List<Genre> genres) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_GENRE_FILM)) {
             preparedStatement.setInt(1, film.getId());
@@ -83,7 +96,13 @@ public class FilmDao implements CRUD<Film> {
         }
     }
 
-    //todo
+    /**
+     * Update genres for film.
+     *
+     * @param film   the film
+     * @param genres the genres
+     */
+//todo
     public void updateGenresForFilm(Film film, List<Genre> genres) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_GENRE_FILM)) {
             preparedStatement.setInt(1, film.getId());
@@ -111,7 +130,14 @@ public class FilmDao implements CRUD<Film> {
         return filmList;
     }
 
-    //pagination
+    /**
+     * Read all list.
+     *
+     * @param offset      the offset
+     * @param noOfRecords the no of records
+     * @return the list
+     */
+//pagination
     public List<Film> readAll(int offset, int noOfRecords) {
         String query = "select SQL_CALC_FOUND_ROWS * from films limit "
                 + offset + ", " + noOfRecords;
@@ -133,6 +159,11 @@ public class FilmDao implements CRUD<Film> {
         return filmList;
     }
 
+    /**
+     * Gets no of records.
+     *
+     * @return the no of records
+     */
     public int getNoOfRecords() {
         return noOfRecords;
     }
@@ -166,6 +197,11 @@ public class FilmDao implements CRUD<Film> {
         return film;
     }
 
+    /**
+     * Update poster.
+     *
+     * @param film the film
+     */
     public void updatePoster(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_POSTER);
@@ -178,6 +214,12 @@ public class FilmDao implements CRUD<Film> {
         }
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param filmId the film id
+     * @return the by id
+     */
     public Film getById(int filmId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_ID)) {
             preparedStatement.setInt(1, filmId);
@@ -193,6 +235,12 @@ public class FilmDao implements CRUD<Film> {
         return null;
     }
 
+    /**
+     * Upload poster.
+     *
+     * @param id       the id
+     * @param response the response
+     */
     public void uploadPoster(int id, HttpServletResponse response) {
         try {
             PreparedStatement stmt = connection.prepareStatement(SELECT_POSTER);
@@ -207,6 +255,12 @@ public class FilmDao implements CRUD<Film> {
 
     }
 
+    /**
+     * Gets blob from part.
+     *
+     * @param filePart the file part
+     * @return the blob from part
+     */
     public SerialBlob getBlobFromPart(Part filePart) {
         SerialBlob serialBlob = null;
         try {
@@ -219,6 +273,12 @@ public class FilmDao implements CRUD<Film> {
         return serialBlob;
     }
 
+    /**
+     * Read all films where genre id present list.
+     *
+     * @param genreId the genre id
+     * @return the list
+     */
     public List<Film> readAllFilmsWhereGenreIdPresent(int genreId) {
         List<Film> films = null;
         ResultSet rs = null;
@@ -240,6 +300,12 @@ public class FilmDao implements CRUD<Film> {
         return films;
     }
 
+    /**
+     * Gets film by title.
+     *
+     * @param filmTitle the film title
+     * @return the film by title
+     */
     public Optional<Film> getFilmByTitle(String filmTitle) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_TITLE)) {
             preparedStatement.setString(1, filmTitle);

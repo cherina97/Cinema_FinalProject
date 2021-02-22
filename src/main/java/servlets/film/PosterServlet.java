@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Poster servlet.
+ */
 @WebServlet("/posterServlet")
 public class PosterServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();

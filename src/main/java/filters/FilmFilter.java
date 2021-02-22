@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Film filter.
+ */
 @WebFilter({"/allFilms/admin/update", "/allFilms/admin/delete", "/allFilms/admin/updatePoster"})
 public class FilmFilter implements Filter {
     private final FilmService filmService = FilmService.getInstance();

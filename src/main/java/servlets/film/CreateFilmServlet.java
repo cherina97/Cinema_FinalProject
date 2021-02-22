@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type Create film servlet.
+ */
 @WebServlet("/allFilms/admin/addFilm")
 @MultipartConfig(maxFileSize = 16177215)
 public class CreateFilmServlet extends HttpServlet {

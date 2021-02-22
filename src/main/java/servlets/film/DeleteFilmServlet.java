@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Delete film servlet.
+ */
 @WebServlet("/allFilms/admin/delete")
 public class DeleteFilmServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();

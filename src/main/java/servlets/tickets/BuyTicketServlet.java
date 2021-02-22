@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Buy ticket servlet.
+ */
 @WebServlet("/tickets")
 public class BuyTicketServlet extends HttpServlet {
     private final TicketService ticketService = TicketService.getInstance();

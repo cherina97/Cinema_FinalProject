@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * The type User.
+ */
 public class User {
     private static final Logger LOG = LoggerFactory.getLogger(User.class);
 
@@ -17,9 +20,18 @@ public class User {
     private String password;
     private int roleId;
 
+    /**
+     * Instantiates a new User.
+     */
     public User() {
     }
 
+    /**
+     * Of user.
+     *
+     * @param resultSet the result set
+     * @return the user
+     */
     public static User of(ResultSet resultSet) {
         try {
             int id = resultSet.getInt("id");
@@ -45,92 +57,199 @@ public class User {
         return null;
     }
 
+    /**
+     * The type Builder.
+     */
     public static class Builder{
         private User user;
 
+        /**
+         * Instantiates a new Builder.
+         */
         public Builder() {
             user = new User();
         }
 
+        /**
+         * With id builder.
+         *
+         * @param id the id
+         * @return the builder
+         */
         public Builder withId(int id){
             user.id = id;
             return this;
         }
 
+        /**
+         * With first name builder.
+         *
+         * @param firstName the first name
+         * @return the builder
+         */
         public Builder withFirstName(String firstName){
             user.firstName = firstName;
             return this;
         }
 
+        /**
+         * With last name builder.
+         *
+         * @param lastName the last name
+         * @return the builder
+         */
         public Builder withLastName(String lastName){
             user.lastName = lastName;
             return this;
         }
 
+        /**
+         * With email builder.
+         *
+         * @param email the email
+         * @return the builder
+         */
         public Builder withEmail(String email){
             user.email = email;
             return this;
         }
 
+        /**
+         * With role id builder.
+         *
+         * @param roleId the role id
+         * @return the builder
+         */
         public Builder withRoleId(int roleId){
             user.roleId = roleId;
             return this;
         }
 
+        /**
+         * With password builder.
+         *
+         * @param password the password
+         * @return the builder
+         */
         public Builder withPassword(String password){
             user.password = password;
             return this;
         }
 
+        /**
+         * Build user.
+         *
+         * @return the user
+         */
         public User build(){
             return user;
         }
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets first name.
+     *
+     * @return the first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Sets first name.
+     *
+     * @param firstName the first name
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Gets last name.
+     *
+     * @return the last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Sets last name.
+     *
+     * @param lastName the last name
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Gets role id.
+     *
+     * @return the role id
+     */
     public int getRoleId() {
         return roleId;
     }
 
+    /**
+     * Sets role id.
+     *
+     * @param roleId the role id
+     */
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }

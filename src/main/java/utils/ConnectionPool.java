@@ -10,6 +10,9 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * The type Connection pool.
+ */
 public class ConnectionPool {
     private static final Logger LOG = LoggerFactory.getLogger(ConnectionPool.class);
 
@@ -19,12 +22,22 @@ public class ConnectionPool {
 
     private static ConnectionPool connectionPool = null;
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ConnectionPool getInstance() {
         if (connectionPool == null)
             connectionPool = new ConnectionPool();
         return connectionPool;
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         Context ctx;
         Connection connection = null;

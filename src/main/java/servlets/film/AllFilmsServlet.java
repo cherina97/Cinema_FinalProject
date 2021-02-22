@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type All films servlet.
+ */
 @WebServlet("/allFilms")
 public class AllFilmsServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type All session servlet.
+ */
 @WebServlet("/allSession")
 public class AllSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 
+/**
+ * The type Registration servlet.
+ */
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();

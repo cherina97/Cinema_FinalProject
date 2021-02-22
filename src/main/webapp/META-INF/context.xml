@@ -8,7 +8,7 @@
               password="1111"
               driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/cinema?autoReconnect=true&amp;serverTimezone=UTC"
-              maxTotal="150"
-              maxIdle="60"/>
+              maxTotal="500"
+              maxIdle="200"/>
 
 </Context>

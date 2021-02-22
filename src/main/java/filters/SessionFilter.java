@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Session filter.
+ */
 @WebFilter({"/allSession/tickets", "/allSession/admin/update", "/allSession/admin/delete"})
 public class SessionFilter implements Filter {
     private final SessionService sessionService = SessionService.getInstance();

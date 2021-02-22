@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Tickets by session servlet.
+ */
 @WebServlet("/allSession/tickets")
 public class TicketsBySessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();

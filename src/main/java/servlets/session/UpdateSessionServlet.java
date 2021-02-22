@@ -15,6 +15,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 
+/**
+ * The type Update session servlet.
+ */
 @WebServlet("/allSession/admin/update")
 public class UpdateSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();

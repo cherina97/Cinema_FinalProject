@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Ticket dao.
+ */
 public class TicketDao implements CRUD<Ticket> {
     private static final Logger LOG = LoggerFactory.getLogger(TicketDao.class);
 
@@ -27,6 +30,9 @@ public class TicketDao implements CRUD<Ticket> {
     private static final String GET_TICKET_BY_ID = "SELECT * FROM tickets WHERE id = ?";
     private final Connection connection;
 
+    /**
+     * Instantiates a new Ticket dao.
+     */
     public TicketDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
     }
@@ -81,6 +87,12 @@ public class TicketDao implements CRUD<Ticket> {
         return null;
     }
 
+    /**
+     * Read all tickets by session id list.
+     *
+     * @param sessionId the session id
+     * @return the list
+     */
     public List<Ticket> readAllTicketsBySessionId(int sessionId) {
         List<Ticket> ticketList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(READ_TICKETS_BY_SESSION)) {
@@ -96,6 +108,13 @@ public class TicketDao implements CRUD<Ticket> {
         return ticketList;
     }
 
+    /**
+     * Gets tickets by seats.
+     *
+     * @param checked   the checked
+     * @param sessionId the session id
+     * @return the tickets by seats
+     */
     public List<Ticket> getTicketsBySeats(List<Integer> checked, int sessionId) {
         List<Ticket> checkedTickets = new ArrayList<>();
         try {
@@ -117,6 +136,12 @@ public class TicketDao implements CRUD<Ticket> {
         return checkedTickets;
     }
 
+    /**
+     * Sets user for tickets.
+     *
+     * @param ticketsBySeats the tickets by seats
+     * @param user           the user
+     */
     public void setUserForTickets(List<Ticket> ticketsBySeats, User user) {
         try {
             String sqlIN = ticketsBySeats.stream()
@@ -134,6 +159,12 @@ public class TicketDao implements CRUD<Ticket> {
         }
     }
 
+    /**
+     * Gets tickets by user.
+     *
+     * @param user the user
+     * @return the tickets by user
+     */
     public List<Ticket> getTicketsByUser(User user) {
         List<Ticket> ticketList = new ArrayList<>();
         try {
@@ -150,6 +181,12 @@ public class TicketDao implements CRUD<Ticket> {
         return ticketList;
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param ticketId the ticket id
+     * @return the by id
+     */
     public Ticket getById(int ticketId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_TICKET_BY_ID)) {
             preparedStatement.setInt(1, ticketId);
@@ -165,6 +202,11 @@ public class TicketDao implements CRUD<Ticket> {
         return null;
     }
 
+    /**
+     * Create tickets for session.
+     *
+     * @param sessionId the session id
+     */
     public void createTicketsForSession(int sessionId) {
         try {
             connection.setAutoCommit(false);

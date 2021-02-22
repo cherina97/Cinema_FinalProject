@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Delete session servlet.
+ */
 @WebServlet("/allSession/admin/delete")
 public class DeleteSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();

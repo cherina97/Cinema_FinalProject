@@ -17,6 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Update film servlet.
+ */
 @WebServlet("/allFilms/admin/update")
 public class UpdateFilmServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();

@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Not auth filter.
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class NotAuthFilter implements Filter {
     private final List<String> START_PAGES =

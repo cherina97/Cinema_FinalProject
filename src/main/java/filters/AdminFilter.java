@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Admin filter.
+ */
 @WebFilter({"/allFilms/admin/*", "/allGenres/admin/*", "/allSession/admin/*"})
 public class AdminFilter implements Filter {
     @Override

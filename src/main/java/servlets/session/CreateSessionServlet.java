@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 
+/**
+ * The type Create session servlet.
+ */
 @WebServlet("/allSession/admin/createSession")
 public class CreateSessionServlet extends HttpServlet {
     private final SessionService sessionService = SessionService.getInstance();

@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Session dao.
+ */
 public class SessionDao implements CRUD<Session> {
     private static final Logger LOG = LoggerFactory.getLogger(SessionDao.class);
 
@@ -42,6 +45,9 @@ public class SessionDao implements CRUD<Session> {
     private static final String GET_BY_ID = "SELECT * FROM sessions WHERE id = ?";
     private int noOfRecords;
 
+    /**
+     * Instantiates a new Session dao.
+     */
     public SessionDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
     }
@@ -70,19 +76,41 @@ public class SessionDao implements CRUD<Session> {
         return getSessionList(READ_ALL_SESSIONS);
     }
 
+    /**
+     * Read all from now list.
+     *
+     * @return the list
+     */
     public List<Session> readAllFromNow() {
         return getSessionList(READ_ALL_ORDER_BY_DATE);
     }
 
+    /**
+     * Read all order by film list.
+     *
+     * @return the list
+     */
     public List<Session> readAllOrderByFilm() {
         return getSessionList(READ_ALL_ORDER_BY_FILM);
     }
 
+    /**
+     * Read all order by free seats list.
+     *
+     * @return the list
+     */
     public List<Session> readAllOrderByFreeSeats() {
         return getSessionList(READ_ALL_ORDER_BY_FREE_SEATS);
     }
 
-    //pagination
+    /**
+     * Read all list.
+     *
+     * @param offset      the offset
+     * @param noOfRecords the no of records
+     * @return the list
+     */
+//pagination
     public List<Session> readAll(int offset, int noOfRecords) {
         String query = "select SQL_CALC_FOUND_ROWS * from sessions limit "
                 + offset + ", " + noOfRecords;
@@ -104,6 +132,11 @@ public class SessionDao implements CRUD<Session> {
         return sessionList;
     }
 
+    /**
+     * Gets no of records.
+     *
+     * @return the no of records
+     */
     public int getNoOfRecords() {
         return noOfRecords;
     }
@@ -150,6 +183,12 @@ public class SessionDao implements CRUD<Session> {
         return null;
     }
 
+    /**
+     * Of with user id session.
+     *
+     * @param resultSet the result set
+     * @return the session
+     */
     public static Session ofWithUserId(ResultSet resultSet) {
         try {
             int id = resultSet.getInt("id");
@@ -173,6 +212,12 @@ public class SessionDao implements CRUD<Session> {
         return null;
     }
 
+    /**
+     * Of session.
+     *
+     * @param resultSet the result set
+     * @return the session
+     */
     public static Session of(ResultSet resultSet) {
         try {
             int id = resultSet.getInt("id");
@@ -194,6 +239,12 @@ public class SessionDao implements CRUD<Session> {
         return null;
     }
 
+    /**
+     * Gets session by id.
+     *
+     * @param sessionId the session id
+     * @return the session by id
+     */
     public Session getSessionById(int sessionId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_ID)) {
             preparedStatement.setInt(1, sessionId);
