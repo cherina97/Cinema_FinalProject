@@ -37,8 +37,11 @@
             <form action="addFilm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Enter a film title: </label>
-                    <input id="title" name="filmTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Film title"
-                           required oninvalid="this.setCustomValidity('${sessionScope.user.email}')">
+                    <input id="title" name="filmTitle" type="text" class="form-control" aria-describedby="emailHelp"
+                           placeholder="Film title"
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="error">
                     <p> ${requestScope.error} </p>
@@ -46,17 +49,23 @@
                 <div class="form-group">
                     <label>Enter a film title in Ukrainian: </label>
                     <input name="filmTitleUK" type="text" class="form-control" placeholder="Film title uk"
-                           required>
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group">
                     <label>Enter a description: </label>
                     <input name="description" type="text" class="form-control" placeholder="Description"
-                           required >
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group">
                     <label>Enter a description in Ukrainian: </label>
                     <input name="descriptionUK" type="text" class="form-control" placeholder="Description uk"
-                           required>
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group">
                     <label>Enter a duration of film: </label>
@@ -64,12 +73,16 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input name="poster" type="file" class="custom-file-input" id="customFile" required>
+                        <input name="poster" type="file" class="custom-file-input" id="customFile" required
+                               oninvalid="this.setCustomValidity('Cannot be empty')"
+                               oninput="setCustomValidity('')">
                         <label class="custom-file-label" for="customFile">Choose a poster for film</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <select name="genres" class="custom-select" multiple required>
+                    <select name="genres" class="custom-select" multiple required
+                            oninvalid="this.setCustomValidity('Cannot be empty')"
+                            oninput="setCustomValidity('')">
                         <option value="" disabled selected hidden> Select subject</option>
                         <c:forEach var="genre" items="${requestScope.genres}">
                             <option value="${genre.id}">${genre.genreName}</option>

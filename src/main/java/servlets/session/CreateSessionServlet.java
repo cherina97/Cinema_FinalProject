@@ -1,5 +1,6 @@
 package servlets.session;
 
+import entities.Film;
 import entities.Session;
 import org.apache.commons.lang3.ObjectUtils;
 import services.FilmService;
@@ -36,6 +37,9 @@ public class CreateSessionServlet extends HttpServlet {
         String startAt = req.getParameter("startAt");
         String date = req.getParameter("date");
 
+        Film filmById = filmService.getById(Integer.parseInt(filmId));
+        checkFreeTime(filmById.getDuration(), Time.valueOf(startAt + ":00"));
+
         String errorStartTime = "The Cinema open at 9:00";
         String errorEndTime = "The Cinema close at 22:00";
 
@@ -58,6 +62,11 @@ public class CreateSessionServlet extends HttpServlet {
         }
 
         req.getRequestDispatcher("/createSession.jsp").forward(req, resp);
+    }
+
+    private void checkFreeTime(Time filmDuration, Time startAt) {
+
+
     }
 
 }

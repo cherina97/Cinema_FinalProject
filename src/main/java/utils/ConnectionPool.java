@@ -17,7 +17,7 @@ public class ConnectionPool {
     private static final Logger LOG = LoggerFactory.getLogger(ConnectionPool.class);
 
     private ConnectionPool() {
-        //private constructor
+        LOG.trace("Initializing ConnectionPool class");
     }
 
     private static ConnectionPool connectionPool = null;
@@ -42,6 +42,13 @@ public class ConnectionPool {
         Context ctx;
         Connection connection = null;
         try {
+//            Hashtable env = new Hashtable();
+//            env.put(Context.INITIAL_CONTEXT_FACTORY,
+//                    "java.naming.factory.initial");
+//            env.put(Context.PROVIDER_URL, "java.naming.provider.url");
+//            env.put(Context.SECURITY_PRINCIPAL, "java.naming.security.principal");
+//            env.put(Context.SECURITY_CREDENTIALS, "java.naming.security.credentials");
+//            ctx = new InitialContext(env);
             ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cinema");
             connection = ds.getConnection();

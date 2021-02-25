@@ -93,14 +93,14 @@
       <version>1.10.19</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.199</version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>1.10.19</version>
       <scope>test</scope>
     </dependency>
+
 
 
   </dependencies>
