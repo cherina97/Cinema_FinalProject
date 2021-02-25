@@ -49,4 +49,11 @@ body{
 .cont{
     background-color:#0000006b;
 }
+.soon{
+    margin-top: 60px;
+    margin-bottom: -50px;
+    margin-left: 580px;
+    font-size: 40px;
+    color: #c2c5c7;
+}
 

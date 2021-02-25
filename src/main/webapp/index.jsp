@@ -28,7 +28,9 @@
         <jsp:include page="navbar.jsp"></jsp:include>
     </div>
 
+    <p class="soon"> Soon in Cinema... </p>
     <div class="mainBlock">
+
 
         <main role="main" class="container">
 
