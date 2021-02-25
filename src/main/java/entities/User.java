@@ -19,6 +19,8 @@ public class User {
     private String email;
     private String password;
     private int roleId;
+    private String hash;
+    private int active;
 
     /**
      * Instantiates a new User.
@@ -40,6 +42,8 @@ public class User {
             String email = resultSet.getString("email");
             String password = resultSet.getString("password");
             int roleId = resultSet.getInt("role_id");
+            String hash = resultSet.getString("hash");
+            int active = resultSet.getInt("active");
 
             return new User.Builder()
                     .withId(id)
@@ -48,6 +52,8 @@ public class User {
                     .withEmail(email)
                     .withPassword(password)
                     .withRoleId(roleId)
+                    .withHash(hash)
+                    .withActive(active)
                     .build();
 
         } catch (SQLException e) {
@@ -55,6 +61,42 @@ public class User {
         }
         //todo
         return null;
+    }
+
+    /**
+     * Gets hash.
+     *
+     * @return the hash
+     */
+    public String getHash() {
+        return hash;
+    }
+
+    /**
+     * Sets hash.
+     *
+     * @param hash the hash
+     */
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    /**
+     * Gets active.
+     *
+     * @return the active
+     */
+    public int getActive() {
+        return active;
+    }
+
+    /**
+     * Sets active.
+     *
+     * @param active the active
+     */
+    public void setActive(int active) {
+        this.active = active;
     }
 
     /**
@@ -135,6 +177,31 @@ public class User {
             user.password = password;
             return this;
         }
+
+        /**
+         * With hash builder.
+         *
+         * @param hash the hash
+         * @return the builder
+         */
+// TODO: 25.02.2021
+        public Builder withHash(String hash){
+            user.hash = hash;
+            return this;
+        }
+
+        /**
+         * With active builder.
+         *
+         * @param active the active
+         * @return the builder
+         */
+// TODO: 25.02.2021
+        public Builder withActive(int active){
+            user.active = active;
+            return this;
+        }
+
 
         /**
          * Build user.

@@ -30,6 +30,13 @@ public class LoginServlet extends HttpServlet {
 
         Optional<User> userOptional = userService.getUserByEmailAndPassword(email, password);
 
+        Optional<User> userServiceByEmail = userService.getByEmail(email);
+
+        if(userServiceByEmail.get().getActive() == 0){
+            req.setAttribute("userError", "Please activate your acc");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
+
         Optional<User> optionalUser = userService.getByEmail(email);
         String errorUser = "User with such email doesn't exist";
         String errorPassword = "Wrong password. Try again";
@@ -39,7 +46,7 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
 
-        if (userOptional.isPresent()) {
+        if (userOptional.get().getActive() == 1) {
             req.getSession().setAttribute("user", userOptional.get());
             resp.sendRedirect("/cinema/cabinet");
             return;

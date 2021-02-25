@@ -5,6 +5,7 @@ import com.sun.org.slf4j.internal.LoggerFactory;
 import entities.User;
 import org.mindrot.jbcrypt.BCrypt;
 import utils.ConnectionPool;
+import utils.SendingEmail;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class UserDao implements CRUD<User> {
     private static final String DELETE_BY_ID = "DELETE FROM users WHERE id = ?";
     private final Connection connection;
     private static final String INSERT_USER =
-            "INSERT INTO users (first_name, last_name, email, password, role_id) VALUES (?, ?, ?, ?, ?);";
+            "INSERT INTO users (first_name, last_name, email, password, role_id, hash) VALUES (?, ?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
 
     /**
@@ -42,7 +43,11 @@ public class UserDao implements CRUD<User> {
             preparedStatement.setString(4, hashPassword);
 
             preparedStatement.setInt(5, user.getRoleId());
+            preparedStatement.setString(6, user.getHash());
             preparedStatement.executeUpdate();
+
+            SendingEmail se = new SendingEmail(user.getEmail(), user.getHash());
+            se.sendMail();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             generatedKeys.next();
@@ -115,7 +120,7 @@ public class UserDao implements CRUD<User> {
     public boolean checkEmailAvailability(String email) {
         LOG.trace("Checking availability of email");
 
-        if(email == null) {
+        if (email == null) {
             return false;
         }
 

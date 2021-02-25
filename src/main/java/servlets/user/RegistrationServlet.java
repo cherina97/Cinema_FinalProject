@@ -1,6 +1,7 @@
 package servlets.user;
 
 import entities.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import services.UserService;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Random;
 
 
 /**
@@ -32,6 +34,11 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+        // Generate Hash Code which helps in creating Activation Link
+        Random theRandom = new Random();
+        theRandom.nextInt(999999);
+        String hash = DigestUtils.md5Hex("" +	theRandom);
+
         Optional<User> userOptional = userService.getByEmail(email);
         String errorUser = "User with such email is already present. Try another one";
         if(userOptional.isPresent()){
@@ -46,8 +53,10 @@ public class RegistrationServlet extends HttpServlet {
                     .withEmail(email)
                     .withRoleId(1)
                     .withPassword(password)
+                    .withHash(hash)
+                    .withActive(0)
                     .build());
-            resp.sendRedirect("/cinema/login");
+            resp.sendRedirect("/cinema/verify");
             return;
         }
         req.getRequestDispatcher("/register.jsp").forward(req, resp);
