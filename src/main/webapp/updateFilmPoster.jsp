@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
 
         <main role="main" class="container">
 
-            <form class="register-form" action="${pageContext.request.contextPath}/allFilms/updatePoster" method="post"
+            <form class="register-form" action="${pageContext.request.contextPath}/allFilms/admin/updatePoster" method="post"
                   enctype="multipart/form-data">
 
                 <input name="id" type="hidden" value="${requestScope.filmById.id}"/>

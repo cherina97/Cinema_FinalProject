@@ -945,11 +945,11 @@ SELECT|sys.sys_config
     </column>
     <column id="297" parent="287" name="description">
       <Position>4</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>text|0s</DataType>
     </column>
     <column id="298" parent="287" name="description_uk">
       <Position>5</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>text|0s</DataType>
     </column>
     <column id="299" parent="287" name="duration">
       <Position>6</Position>
@@ -1147,25 +1147,34 @@ SELECT|sys.sys_config
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="338" parent="293" name="email">
+    <column id="338" parent="293" name="hash">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="339" parent="293" name="active">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <index id="340" parent="293" name="email">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="339" parent="293" name="role_id">
+    <index id="341" parent="293" name="role_id">
       <ColNames>role_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="340" parent="293" name="PRIMARY">
+    <key id="342" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="341" parent="293" name="email">
+    <key id="343" parent="293" name="email">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
-    <foreign-key id="342" parent="293" name="users_ibfk_1">
+    <foreign-key id="344" parent="293" name="users_ibfk_1">
       <ColNames>role_id</ColNames>
       <RefTableName>user_role</RefTableName>
       <RefColNames>id</RefColNames>

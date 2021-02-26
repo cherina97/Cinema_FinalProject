@@ -8,3 +8,12 @@ body{
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }
+table caption{
+    caption-side: top;
+}
+
+.error{
+    color:#f23a3a;
+    font-size: 15px;
+    margin-top: 15px;
+}

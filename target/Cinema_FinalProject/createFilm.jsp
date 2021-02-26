@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
+    <meta>
     <title>Create film</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/createFilm.css"/>
@@ -37,24 +37,35 @@
             <form action="addFilm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Enter a film title: </label>
-                    <input id="title" name="filmTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Film title"
-                           required minlength="5" maxlength="10" pattern="[a-zA-Z0-9]+"
-                           oninvalid="this.setCustomValidity('${sessionScope.user.email}')">
+                    <input id="title" name="filmTitle" type="text" class="form-control" aria-describedby="emailHelp"
+                           placeholder="Film title"
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
+                </div>
+                <div class="error">
+                    <p> ${requestScope.error} </p>
                 </div>
                 <div class="form-group">
                     <label>Enter a film title in Ukrainian: </label>
                     <input name="filmTitleUK" type="text" class="form-control" placeholder="Film title uk"
-                           required minlength="5" maxlength="10" pattern="[a-zA-Z0-9]+">
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group">
                     <label>Enter a description: </label>
                     <input name="description" type="text" class="form-control" placeholder="Description"
-                           required >
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group">
                     <label>Enter a description in Ukrainian: </label>
                     <input name="descriptionUK" type="text" class="form-control" placeholder="Description uk"
-                           required>
+                           required
+                           oninvalid="this.setCustomValidity('Cannot be empty')"
+                           oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group">
                     <label>Enter a duration of film: </label>
@@ -62,12 +73,16 @@
                 </div>
                 <div class="form-group">
                     <div class="custom-file">
-                        <input name="poster" type="file" class="custom-file-input" id="customFile" required>
+                        <input name="poster" type="file" class="custom-file-input" id="customFile" required
+                               oninvalid="this.setCustomValidity('Cannot be empty')"
+                               oninput="setCustomValidity('')">
                         <label class="custom-file-label" for="customFile">Choose a poster for film</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <select name="genres" class="custom-select" multiple required>
+                    <select name="genres" class="custom-select" multiple required
+                            oninvalid="this.setCustomValidity('Cannot be empty')"
+                            oninput="setCustomValidity('')">
                         <option value="" disabled selected hidden> Select subject</option>
                         <c:forEach var="genre" items="${requestScope.genres}">
                             <option value="${genre.id}">${genre.genreName}</option>
@@ -76,6 +91,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add film</button>
+
+
             </form>
         </main>
     </div>
@@ -84,14 +101,6 @@
 </div>
 
 </div>
-
-<%--<script>--%>
-<%--    var input = document.getElementById('title');--%>
-<%--    input.oninvalid = function(event) {--%>
-<%--        event.target.setCustomValidity('Username should only contain lowercase letters. e.g. john');--%>
-<%--    }--%>
-
-<%--</script>--%>
 
 <script src="js/navbar.js"></script>
 

@@ -1,5 +1,7 @@
 package daos;
 
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import entities.Film;
 import entities.Genre;
 import org.apache.commons.io.IOUtils;
@@ -13,8 +15,14 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * The type Film dao.
+ */
 public class FilmDao implements CRUD<Film> {
+    private static final Logger LOG = LoggerFactory.getLogger(FilmDao.class);
+
     private static final String CREATE_FILM =
             "INSERT INTO films (film_title, film_title_uk, description, description_uk, duration, poster) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String READ_ALL_FILMS = "SELECT * FROM films";
@@ -25,12 +33,19 @@ public class FilmDao implements CRUD<Film> {
     private static final String SELECT_POSTER = "SELECT poster FROM films WHERE id = ?";
     private static final String UPDATE_POSTER = "UPDATE films SET poster = ? WHERE id = ?";
     private static final String INSERT_INTO_GENRE_FILM = "INSERT INTO genre_film (film_id, genre_id) VALUES (?, ?)";
+    private static final String UPDATE_GENRES_FILM = "UPDATE genre_film SET genre_id = ? WHERE film_id = ?";
+    private static final String GET_FILM_BY_TITLE = "SELECT * FROM films WHERE film_title = ?";
+    private static final String DELETE_GENRE_FILM = "delete from genre_film where film_id = ?";
     private final Connection connection;
     private int noOfRecords;
 
+    /**
+     * Instantiates a new Film dao.
+     */
     public FilmDao() {
         this.connection = ConnectionPool.getInstance().getConnection();
     }
+
 
 
     public Film create(Film film) {
@@ -47,11 +62,17 @@ public class FilmDao implements CRUD<Film> {
             generatedKeys.next();
             film.setId(generatedKeys.getInt(1));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in create method of FilmDao class", e);
         }
         return film;
     }
 
+    /**
+     * Sets genres for film.
+     *
+     * @param film   the film
+     * @param genres the genres
+     */
     public void setGenresForFilm(Film film, List<Genre> genres) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_GENRE_FILM)) {
             preparedStatement.setInt(1, film.getId());
@@ -71,7 +92,26 @@ public class FilmDao implements CRUD<Film> {
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in setGenresForFilm method of FilmDao class", e);
+        }
+    }
+
+    /**
+     * Update genres for film.
+     *
+     * @param film   the film
+     * @param genres the genres
+     */
+//todo
+    public void updateGenresForFilm(Film film, List<Genre> genres) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_GENRE_FILM)) {
+            preparedStatement.setInt(1, film.getId());
+            preparedStatement.executeUpdate();
+
+            setGenresForFilm(film, genres);
+
+        } catch (SQLException e) {
+            LOG.error("SQLException in updateGenresForFilm method of FilmDao class", e);
         }
     }
 
@@ -85,11 +125,19 @@ public class FilmDao implements CRUD<Film> {
                 filmList.add(Film.of(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in readAll method of FilmDao class", e);
         }
         return filmList;
     }
 
+    /**
+     * Read all list.
+     *
+     * @param offset      the offset
+     * @param noOfRecords the no of records
+     * @return the list
+     */
+//pagination
     public List<Film> readAll(int offset, int noOfRecords) {
         String query = "select SQL_CALC_FOUND_ROWS * from films limit "
                 + offset + ", " + noOfRecords;
@@ -106,11 +154,16 @@ public class FilmDao implements CRUD<Film> {
             if (rs.next())
                 this.noOfRecords = rs.getInt(1);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in readAll method of FilmDao class", e);
         }
         return filmList;
     }
 
+    /**
+     * Gets no of records.
+     *
+     * @return the no of records
+     */
     public int getNoOfRecords() {
         return noOfRecords;
     }
@@ -122,12 +175,12 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in remove method of FilmDao class", e);
         }
     }
 
     @Override
-    public void update(Film film) {
+    public Film update(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_FILM);
             preparedStatement.setString(1, film.getFilmTitle());
@@ -139,10 +192,16 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in update method of FilmDao class", e);
         }
+        return film;
     }
 
+    /**
+     * Update poster.
+     *
+     * @param film the film
+     */
     public void updatePoster(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_POSTER);
@@ -151,10 +210,16 @@ public class FilmDao implements CRUD<Film> {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in updatePoster method of FilmDao class", e);
         }
     }
 
+    /**
+     * Gets by id.
+     *
+     * @param filmId the film id
+     * @return the by id
+     */
     public Film getById(int filmId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_ID)) {
             preparedStatement.setInt(1, filmId);
@@ -164,11 +229,18 @@ public class FilmDao implements CRUD<Film> {
                 return Film.of(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getById method of FilmDao class", e);
         }
+        //todo
         return null;
     }
 
+    /**
+     * Upload poster.
+     *
+     * @param id       the id
+     * @param response the response
+     */
     public void uploadPoster(int id, HttpServletResponse response) {
         try {
             PreparedStatement stmt = connection.prepareStatement(SELECT_POSTER);
@@ -178,11 +250,17 @@ public class FilmDao implements CRUD<Film> {
                 response.getOutputStream().write(rs.getBytes("poster"));
             }
         } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in uploadPoster method of FilmDao class", e);
         }
 
     }
 
+    /**
+     * Gets blob from part.
+     *
+     * @param filePart the file part
+     * @return the blob from part
+     */
     public SerialBlob getBlobFromPart(Part filePart) {
         SerialBlob serialBlob = null;
         try {
@@ -190,11 +268,17 @@ public class FilmDao implements CRUD<Film> {
             byte[] bytes = IOUtils.toByteArray(inputStream);
             serialBlob = new SerialBlob(bytes);
         } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            LOG.error("SQLException in getBlobFromPart method of FilmDao class", e);
         }
         return serialBlob;
     }
 
+    /**
+     * Read all films where genre id present list.
+     *
+     * @param genreId the genre id
+     * @return the list
+     */
     public List<Film> readAllFilmsWhereGenreIdPresent(int genreId) {
         List<Film> films = null;
         ResultSet rs = null;
@@ -211,8 +295,29 @@ public class FilmDao implements CRUD<Film> {
                 films.add(Film.of(rs));
             }
         } catch (SQLException e) {
-            //error
+            LOG.error("SQLException in readAllFilmsWhereGenreIdPresent method of FilmDao class", e);
         }
         return films;
+    }
+
+    /**
+     * Gets film by title.
+     *
+     * @param filmTitle the film title
+     * @return the film by title
+     */
+    public Optional<Film> getFilmByTitle(String filmTitle) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_FILM_BY_TITLE)) {
+            preparedStatement.setString(1, filmTitle);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.ofNullable(Film.of(resultSet));
+            }
+        } catch (SQLException e) {
+            LOG.error("SQLException in getFilmByTitle method of FilmDao class", e);
+        }
+        //todo
+        return Optional.empty();
     }
 }

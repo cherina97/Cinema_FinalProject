@@ -18,9 +18,13 @@ import java.io.IOException;
 import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-@WebServlet("/addFilm")
+/**
+ * The type Create film servlet.
+ */
+@WebServlet("/allFilms/admin/addFilm")
 @MultipartConfig(maxFileSize = 16177215)
 public class CreateFilmServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();
@@ -30,7 +34,7 @@ public class CreateFilmServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Genre> genres = genreService.readAllGenres();
         req.setAttribute("genres", genres);
-        req.getRequestDispatcher("createFilm.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createFilm.jsp").forward(req, resp);
     }
 
     @Override
@@ -42,19 +46,22 @@ public class CreateFilmServlet extends HttpServlet {
         String duration = req.getParameter("duration");
         Part filePart = req.getPart("poster");
 
-        String[] genres = req.getParameterValues("genres");
+        Optional<Film> filmByTitle = filmService.getFilmByTitle(filmTitle);
+        String filmPresent = "Film with such title is already present";
 
+        if (filmByTitle.isPresent()) {
+            req.setAttribute("error", filmPresent);
+            req.getRequestDispatcher("/createFilm.jsp").forward(req, resp);
+        }
+
+        String[] genres = req.getParameterValues("genres");
         List<Integer> genresIds = Arrays.stream(genres)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
         List<Genre> genresByIds = genreService.getGenresByIds(genresIds);
-
-//        String genres = req.getParameter("genres");
-//        Genre byName = genreService.getByName(genres);
-
         SerialBlob serialBlob = filmService.getBlobFromPart(filePart);
 
-        if (ObjectUtils.allNotNull(filmTitle, description, duration)) {
+        if (ObjectUtils.allNotNull(filmTitle, description, duration) && !filmByTitle.isPresent()) {
             Film film = filmService.createFilm(
                     new Film.Builder()
                             .withFilmTitle(filmTitle)
@@ -64,12 +71,11 @@ public class CreateFilmServlet extends HttpServlet {
                             .withDuration(Time.valueOf(duration + ":00"))
                             .withPoster(serialBlob)
                             .build());
-
             filmService.setGenresForFilm(film, genresByIds);
             resp.sendRedirect("/cinema/allFilms");
             return;
         }
 
-        req.getRequestDispatcher("createFilm.jsp").forward(req, resp);
+        req.getRequestDispatcher("/createFilm.jsp").forward(req, resp);
     }
 }

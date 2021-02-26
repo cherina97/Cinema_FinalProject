@@ -3,7 +3,6 @@ package servlets.film;
 import dto.FilmDto;
 import entities.Film;
 import services.FilmService;
-import services.GenreService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +13,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type All films servlet.
+ */
 @WebServlet("/allFilms")
 public class AllFilmsServlet extends HttpServlet {
     private final FilmService filmService = FilmService.getInstance();
-    private final GenreService genreService = GenreService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //pagination
         int page = 1;
-        int recordsPerPage = 3;
+        int recordsPerPage = 2;
         if (req.getParameter("page") != null)
             page = Integer.parseInt(req.getParameter("page"));
 
@@ -40,7 +41,6 @@ public class AllFilmsServlet extends HttpServlet {
         }
 
         req.setAttribute("filmListPagination", filmDtos);
-//        req.setAttribute("filmListPagination", filmList);
         req.setAttribute("noOfPages", noOfPages);
         req.setAttribute("currentPage", page);
 

@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="ISO-8859-1" %>
 <%--<jsp:useBean id="allFilms" scope="request" type="java.util.List"/>--%>
 
@@ -53,8 +53,10 @@
                 <div class="form-group">
                     <label>Enter a start time: </label>
                     <input name="startAt" type="time" class="form-control" placeholder="Start at"
-                           required
-                           pattern="([0]?9|[1]?[0-9]|[2]?[0-2]):[0-9][0-9]">
+                           required>
+                    <div class="error">
+                        <p> ${requestScope.error} </p>
+                    </div>
                 </div>
 
                 <div class="form-group">

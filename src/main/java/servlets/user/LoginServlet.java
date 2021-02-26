@@ -1,7 +1,6 @@
 package servlets.user;
 
 import entities.User;
-import org.apache.commons.lang3.ObjectUtils;
 import services.UserService;
 
 import javax.servlet.ServletException;
@@ -9,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * The type Login servlet.
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private final UserService userService = UserService.getInstance();
@@ -24,29 +25,37 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        if (ObjectUtils.anyNull(email, password)) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-
         Optional<User> userOptional = userService.getUserByEmailAndPassword(email, password);
 
-        if (userOptional.isPresent()) {
-            HttpSession session = req.getSession(true);
-            session.setAttribute("userEmail", userOptional.get().getEmail());
+        Optional<User> userServiceByEmail = userService.getByEmail(email);
 
-//            String userEmail = (String) req.getSession().getAttribute("userEmail");
-            Optional<User> userByEmail = userService.getByEmail(email);
-            req.getSession().setAttribute("user", userByEmail.get());
-
-            resp.setStatus(HttpServletResponse.SC_OK);
-            return;
+        if(userServiceByEmail.get().getActive() == 0){
+            req.setAttribute("userError", "Please activate your acc");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
         }
 
-        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        Optional<User> optionalUser = userService.getByEmail(email);
+        String errorUser = "User with such email doesn't exist";
+        String errorPassword = "Wrong password. Try again";
+
+        if(!optionalUser.isPresent()){
+            req.setAttribute("userError", errorUser);
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
+
+        if (userOptional.get().getActive() == 1) {
+            req.getSession().setAttribute("user", userOptional.get());
+            resp.sendRedirect("/cinema/cabinet");
+            return;
+        } else {
+            req.setAttribute("userError", errorPassword);
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
+
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+
     }
 }

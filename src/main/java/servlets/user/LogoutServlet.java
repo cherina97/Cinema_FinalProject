@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * The type Logout servlet.
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
@@ -17,7 +20,6 @@ public class LogoutServlet extends HttpServlet {
         if (session != null){
             session.invalidate();
 
-//            req.getRequestDispatcher("index.jsp").forward(req, resp);
             resp.setStatus(HttpServletResponse.SC_OK);
             return;
         }

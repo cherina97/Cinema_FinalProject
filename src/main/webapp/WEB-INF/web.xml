@@ -5,5 +5,23 @@
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
 
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>filters.EncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <context-param>
+    <param-name>log4j-config</param-name>
+    <param-value>WEB-INF/log4j.properties</param-value>
+  </context-param>
+
 
 </web-app>
